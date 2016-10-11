@@ -1,0 +1,63 @@
+<resources>
+
+
+    <style name="MyCustomProgressStyle">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/seekbarcolors</item>
+        <item name="android:indeterminateDrawable">
+            @android:drawable/progress_indeterminate_horizontal
+        </item>
+        <item name="android:minHeight">10dp</item>
+        <item name="android:maxHeight">10dp</item>
+        <item name="android:thumbOffset">0dp</item>
+        <item name="android:thumb">@drawable/thumb</item>
+    </style>
+
+
+    <style name="TextViewAppearance" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="typeface">robotoRegular</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingLeft">26dp</item>
+        <item name="android:paddingRight">26dp</item>
+        <!-- Supports API Level 17+ -->
+        <!-- <item name="android:paddingStart">26dp</item> -->
+        <!-- Supports API Level 17+ -->
+        <!-- <item name="android:paddingEnd">26dp</item> -->
+    </style>
+
+    <!-- Typography style 1 -->
+
+    <!-- ListView related themes -->
+    <style name="ListViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/main_color_grey_100</item>
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:choiceMode">singleChoice</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:dividerHeight">0dp</item>
+    </style>
+
+    <style name="TextViewAppearance.Display25sp" parent="@style/TextViewAppearance">
+
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/main_color_grey_900</item>
+    </style>
+
+    <style name="TextViewAppearance.DisplayThemed" parent="@style/TextViewAppearance">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/themecolor</item>
+    </style>
+
+    <style name="TextViewAppearance.DisplayThemedLarge" parent="@style/TextViewAppearance">
+
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/themecolor</item>
+    </style>
+
+
+</resources>

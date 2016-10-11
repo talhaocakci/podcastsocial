@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:id="@+id/TableLayout02"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent">
+
+        <TableRow
+            android:id="@+id/TableRow01"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/teamborder">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/backBtn"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginTop="5dip"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="5dip"
+                android:text="Back"></Button>
+
+
+        </TableRow>
+    </TableLayout>
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+</LinearLayout>

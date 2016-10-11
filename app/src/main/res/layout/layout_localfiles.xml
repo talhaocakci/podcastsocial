@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TableLayout
+        android:id="@+id/browseTable"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TableRow
+            android:id="@+id/tableRow7"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/upDir"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15px"
+                android:layout_marginRight="70dip"></Button>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow8"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent">
+
+            <ListView
+                android:id="@+id/localfileslist"
+                android:layout_height="fill_parent"
+                android:smoothScrollbar="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:background="#fff"
+                android:fastScrollEnabled="false"
+                android:clickable="true"
+                android:cacheColorHint="#fff"
+                android:listSelector="@drawable/list_back"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"></ListView>
+
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

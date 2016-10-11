@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:background="@color/white"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <com.javathlon.memsoft.RobotoTextView
+        style="@style/TextViewAppearance.Display25sp"
+        android:layout_height="wrap_content"
+        android:text="Something"
+        android:id="@+id/audioTrackName"
+        android:textSize="24sp"
+        android:layout_marginLeft="10dip"
+        android:layout_width="fill_parent"
+        android:layout_weight=".8"></com.javathlon.memsoft.RobotoTextView>
+
+
+    <LinearLayout
+        android:id="@+id/podcastinfoBar"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.javathlon.memsoft.FontelloTextView
+                android:id="@+id/downloadpodcastitem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/material_downloadindicator"
+                style="@style/TextViewAppearance.DisplayThemedLarge"
+                android:layout_centerVertical="true" />
+
+            <com.javathlon.memsoft.RobotoTextView
+                android:id="@+id/podcastSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginLeft="20dp"
+                android:text=""
+                android:textColor="@color/material_blue_grey_300"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+
+        <com.javathlon.memsoft.FontelloTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-18dp"
+            android:text="@string/material_headphones"
+            style="@style/TextViewAppearance.DisplayThemed" />
+
+        <com.javathlon.memsoft.RobotoTextView
+            android:id="@+id/podcastDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+
+            android:textColor="@color/material_blue_grey_300"
+            android:textSize="18sp" />
+
+        <com.javathlon.memsoft.RobotoTextView
+            android:id="@+id/podcastProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="20dp"
+            android:text=""
+            android:textColor="@color/material_blue_grey_300"
+            android:textSize="12sp" />
+
+
+        <com.javathlon.memsoft.FontelloTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/material_calendar"
+            style="@style/TextViewAppearance.DisplayThemed"
+            android:layout_marginRight="-18dp"
+            android:textSize="16sp"
+            android:layout_centerVertical="true" />
+
+
+        <com.javathlon.memsoft.RobotoTextView
+            android:id="@+id/podcastPublishDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="5sp"
+            android:text="13 Haziran 2015"
+            android:textColor="@color/material_blue_grey_300"
+            android:textSize="14sp"
+
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

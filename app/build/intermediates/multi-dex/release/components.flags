@@ -1,0 +1,134 @@
+-injars /Users/ocakcit/projects/audiosocial/app/build/intermediates/transforms/jarMerging/release/jars/1/1f/combined.jar
+-outjars /Users/ocakcit/projects/audiosocial/app/build/intermediates/multi-dex/release/componentClasses.jar
+
+-libraryjars /Users/ocakcit/Library/Android/sdk/build-tools/22.0.1/lib/shrinkedAndroid.jar
+
+-forceprocessing
+-dontoptimize
+-dontobfuscate
+-dontusemixedcaseclassnames
+-dontpreverify
+-dontwarn
+-printconfiguration /Users/ocakcit/projects/audiosocial/app/build/intermediates/multi-dex/release/components.flags
+
+
+-keep class com.javathlon.SplashActivity {
+    <init>();
+}
+
+-keep class com.facebook.FacebookActivity {
+    <init>();
+}
+
+-keep class com.facebook.android.ShareOnFacebook {
+    <init>();
+}
+
+-keep class com.javathlon.LoginPref {
+    <init>();
+}
+
+-keep class com.podmark.twitter.OAuthAccessTokenActivity {
+    <init>();
+}
+
+-keep class com.podmark.twitter.TweetOnTwitter {
+    <init>();
+}
+
+-keep class com.javathlon.player.PlayerScreen {
+    <init>();
+}
+
+-keep class com.javathlon.SongSelectionList {
+    <init>();
+}
+
+-keep class com.javathlon.BaseActivity {
+    <init>();
+}
+
+-keep class com.javathlon.fragments.SignInActivity {
+    <init>();
+}
+
+-keep class com.javathlon.download.DownLoadController {
+    <init>();
+}
+
+-keep class com.javathlon.upload.UploadController {
+    <init>();
+}
+
+-keep class com.javathlon.video.VideoSample {
+    <init>();
+}
+
+-keep class com.javathlon.player.MusicService {
+    <init>();
+}
+
+-keep class com.javathlon.MainActivity {
+    <init>();
+}
+
+-keep class com.javathlon.BuySubscriptionActivity {
+    <init>();
+}
+
+-keep class com.javathlon.scheduledtask.RssUpdateTask {
+    <init>();
+}
+
+-keep class com.javathlon.scheduledtask.BootInit {
+    <init>();
+}
+
+-keep class com.javathlon.fragments.SettingsActivity {
+    <init>();
+}
+
+-keep class com.facebook.FacebookContentProvider {
+    <init>();
+}
+
+-keep class com.google.android.gms.gcm.GcmReceiver {
+    <init>();
+}
+
+-keep class com.javathlon.MyGcmListenerService {
+    <init>();
+}
+
+-keep class com.javathlon.MyInstanceIDListenerService {
+    <init>();
+}
+
+-keep class com.javathlon.RegistrationIntentService {
+    <init>();
+}
+
+-keep class com.javathlon.WebViewActivity {
+    <init>();
+}
+
+-keep class com.google.android.gms.measurement.AppMeasurementContentProvider {
+    <init>();
+}
+
+-keep class com.google.android.gms.measurement.AppMeasurementReceiver {
+    <init>();
+}
+
+-keep class com.google.android.gms.measurement.AppMeasurementService {
+    <init>();
+}
+
+-keep public class * extends android.app.backup.BackupAgent {
+    <init>();
+}
+
+-keep public class * extends java.lang.annotation.Annotation {
+    <fields>;
+    <methods>;
+}

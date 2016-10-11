@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/downloader1">
+
+            <TextView
+                android:id="@+id/t1"
+                android:text="abc"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"></TextView>
+
+            <ProgressBar
+                android:layout_width="fill_parent"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:id="@+id/progressBar1"
+                android:layout_marginLeft="10dip"
+                android:progress="0"
+                android:max="100"
+                android:layout_height="wrap_content"></ProgressBar>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout6">
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/pause1"
+                    android:text="Pause"></Button>
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/cancel1"
+                    android:text="Cancel"></Button>
+
+                <Button
+                    android:text="Play now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/playNow1"
+                    android:visibility="gone"></Button>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/downloader2">
+
+            <TextView
+                android:id="@+id/t2"
+                android:text="abc"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"></TextView>
+
+            <ProgressBar
+                android:layout_width="fill_parent"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:id="@+id/progressBar2"
+                android:layout_marginLeft="10dip"
+                android:progress="0"
+                android:max="100"
+                android:layout_height="wrap_content"></ProgressBar>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/LinearLayout01">
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/pause2"
+                    android:text="Pause"></Button>
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/cancel2"
+                    android:text="Cancel"></Button>
+
+                <Button
+                    android:text="Play now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/playNow2"
+                    android:visibility="gone"></Button>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/downloader3">
+
+            <TextView
+                android:id="@+id/t3"
+                android:text="abc"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"></TextView>
+
+            <ProgressBar
+                android:layout_width="fill_parent"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:id="@+id/progressBar3"
+                android:layout_marginLeft="10dip"
+                android:progress="0"
+                android:max="0"
+                android:layout_height="wrap_content"></ProgressBar>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/LinearLayout02">
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/pause3"
+                    android:text="Pause"></Button>
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/cancel3"
+                    android:text="Cancel"></Button>
+
+                <Button
+                    android:text="Play now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/playNow3"
+                    android:visibility="gone"></Button>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/downloader4">
+
+            <TextView
+                android:text="abc"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/t4"></TextView>
+
+            <ProgressBar
+                android:layout_width="fill_parent"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_marginLeft="10dip"
+                android:progress="0"
+                android:max="0"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar4"></ProgressBar>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/LinearLayout03">
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/pause4"
+                    android:text="Pause"></Button>
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/cancel4"
+                    android:text="Cancel"></Button>
+
+                <Button
+                    android:text="Play now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/playNow4"
+                    android:visibility="gone"></Button>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/downloader5">
+
+            <TextView
+                android:text="abc"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/t5"></TextView>
+
+            <ProgressBar
+                android:layout_width="fill_parent"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_marginLeft="10dip"
+                android:progress="0"
+                android:max="0"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar5"></ProgressBar>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/LinearLayout04">
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/pause5"
+                    android:text="Pause"></Button>
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/cancel5"
+                    android:text="Cancel"></Button>
+
+                <Button
+                    android:text="Play now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/playNow5"
+                    android:visibility="gone"></Button>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

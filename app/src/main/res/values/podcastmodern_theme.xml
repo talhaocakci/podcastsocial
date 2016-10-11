@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PodcastModernTheme" parent="android:Theme.Holo.Light">
+
+
+
+
+    </style>
+
+    <style name="Theme_Holo_Dialog_Alert" parent="android:style/Theme.Holo.Dialog">
+        <item name="android:windowBackground">@android:color/white</item>
+
+    </style>
+
+
+
+</resources>

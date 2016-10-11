@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="topmenutitle">Girişimci Muhabbeti</string>
+    <string name="hello">Hello World, Main!</string>
+    <string name="app_name">PodAddict</string>
+    <string name="appKey">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlCXgpyvAhcf6mYS9RPH8LIvBVAuZglgNbMN00CqPa/fbi/Thg4CAVQs3U5kdw5spDsosmXqxeMPECtm5nvDXuwZNdl5B7x8aFQGGygysADyCwdNQ65UDaZNwgGdpmgXxXw5T+FIKj3qP/dJEJZDHAmQe7USpakBItBt8lI0VCeTyxqdxrTICf2Z/72ytqFQnZtj3q7BpM+eAS2zT5DFC9WNGBdvbbAN2zCXtZxAdQzPU4KskLeu2LKG5SCAjaciQ7BtPaOlVBr9HZIbHSr395EoU6bQwjKJEx+GvA59lU1tN/GqnN59E/JNVumcl9O90uV1Febptrqw1FKF//ZU7DQIDAQAB</string>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000033</color>
+    <color name="green">#006633</color>
+    <color name="blue">#0484f2</color>
+    <color name="gray">#edebe0</color>
+    <color name="fev">#4f81bc</color>
+    <color name="red">#ff0000</color>
+    <color name="c1">#433939</color>
+    <color name="expendablelist">#324f85</color>
+    <color name="teamborder">#8c9bb8</color>
+    
+    <string name="gcmserverkey">AIzaSyA9-ie__wmeSKu7_boidJYOIR8QSAjm0F8</string>
+    <string name="gcmsenderid">334941374162</string>
+
+    <string name="podcastt_title_search">Type podcast title</string>
+
+    <string name="noitemselected">No item is selected to play.</string>
+    <string name="episodes">Episodes</string>
+    <string name="rsslistisupdating">Sunuculardan bilgi çekiliyor...</string>
+    <string name="navigationdrawertitle">Menu</string>
+    <string name="notificationtitle">Girişimci Muhabbeti</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="downloadedfiledeletedbefore">This file does not exist. Do you want to stream it?</string>
+    <string name="download">Downloading...</string>
+    <string name="upload">Uploading...</string>
+    <string name="shareNoteConfirmTitle">Share Snippet</string>
+    <string name="shareNoteOnSocialMedia">Share on social media</string>
+    <string name="croppingsnippet">Cropping Snippet From Audio...</string>
+    <string name="sendwhatsapp">Send to\nWhatsApp</string>
+    <string name="share">Share</string>
+    <string name="negative">Ignore</string>
+    <string name="facebookhash">easQYxdztX9yKUHnmTtpuTEpKG4=</string>
+    <string name="facebookAppId">263435310362974</string>
+    <string name="facebookhashkey">podcastmodern</string>
+
+    <string-array name="menu">
+        <item>Main Catalog</item>
+        <item>Social Connect</item>
+        <item>Downloaded</item>
+        <item>Player Screen</item>
+        <item>Recent Files</item>
+        <item>Recent Notes</item>
+        <item>Subscribe</item>
+    </string-array>
+
+    <string name="downloadstarted">Download initialized.</string>
+    <string name="filecorruptedornotsupported">This file is either corrupted or not supported by current Android system.</string>
+    <string name="hintsearchtitleordescription">Title or description</string>
+    <string name="subscribeConfirm">The latest 3 episodes will be downloaded automatically in the morning. Do you confirm this?</string>
+    <string name="unsubscribeConfirm">Automatic downloads will no longer execute. Do you confirm this?</string>
+    <string name="drawer_open">Drawer Açıldı</string>
+    <string name="drawer_close">Drawer Kapandı</string>
+    <string name="search">Ara</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="unsubscribe">Unsubscribe</string>
+    <string name="enternote">Your note here</string>
+    <string name="addedToMain">Podcast is added to main catalog</string>
+    <string name="sdcard_readonly">Sorry, the SD Card is mounted as read-only and PodAddict requires it to be writable.</string>
+    <string name="no_sdcard">Sorry, PodAddict can\'t run unless you have an SD Card inserted.</string>
+    <string name="sdcard_shared">Sorry, PodAddict can\'t run while your handset is mounted as a USB device.</string>
+    <string name="no_saved_notes">Currently you have no saved bookmarks or notes. You can save one by using the Add New Note tab. </string>
+    <string name="noaccesstourl">YOur Internet provider does not acces to : </string>
+    <string name="alert_title_success">Success</string>
+    <string name="alert_title_failure">Error</string>
+    <string name="alert_ok_button">OK</string>
+    <string name="alert_yes_button">Yes, please!</string>
+    <string name="alert_no_button">No, thanks.</string>
+    <string name="twitterInstruction">To initiate the "Twitter Authentication" process press on "Request For PIN".
+                                        After verified,twitter will show you a PIN number provide the number by pressing "Set PIN".</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2" translatable="false">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Navigation Drawer icon codes -->
+    <string name="drawer_icon_splash_screens"></string>
+    <string name="drawer_icon_progress_bars"></string>
+    <!-- <string name="drawer_icon_buttons">&#xe802;</string> -->
+    <string name="drawer_icon_shape_image_views"></string>
+    <string name="drawer_icon_text_views"></string>
+    <string name="drawer_icon_search_bars"></string>
+    <string name="drawer_icon_login_page"></string>
+    <!-- <string name="drawer_icon_audio_player">&#xe807;</string> -->
+    <!-- <string name="drawer_icon_video_player">&#xe808;</string> -->
+    <string name="drawer_icon_image_gallery"></string>
+    <string name="drawer_icon_check_and_radio_buttons"></string>
+    <!-- <string name="drawer_icon_calendars">&#xe811;</string> -->
+    <string name="drawer_icon_left_menus"></string>
+    <string name="drawer_icon_list_views"></string>
+    <string name="drawer_icon_parallax"></string>
+    <!-- <string name="drawer_icon_dialogs">&#xe803;</string> -->
+
+    <string name="drawer_icon_linked_in"></string>
+    <string name="drawer_icon_blog"></string>
+    <string name="drawer_icon_git_hub"></string>
+    <string name="drawer_icon_instagram"></string>
+
+    <!-- Navigation Drawer icon titles -->
+    <string name="drawer_title_splash_screens">Splash Screens</string>
+    <string name="drawer_title_progress_bars">Progress Bars</string>
+    <!-- <string name="drawer_title_buttons">Buttons</string> -->
+    <string name="drawer_title_shape_image_views">Shape Image Views</string>
+    <string name="drawer_title_text_views">Text Views</string>
+    <string name="drawer_title_search_bars">Search Bars</string>
+    <string name="drawer_title_login_page">Login Pages</string>
+    <!-- <string name="drawer_title_audio_player">Audio Player</string> -->
+    <!-- <string name="drawer_title_video_player">Video Player</string> -->
+    <string name="drawer_title_image_gallery">Image Gallery</string>
+    <string name="drawer_title_check_and_radio_buttons">Check Boxes</string>
+    <!-- <string name="drawer_title_calendars">Calendars</string> -->
+    <string name="drawer_title_left_menus">Left Menus</string>
+    <string name="drawer_title_list_views">List Views</string>
+    <string name="drawer_title_parallax">Parallax</string>
+    <!-- <string name="drawer_title_dialogs">Dialogs</string> -->
+
+    <string name="drawer_title_linked_in">LinkedIn</string>
+    <string name="drawer_title_blog">Blog</string>
+    <string name="drawer_title_git_hub">GitHub</string>
+    <string name="drawer_title_instagram">Instagram</string>
+
+    <!-- Fontello icons  &#xe833;-->
+    <string name="fontello_logo"></string>
+    <string name="fontello_search"></string>
+    <string name="fontello_x_mark"></string>
+    <string name="fontello_x_mark_masked"></string>
+    <string name="fontello_microfon"></string>
+    <string name="fontello_user"></string>
+    <string name="fontello_password"></string>
+    <string name="fontello_upload"></string>
+    <string name="fontello_play"></string>
+    <string name="fontello_heart_empty"></string>
+    <string name="fontello_heart_full"></string>
+    <string name="fontello_drag_and_drop"></string>
+<string name="material_info">&#xe813;</string>
+    <string name="material_play"></string>
+    <string name="material_stop"></string>
+    <string name="material_pause"></string>
+    <string name="material_next"></string>
+    <string name="material_prev"></string>
+    <string name="material_share">&#xe833;</string>
+    <string name="material_calendar"></string>
+    <string name="material_downloadindicator"></string>
+    <string name="material_folder"></string>
+    <string name="material_headphones"></string>
+    <string name="material_pencil"></string>
+    <string name="material_ok"></string>
+    <string name="material_home"></string>
+    <string name="material_search"></string>
+    <string name="material_microphone"></string>
+
+    <!-- Material Design Icons -->
+    <string name="material_icon_bike"></string>
+    <string name="material_icon_go"></string>
+    <string name="material_icon_sleep"></string>
+    <string name="material_icon_eat"></string>
+    <string name="material_icon_play"></string>
+    <string name="material_icon_drink"></string>
+    <string name="material_icon_party"></string>
+    <string name="material_icon_shop"></string>
+    <string name="material_icon_account"></string>
+    <string name="material_icon_account_multiple"></string>
+    <string name="material_icon_message"></string>
+    <string name="material_icon_image_box"></string>
+    <string name="material_icon_video"></string>
+    <string name="material_icon_clock"></string>
+    <string name="material_icon_star_outline"></string>
+    <string name="material_icon_star"></string>
+
+    <string name="material_icon_plus_box"></string>
+    <string name="material_icon_check"></string>
+    <string name="material_icon_undo"></string>
+    <string name="material_icon_friends"></string>
+    <string name="material_icon_email"></string>
+    <string name="material_icon_password"></string>
+    <string name="material_icon_flag"></string>
+    <string name="material_icon_city"></string>
+    <string name="material_icon_unfold_more"></string>
+    <string name="material_icon_home_variant"></string>
+    <string name="material_icon_home"></string>
+    <string name="material_icon_hotels"></string>
+    <string name="material_icon_date"></string>
+    <string name="material_icon_like"></string>
+    <string name="material_icon_bookmark"></string>
+
+
+    <!--google plus-->
+    <string name="change_locale">Change Locale</string>
+    <string name="list_moments_title">Touch a moment to delete</string>
+    <string name="send_interactive_button_name">Send Interactive Post</string>
+    <string name="sign_in_profile_label">profile scope</string>
+    <string name="sign_out_button_name">Disconnect Google </string>
+    <string name="revoke_access_button_name">Revoke access</string>
+    <string name="server_auth_code_required_label">Reset server auth code state</string>
+    <string name="share_title">Prefill Text (optional)</string>
+    <string name="share_prefill_text">Welcome to the Google+ platform.</string>
+
+    <string name="default_status"/>
+    <string name="greeting_status">Welcome, %s.</string>
+    <string name="greeting_status_sign_in_required">Sign-in required</string>
+    <string name="greeting_status_error">Error signing in: %s.</string>
+    <string name="loading_status">Loading…</string>
+    <string name="signing_in_status">Signing in with Google+.</string>
+    <string name="signed_in_status">Signed in as \"%s\".</string>
+
+    <!-- Used if there was an error loading the signed in user's name. -->
+    <string name="unknown_person">Unknown</string>
+    <string name="signed_out_status">Signed out.</string>
+    <string name="sign_in_error_status">Error signing in.</string>
+    <string name="revoke_access_status">Revoked access.</string>
+    <string name="revoke_access_error_status">Unable to revoke access.</string>
+
+    <string name="plus_write_moment_status">Saving moment</string>
+    <string name="plus_write_moment_status_success">Write moment succeeded</string>
+    <string name="plus_write_moment_status_cached">Write moment cached</string>
+    <string name="plus_write_moment_status_auth_error">Sign in is required</string>
+    <string name="plus_write_moment_status_error">Internal error</string>
+
+    <string name="plus_remove_moment_status">Removing moment</string>
+
+    <string name="plus_one_small_name">Small +1 button</string>
+    <string name="plus_one_medium_name">Medium +1 button</string>
+    <string name="plus_one_tall_name">Tall +1 button</string>
+    <string name="plus_one_standard_name">Standard +1 button</string>
+    <string name="plus_one_standard_ann_name">Standard +1 button (with inline annotation)</string>
+
+    <string name="plus_example_deep_link_id">/+/mobile/android/</string>
+    <string name="plus_example_deep_link_url">
+        https://developers.google.com/+/mobile/android/
+    </string>
+    <string name="plus_generic_error">Sign in with Google is not available.</string>
+    <string name="progress_message">Signing in to Google&#8230;</string>
+
+    <string name="offline_access_disabled">Offline access emulation disabled: set the server client
+        ID in strings.xml for offline access</string>
+
+
+    <string name="please_connect_social">For sharing options, notifications and recommendations, connect social accounts.</string>
+    <string name="podcast_catalog_refresh_error">Podcasts can not be refreshed. Please check internet connection</string>
+
+
+    <string name="subscription_period_prompt">Select your subscription period</string>
+    <string name="subscription_resignup_prompt">To reactivate your subscription, select your subscription period</string>
+    <string name="subscription_update_prompt">To change your subscription, select your new subscription period</string>
+    <string name="subscription_period_monthly">Monthly</string>
+    <string name="subscription_period_yearly">Yearly</string>
+    <string name="subscription_prompt_continue">Continue</string>
+    <string name="subscription_prompt_cancel">Cancel</string>
+    <string name="content_description_app_loading_image">App loading image</string>
+    <string name="content_description_title_image">80\'s Video Game Style Car Logo</string>
+    <string name="content_desc_gas_gauge_indicator">Gas gauge indicator</string>
+    <string name="content_desc_free_vs_premium_indicator">Free or Premium Image Indicator</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+</resources>

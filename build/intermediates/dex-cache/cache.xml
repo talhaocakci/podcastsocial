@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/ocakcit/Downloads/audiosocial/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/8.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4b8df1b1e51fe14b0e89b3845dc2e215a024a09f">
+        <dex dex="/Users/ocakcit/Downloads/audiosocial/app/build/intermediates/pre-dexed/debug/classes-31cc410703e3fa44536c297caa85db653369893f.jar" />
+    </item>
+    <item
+        jar="/Users/ocakcit/Downloads/audiosocial/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/8.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0af4f577b4a21eb9be2a7f52e33b077b67e6d9f8">
+        <dex dex="/Users/ocakcit/Downloads/audiosocial/app/build/intermediates/pre-dexed/debug/classes-12c3d2d64551a89f61005a9b5b207fd59e36d840.jar" />
+    </item>
+
+</items>
