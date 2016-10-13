@@ -1,19 +1,19 @@
 [
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/playerscreen.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/playerscreen.xml"
-    },
-    {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_popup_menu_item_layout.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_list_menu_item_icon.xml"
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/playerscreen.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/playerscreen.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/catalogeditions.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/catalogeditions.xml"
+    },
+    {
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_list_menu_item_icon.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/messenger_button_send_blue_round.xml",
@@ -36,12 +36,12 @@
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/audioplayout.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/support_simple_spinner_dropdown_item.xml"
-    },
-    {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/support_simple_spinner_dropdown_item.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/maincatalog.xml",
@@ -72,12 +72,12 @@
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_action_menu_item_layout.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_activity_chooser_view.xml"
-    },
-    {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/com_facebook_login_fragment.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/layout/com_facebook_login_fragment.xml"
+    },
+    {
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_activity_chooser_view.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/messenger_button_send_blue_large.xml",
@@ -88,12 +88,12 @@
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_action_bar_view_list_nav_layout.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/loginsharepref.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/loginsharepref.xml"
-    },
-    {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/web_load.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/web_load.xml"
+    },
+    {
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/loginsharepref.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/loginsharepref.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/messenger_button_send_white_round.xml",
@@ -140,20 +140,20 @@
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_search_view.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_action_menu_layout.xml"
-    },
-    {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/notification_template_media.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/notification_template_media.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/listitem.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/listitem.xml"
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_action_menu_layout.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/main.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/main.xml"
+    },
+    {
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/listitem.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/listitem.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/podcastitem.xml",
@@ -172,32 +172,32 @@
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/lastbrowsed.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/splash.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/splash.xml"
-    },
-    {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/note_row.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/note_row.xml"
+    },
+    {
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/splash.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/splash.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_action_bar_title_item.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_search_dropdown_item_icons_2line.xml"
-    },
-    {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/library.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/library.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/note_item.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/note_item.xml"
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_search_dropdown_item_icons_2line.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/note_item.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/note_item.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/notification_template_lines.xml",
@@ -212,24 +212,24 @@
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/list_view.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_expanded_menu_layout.xml"
-    },
-    {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/layout_localfiles.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/layout_localfiles.xml"
+    },
+    {
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_expanded_menu_layout.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_action_bar_up_container.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/notelist.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/notelist.xml"
-    },
-    {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/download_progress.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/download_progress.xml"
+    },
+    {
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/notelist.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/notelist.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/twitterpinrequest.xml",
@@ -252,16 +252,16 @@
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/layout/com_facebook_activity_layout.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/messenger_button_send_white_large.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/layout/messenger_button_send_white_large.xml"
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/notification_template_big_media.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/notification_template_big_media.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_screen_toolbar.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_screen_toolbar.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/notification_template_big_media.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/notification_template_big_media.xml"
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/messenger_button_send_white_large.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/layout/messenger_button_send_white_large.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/activity_main.xml",
@@ -280,20 +280,20 @@
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_dialog_title_material.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/select_dialog_item_material.xml"
-    },
-    {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/sharetotwitter.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/sharetotwitter.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/notification_template_part_chronometer.xml"
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/select_dialog_item_material.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/notification_template_part_chronometer.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
@@ -304,24 +304,24 @@
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/recent_files.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/playlisteditor.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/playlisteditor.xml"
-    },
-    {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/layout_lastnotes.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/layout_lastnotes.xml"
+    },
+    {
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/playlisteditor.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/playlisteditor.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/buy_subscription.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/buy_subscription.xml"
     },
     {
-        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/com_facebook_tooltip_bubble.xml",
-        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/layout/com_facebook_tooltip_bubble.xml"
-    },
-    {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/avlistitemlayout.xml",
         "source": "/Users/ocakcit/projects/audiosocial/app/src/main/res/layout/avlistitemlayout.xml"
+    },
+    {
+        "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/com_facebook_tooltip_bubble.xml",
+        "source": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/layout/com_facebook_tooltip_bubble.xml"
     },
     {
         "merged": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_radio.xml",

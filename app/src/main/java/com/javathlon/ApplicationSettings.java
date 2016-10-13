@@ -9,7 +9,17 @@ public class ApplicationSettings {
     public static String proxyAddress = "proxy.pozitron.com";
     public static String proxyHost = "3128";
 
-    public static Long appId = 21L;
 
-    public static String podcastModernServerUrl = "http://107.170.10.28:8080/PodcastModern/api/";
+    public static MemberMode memberMode = MemberMode.FREE;
+
+    public static Long appId = 25L;
+
+    public static String podcastModernServerUrl = "http://107.170.25.76:8080//PodcastModern/api/";
+
+
+    public enum MemberMode {
+        FREE,
+        JAVACORE,
+        FULL
+    }
 }

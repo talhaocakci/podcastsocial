@@ -609,6 +609,12 @@ public class DBAccessor {
         return db.update(DB_TABLE_PODCAST, values, KEY_FULLDEVICEPATH + "= '" + full_device_path + "'", null);
     }
 
+    public long updateDownloadLink(long id, String downlink) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_DOWNLINK, downlink);
+        return db.update(DB_TABLE_PODCAST, values, KEY_PODCASTID + "= " + id , null);
+    }
+
     /**
      * Deletes todo
      */

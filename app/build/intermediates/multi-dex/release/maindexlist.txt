@@ -87,8 +87,8 @@ com/google/common/collect/ImmutableMultimap.class
 com/google/common/collect/ImmutableMapEntry.class
 ogrelab/org/apache/http/annotation/GuardedBy.class
 com/google/gson/annotations/Since.class
-ogrelab/org/apache/http/client/params/ClientPNames.class
 com/google/api/client/auth/oauth/OAuthAuthorizationHeaderIntercepter.class
+ogrelab/org/apache/http/client/params/ClientPNames.class
 org/codehaus/jackson/annotate/JsonProperty.class
 android/support/annotation/IntRange.class
 com/google/common/annotations/GwtIncompatible.class
@@ -151,8 +151,8 @@ com/javathlon/fragments/SettingsActivity$GeneralPreferenceFragment.class
 com/nostra13/universalimageloader/core/ImageLoaderConfiguration$Builder.class
 com/javathlon/download/DownLoadController$2$3.class
 com/google/common/collect/RegularImmutableMap$NonTerminalMapEntry.class
-com/amazonaws/services/s3/internal/SSEResultBase.class
 ogrelab/org/apache/http/conn/scheme/LayeredSocketFactory.class
+com/amazonaws/services/s3/internal/SSEResultBase.class
 com/javathlon/fragments/SettingsActivity.class
 com/google/api/client/json/JsonString.class
 com/javathlon/WebViewActivity.class
@@ -238,8 +238,8 @@ com/google/common/collect/TreeMultiset$AvlNode.class
 ogrelab/org/apache/http/annotation/ThreadSafe.class
 com/javathlon/model/User$SOCIAL_TYPES.class
 com/javathlon/download/RssRefreshAndDownloadItemsAsyncTask.class
-android/support/v7/appcompat/R$style.class
 bolts/AggregateException.class
+android/support/v7/appcompat/R$style.class
 android/support/v4/app/FragmentManagerImpl$FragmentTag.class
 com/javathlon/download/DownLoadController$2$1.class
 com/facebook/share/ShareBuilder.class
@@ -248,8 +248,8 @@ com/google/api/client/googleapis/json/DiscoveryDocument$ServiceDefinition.class
 com/google/common/collect/UnmodifiableIterator.class
 com/javathlon/player/PlayerScreen$10.class
 com/google/common/collect/ImmutableMap.class
-com/google/api/client/googleapis/json/DiscoveryDocument$ServiceMethod.class
 com/google/api/client/auth/oauth2/draft10/AccessTokenRequest$AuthorizationCodeGrant.class
+com/google/api/client/googleapis/json/DiscoveryDocument$ServiceMethod.class
 com/javathlon/BuySubscriptionActivity$1.class
 com/google/common/primitives/Floats.class
 android/support/v4/media/session/PlaybackStateCompat$Actions.class
@@ -259,8 +259,8 @@ android/support/v4/media/session/MediaSessionCompat$ResultReceiverWrapper.class
 com/google/common/base/Converter.class
 com/javathlon/download/DownLoadController$2$7.class
 ogrelab/org/apache/http/entity/StringEntity.class
-ogrelab/org/apache/http/conn/scheme/SocketFactory.class
 org/codehaus/jackson/JsonLocation.class
+ogrelab/org/apache/http/conn/scheme/SocketFactory.class
 com/google/api/client/googleapis/json/GoogleApi.class
 com/google/common/cache/LocalCache.class
 com/javathlon/player/PlayerScreen$15.class
@@ -538,8 +538,8 @@ com/google/api/client/util/GenericData.class
 com/podmark/twitter/store/CredentialStore.class
 com/javathlon/CommonStaticClass.class
 com/google/api/client/testing/json/AbstractJsonParserTest$E.class
-ogrelab/org/apache/http/conn/params/ConnManagerParams.class
 com/google/api/client/googleapis/json/DiscoveryDocument$ServiceResource.class
+ogrelab/org/apache/http/conn/params/ConnManagerParams.class
 com/google/api/client/util/Key.class
 com/google/android/gms/measurement/AppMeasurementService.class
 android/support/v4/media/MediaMetadataCompat$LongKey.class
@@ -615,6 +615,7 @@ android/support/v4/app/ActivityCompatApi23.class
 com/javathlon/player/MusicService$LocalBinder.class
 com/google/android/gms/gcm/zza.class
 com/amazonaws/http/AmazonHttpClient.class
+com/javathlon/ApplicationSettings$MemberMode.class
 android/support/v4/app/FragmentActivity$NonConfigurationInstances.class
 com/javathlon/model/podcastmodern/Application.class
 android/support/v4/app/BaseFragmentActivityDonut.class
@@ -737,6 +738,7 @@ com/google/api/client/auth/oauth2/draft10/AuthorizationResponse.class
 android/support/annotation/DimenRes.class
 android/support/annotation/AnyRes.class
 com/google/common/collect/ImmutableSortedMultiset.class
+com/javathlon/download/PodcstModernUtil.class
 com/javathlon/download/DownLoadController$2$5.class
 com/javathlon/model/spreaker/Category.class
 android/support/annotation/CallSuper.class
@@ -766,12 +768,12 @@ com/amazonaws/mobileconnectors/cognito/internal/storage/CognitoSyncStorage.class
 com/google/android/gms/iid/MessengerCompat$zza.class
 android/support/v4/app/FragmentManagerImpl$2.class
 android/support/v4/util/SimpleArrayMap.class
-com/amazonaws/auth/DefaultAWSCredentialsProviderChain.class
 com/amazonaws/mobileconnectors/s3/transfermanager/Transfer.class
+com/amazonaws/auth/DefaultAWSCredentialsProviderChain.class
 com/google/android/gms/common/GoogleApiAvailability.class
 com/facebook/android/ShareOnFacebook.class
-com/amazonaws/util/AWSRequestMetrics.class
 com/google/api/client/testing/json/AbstractJsonParserTest$A.class
+com/amazonaws/util/AWSRequestMetrics.class
 com/google/android/gms/common/api/CommonStatusCodes.class
 com/amazonaws/mobileconnectors/s3/transfermanager/PersistableDownload.class
 com/google/api/client/http/apache/ApacheHttpTransport.class
@@ -793,8 +795,8 @@ android/support/v4/view/MenuCompat.class
 ogrelab/org/apache/http/impl/conn/tsccm/ConnPoolByRoute.class
 com/google/api/client/googleapis/auth/clientlogin/ClientLogin$ErrorInfo.class
 android/support/v7/widget/RecyclerView$ItemDecoration.class
-android/support/v4/app/Fragment$SavedState.class
 android/support/annotation/ArrayRes.class
+android/support/v4/app/Fragment$SavedState.class
 com/google/common/cache/ForwardingCache.class
 com/google/common/collect/TreeRangeSet.class
 com/facebook/android/Facebook$DialogListener.class
@@ -944,8 +946,8 @@ com/facebook/share/widget/ShareDialog.class
 com/amazonaws/services/s3/model/GetObjectRequest.class
 ogrelab/org/apache/http/impl/auth/NegotiateScheme.class
 com/google/common/cache/Cache.class
-com/google/api/client/testing/json/AbstractJsonGeneratorTest$Entry.class
 ogrelab/org/apache/http/entity/mime/content/InputStreamBody.class
+com/google/api/client/testing/json/AbstractJsonGeneratorTest$Entry.class
 android/support/v7/app/ActionBar$DisplayOptions.class
 org/codehaus/jackson/annotate/JsonPropertyOrder.class
 com/javathlon/inapp_purchase/IabBroadcastReceiver$IabBroadcastListener.class
@@ -958,8 +960,8 @@ android/support/v4/util/ContainerHelpers.class
 twitter4j/TwitterBase.class
 com/amazonaws/services/s3/model/ProgressListener.class
 com/javathlon/download/DownLoadController$2$4.class
-com/amazonaws/internal/MetricAware.class
 com/google/api/client/auth/oauth2/AuthorizationRequestUrl.class
+com/amazonaws/internal/MetricAware.class
 android/support/annotation/BoolRes.class
 com/google/api/client/auth/oauth2/AccessProtectedResource.class
 com/google/api/client/auth/oauth2/draft10/AccessTokenErrorResponse.class

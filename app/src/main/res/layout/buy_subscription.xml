@@ -17,82 +17,25 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/screen_wait"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:contentDescription="@string/content_description_app_loading_image"
-        android:src="@drawable/wait"
-        android:visibility="gone" />
-    <LinearLayout
-        android:id="@+id/screen_main"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="visible">
-        <ImageView
-            android:src="@drawable/title"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:contentDescription="@string/content_description_title_image"
-            android:layout_marginBottom="10dp" />
-
-        <ImageView
-            android:id="@+id/free_or_premium"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:contentDescription="@string/content_desc_free_vs_premium_indicator"
-            android:layout_marginBottom="40dp"
-            android:src="@drawable/free" />
-
-        <ImageView
-            android:id="@+id/gas_gauge"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:contentDescription="@string/content_desc_gas_gauge_indicator"
-            android:layout_marginBottom="40dp"
-            android:src="@drawable/button_play" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginBottom="20dp">
-            <ImageView
-                android:src="@drawable/button_play"
-                android:onClick="onDriveButtonClicked"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp" />
-
-            <ImageView android:id="@+id/buy_subscription"
-                android:src="@drawable/buy_gas"
-                android:onClick="onBuyGasButtonClicked"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
-            <ImageView
-                android:id="@+id/upgrade_button"
-                android:src="@drawable/upgrade_app"
+            <Button
+                android:id="@+id/full_upgrade_button"
                 android:onClick="onUpgradeAppButtonClicked"
                 android:layout_width="wrap_content"
+                android:text="Unlock all courses for 4$ for month"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp" />
 
-            <ImageView
-                android:id="@+id/infinite_gas_button"
+            <Button
+                android:id="@+id/java_core_upgrade_button"
                 android:onClick="onInfiniteGasButtonClicked"
+                android:text="Unlock Java core for 2$ for month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-    </LinearLayout>
 </FrameLayout>

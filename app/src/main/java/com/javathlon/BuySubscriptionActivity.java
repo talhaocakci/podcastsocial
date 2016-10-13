@@ -355,6 +355,7 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
                 Log.d(TAG, "Purchase is premium upgrade. Congratulating user.");
                 alert("Thank you for upgrading to premium!");
                 mIsPremium = true;
+                ApplicationSettings.memberMode = ApplicationSettings.MemberMode.FULL;
                 updateUi();
                 setWaitScreen(false);
             }
@@ -364,6 +365,7 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
                 alert("Thank you for subscribing to infinite gas!");
                 mSubscribedToInfiniteGas = true;
                 mAutoRenewEnabled = purchase.isAutoRenewing();
+                ApplicationSettings.memberMode = ApplicationSettings.MemberMode.JAVACORE;
                 updateUi();
                 setWaitScreen(false);
             }
@@ -445,8 +447,8 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
 
     // Enables or disables the "please wait" screen.
     void setWaitScreen(boolean set) {
-        findViewById(R.id.screen_main).setVisibility(set ? View.GONE : View.VISIBLE);
-        findViewById(R.id.screen_wait).setVisibility(set ? View.VISIBLE : View.GONE);
+        //findViewById(R.id.screen_main).setVisibility(set ? View.GONE : View.VISIBLE);
+        //findViewById(R.id.screen_wait).setVisibility(set ? View.VISIBLE : View.GONE);
     }
 
     void complain(String message) {

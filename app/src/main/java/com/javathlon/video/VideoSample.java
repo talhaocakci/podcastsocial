@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.javathlon.R;
+import com.javathlon.db.DBAccessor;
+import com.javathlon.download.PodcstModernUtil;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -45,12 +47,18 @@ public class VideoSample extends Activity implements OnSeekBarChangeListener, Ca
     private Animation hideMediaController;
     private LinearLayout linearLayoutMediaController;
     private static final String TAG = "Video";
+    protected DBAccessor dbHelper = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.videosample);
         extras = getIntent().getExtras();
+
+        if (dbHelper == null) {
+            dbHelper = new DBAccessor(this);
+            dbHelper.open();
+        }
 
         linearLayoutMediaController = (LinearLayout) findViewById(R.id.linearLayoutMediaController);
         linearLayoutMediaController.setVisibility(View.GONE);
@@ -93,14 +101,29 @@ public class VideoSample extends Activity implements OnSeekBarChangeListener, Ca
     }
 
     private void playVideo() {
+
+        String signedUrl = PodcstModernUtil.getSignedUrl("javacore-course", extras.getString("video_item"), false);
+        if(signedUrl == null)
+        {
+            Toast.makeText(getApplicationContext(), "Can not open, upgrade your account", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final String url = signedUrl;
+
+        long id = extras.getLong("video_item_id");
+
+        dbHelper.updateDownloadLink(id, url);
+
         player.setDisplay(holder);
-        if (extras.getString("video_path").equals("VIDEO_URI")) {
+
+        if (url.equals("VIDEO_URI")) {
             showToast("Please, set the video URI in HelloAndroidActivity.java in onClick(View v) method");
         } else {
             new Thread(new Runnable() {
                 public void run() {
                     try {
-                        player.setDataSource(extras.getString("video_path"));
+                        player.setDataSource(url);
                         player.prepareAsync();
                     } catch (IllegalArgumentException e) {
                         showToast("Error while playing video");

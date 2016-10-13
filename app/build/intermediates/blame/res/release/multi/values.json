@@ -19978,7 +19978,7 @@
                     "startOffset": 153066,
                     "endLine": 2112,
                     "endColumn": 12,
-                    "endOffset": 153283
+                    "endOffset": 153286
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/src/main/res/values/styles.xml",
@@ -19988,7 +19988,7 @@
                         "startOffset": 1876,
                         "endLine": 47,
                         "endColumn": 12,
-                        "endOffset": 2097
+                        "endOffset": 2100
                     }
                 }
             },
@@ -19996,20 +19996,20 @@
                 "to": {
                     "startLine": 2113,
                     "startColumn": 4,
-                    "startOffset": 153288,
+                    "startOffset": 153291,
                     "endLine": 2117,
                     "endColumn": 12,
-                    "endOffset": 153498
+                    "endOffset": 153501
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 49,
                         "startColumn": 4,
-                        "startOffset": 2105,
+                        "startOffset": 2108,
                         "endLine": 53,
                         "endColumn": 12,
-                        "endOffset": 2319
+                        "endOffset": 2322
                     }
                 }
             },
@@ -20017,20 +20017,20 @@
                 "to": {
                     "startLine": 2118,
                     "startColumn": 4,
-                    "startOffset": 153503,
+                    "startOffset": 153506,
                     "endLine": 2122,
                     "endColumn": 12,
-                    "endOffset": 153718
+                    "endOffset": 153721
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 55,
                         "startColumn": 4,
-                        "startOffset": 2327,
+                        "startOffset": 2330,
                         "endLine": 59,
                         "endColumn": 12,
-                        "endOffset": 2546
+                        "endOffset": 2549
                     }
                 }
             },
@@ -20038,9 +20038,9 @@
                 "to": {
                     "startLine": 2123,
                     "startColumn": 4,
-                    "startOffset": 153723,
+                    "startOffset": 153726,
                     "endColumn": 65,
-                    "endOffset": 153784
+                    "endOffset": 153787
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20057,9 +20057,9 @@
                 "to": {
                     "startLine": 2124,
                     "startColumn": 4,
-                    "startOffset": 153789,
+                    "startOffset": 153792,
                     "endColumn": 89,
-                    "endOffset": 153874
+                    "endOffset": 153877
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20076,9 +20076,9 @@
                 "to": {
                     "startLine": 2125,
                     "startColumn": 4,
-                    "startOffset": 153879,
+                    "startOffset": 153882,
                     "endColumn": 79,
-                    "endOffset": 153954
+                    "endOffset": 153957
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20095,9 +20095,9 @@
                 "to": {
                     "startLine": 2126,
                     "startColumn": 4,
-                    "startOffset": 153959,
+                    "startOffset": 153962,
                     "endColumn": 91,
-                    "endOffset": 154046
+                    "endOffset": 154049
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20114,9 +20114,9 @@
                 "to": {
                     "startLine": 2127,
                     "startColumn": 4,
-                    "startOffset": 154051,
+                    "startOffset": 154054,
                     "endColumn": 97,
-                    "endOffset": 154144
+                    "endOffset": 154147
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20133,10 +20133,10 @@
                 "to": {
                     "startLine": 2128,
                     "startColumn": 4,
-                    "startOffset": 154149,
+                    "startOffset": 154152,
                     "endLine": 2129,
                     "endColumn": 12,
-                    "endOffset": 154254
+                    "endOffset": 154257
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20154,9 +20154,9 @@
                 "to": {
                     "startLine": 2130,
                     "startColumn": 4,
-                    "startOffset": 154259,
+                    "startOffset": 154262,
                     "endColumn": 77,
-                    "endOffset": 154332
+                    "endOffset": 154335
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20173,9 +20173,9 @@
                 "to": {
                     "startLine": 2131,
                     "startColumn": 4,
-                    "startOffset": 154337,
+                    "startOffset": 154340,
                     "endColumn": 105,
-                    "endOffset": 154438
+                    "endOffset": 154441
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20192,9 +20192,9 @@
                 "to": {
                     "startLine": 2132,
                     "startColumn": 4,
-                    "startOffset": 154443,
+                    "startOffset": 154446,
                     "endColumn": 91,
-                    "endOffset": 154530
+                    "endOffset": 154533
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20211,9 +20211,9 @@
                 "to": {
                     "startLine": 2133,
                     "startColumn": 4,
-                    "startOffset": 154535,
+                    "startOffset": 154538,
                     "endColumn": 103,
-                    "endOffset": 154634
+                    "endOffset": 154637
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20230,9 +20230,9 @@
                 "to": {
                     "startLine": 2134,
                     "startColumn": 4,
-                    "startOffset": 154639,
+                    "startOffset": 154642,
                     "endColumn": 109,
-                    "endOffset": 154744
+                    "endOffset": 154747
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20249,10 +20249,10 @@
                 "to": {
                     "startLine": 2135,
                     "startColumn": 4,
-                    "startOffset": 154749,
+                    "startOffset": 154752,
                     "endLine": 2136,
                     "endColumn": 12,
-                    "endOffset": 154866
+                    "endOffset": 154869
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20270,10 +20270,10 @@
                 "to": {
                     "startLine": 2137,
                     "startColumn": 4,
-                    "startOffset": 154871,
+                    "startOffset": 154874,
                     "endLine": 2140,
                     "endColumn": 12,
-                    "endOffset": 155029
+                    "endOffset": 155032
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20291,10 +20291,10 @@
                 "to": {
                     "startLine": 2141,
                     "startColumn": 4,
-                    "startOffset": 155034,
+                    "startOffset": 155037,
                     "endLine": 2144,
                     "endColumn": 12,
-                    "endOffset": 155186
+                    "endOffset": 155189
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20312,9 +20312,9 @@
                 "to": {
                     "startLine": 2145,
                     "startColumn": 4,
-                    "startOffset": 155191,
+                    "startOffset": 155194,
                     "endColumn": 79,
-                    "endOffset": 155266
+                    "endOffset": 155269
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20331,9 +20331,9 @@
                 "to": {
                     "startLine": 2146,
                     "startColumn": 4,
-                    "startOffset": 155271,
+                    "startOffset": 155274,
                     "endColumn": 99,
-                    "endOffset": 155366
+                    "endOffset": 155369
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20350,9 +20350,9 @@
                 "to": {
                     "startLine": 2147,
                     "startColumn": 4,
-                    "startOffset": 155371,
+                    "startOffset": 155374,
                     "endColumn": 89,
-                    "endOffset": 155456
+                    "endOffset": 155459
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20369,9 +20369,9 @@
                 "to": {
                     "startLine": 2148,
                     "startColumn": 4,
-                    "startOffset": 155461,
+                    "startOffset": 155464,
                     "endColumn": 109,
-                    "endOffset": 155566
+                    "endOffset": 155569
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20388,9 +20388,9 @@
                 "to": {
                     "startLine": 2149,
                     "startColumn": 4,
-                    "startOffset": 155571,
+                    "startOffset": 155574,
                     "endColumn": 91,
-                    "endOffset": 155658
+                    "endOffset": 155661
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20407,10 +20407,10 @@
                 "to": {
                     "startLine": 2150,
                     "startColumn": 4,
-                    "startOffset": 155663,
+                    "startOffset": 155666,
                     "endLine": 2153,
                     "endColumn": 12,
-                    "endOffset": 155830
+                    "endOffset": 155833
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/src/main/res/values/podcastmodern_theme.xml",
@@ -20428,10 +20428,10 @@
                 "to": {
                     "startLine": 2154,
                     "startColumn": 4,
-                    "startOffset": 155835,
+                    "startOffset": 155838,
                     "endLine": 2155,
                     "endColumn": 12,
-                    "endOffset": 155930
+                    "endOffset": 155933
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20449,10 +20449,10 @@
                 "to": {
                     "startLine": 2156,
                     "startColumn": 4,
-                    "startOffset": 155935,
+                    "startOffset": 155938,
                     "endLine": 2157,
                     "endColumn": 12,
-                    "endOffset": 156042
+                    "endOffset": 156045
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20470,10 +20470,10 @@
                 "to": {
                     "startLine": 2158,
                     "startColumn": 4,
-                    "startOffset": 156047,
+                    "startOffset": 156050,
                     "endLine": 2159,
                     "endColumn": 12,
-                    "endOffset": 156156
+                    "endOffset": 156159
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20491,10 +20491,10 @@
                 "to": {
                     "startLine": 2160,
                     "startColumn": 4,
-                    "startOffset": 156161,
+                    "startOffset": 156164,
                     "endLine": 2161,
                     "endColumn": 12,
-                    "endOffset": 156272
+                    "endOffset": 156275
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20512,10 +20512,10 @@
                 "to": {
                     "startLine": 2162,
                     "startColumn": 4,
-                    "startOffset": 156277,
+                    "startOffset": 156280,
                     "endLine": 2163,
                     "endColumn": 12,
-                    "endOffset": 156388
+                    "endOffset": 156391
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20533,9 +20533,9 @@
                 "to": {
                     "startLine": 2164,
                     "startColumn": 4,
-                    "startOffset": 156393,
+                    "startOffset": 156396,
                     "endColumn": 93,
-                    "endOffset": 156482
+                    "endOffset": 156485
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20552,9 +20552,9 @@
                 "to": {
                     "startLine": 2165,
                     "startColumn": 4,
-                    "startOffset": 156487,
+                    "startOffset": 156490,
                     "endColumn": 113,
-                    "endOffset": 156596
+                    "endOffset": 156599
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20571,9 +20571,9 @@
                 "to": {
                     "startLine": 2166,
                     "startColumn": 4,
-                    "startOffset": 156601,
+                    "startOffset": 156604,
                     "endColumn": 117,
-                    "endOffset": 156714
+                    "endOffset": 156717
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20590,10 +20590,10 @@
                 "to": {
                     "startLine": 2167,
                     "startColumn": 4,
-                    "startOffset": 156719,
+                    "startOffset": 156722,
                     "endLine": 2168,
                     "endColumn": 12,
-                    "endOffset": 156816
+                    "endOffset": 156819
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20611,10 +20611,10 @@
                 "to": {
                     "startLine": 2169,
                     "startColumn": 4,
-                    "startOffset": 156821,
+                    "startOffset": 156824,
                     "endLine": 2170,
                     "endColumn": 12,
-                    "endOffset": 156936
+                    "endOffset": 156939
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20632,10 +20632,10 @@
                 "to": {
                     "startLine": 2171,
                     "startColumn": 4,
-                    "startOffset": 156941,
+                    "startOffset": 156944,
                     "endLine": 2172,
                     "endColumn": 12,
-                    "endOffset": 157058
+                    "endOffset": 157061
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20653,9 +20653,9 @@
                 "to": {
                     "startLine": 2173,
                     "startColumn": 4,
-                    "startOffset": 157063,
+                    "startOffset": 157066,
                     "endColumn": 81,
-                    "endOffset": 157140
+                    "endOffset": 157143
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20672,9 +20672,9 @@
                 "to": {
                     "startLine": 2174,
                     "startColumn": 4,
-                    "startOffset": 157145,
+                    "startOffset": 157148,
                     "endColumn": 103,
-                    "endOffset": 157244
+                    "endOffset": 157247
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20691,9 +20691,9 @@
                 "to": {
                     "startLine": 2175,
                     "startColumn": 4,
-                    "startOffset": 157249,
+                    "startOffset": 157252,
                     "endColumn": 119,
-                    "endOffset": 157364
+                    "endOffset": 157367
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20710,9 +20710,9 @@
                 "to": {
                     "startLine": 2176,
                     "startColumn": 4,
-                    "startOffset": 157369,
+                    "startOffset": 157372,
                     "endColumn": 125,
-                    "endOffset": 157490
+                    "endOffset": 157493
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20729,9 +20729,9 @@
                 "to": {
                     "startLine": 2177,
                     "startColumn": 4,
-                    "startOffset": 157495,
+                    "startOffset": 157498,
                     "endColumn": 97,
-                    "endOffset": 157588
+                    "endOffset": 157591
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20748,9 +20748,9 @@
                 "to": {
                     "startLine": 2178,
                     "startColumn": 4,
-                    "startOffset": 157593,
+                    "startOffset": 157596,
                     "endColumn": 93,
-                    "endOffset": 157682
+                    "endOffset": 157685
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20767,9 +20767,9 @@
                 "to": {
                     "startLine": 2179,
                     "startColumn": 4,
-                    "startOffset": 157687,
+                    "startOffset": 157690,
                     "endColumn": 87,
-                    "endOffset": 157770
+                    "endOffset": 157773
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20786,9 +20786,9 @@
                 "to": {
                     "startLine": 2180,
                     "startColumn": 4,
-                    "startOffset": 157775,
+                    "startOffset": 157778,
                     "endColumn": 111,
-                    "endOffset": 157882
+                    "endOffset": 157885
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20805,9 +20805,9 @@
                 "to": {
                     "startLine": 2181,
                     "startColumn": 4,
-                    "startOffset": 157887,
+                    "startOffset": 157890,
                     "endColumn": 115,
-                    "endOffset": 157998
+                    "endOffset": 158001
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20824,9 +20824,9 @@
                 "to": {
                     "startLine": 2182,
                     "startColumn": 4,
-                    "startOffset": 158003,
+                    "startOffset": 158006,
                     "endColumn": 121,
-                    "endOffset": 158120
+                    "endOffset": 158123
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20843,9 +20843,9 @@
                 "to": {
                     "startLine": 2183,
                     "startColumn": 4,
-                    "startOffset": 158125,
+                    "startOffset": 158128,
                     "endColumn": 111,
-                    "endOffset": 158232
+                    "endOffset": 158235
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20862,10 +20862,10 @@
                 "to": {
                     "startLine": 2184,
                     "startColumn": 4,
-                    "startOffset": 158237,
+                    "startOffset": 158240,
                     "endLine": 2186,
                     "endColumn": 12,
-                    "endOffset": 158407
+                    "endOffset": 158410
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20883,9 +20883,9 @@
                 "to": {
                     "startLine": 2187,
                     "startColumn": 4,
-                    "startOffset": 158412,
+                    "startOffset": 158415,
                     "endColumn": 115,
-                    "endOffset": 158523
+                    "endOffset": 158526
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20902,9 +20902,9 @@
                 "to": {
                     "startLine": 2188,
                     "startColumn": 4,
-                    "startOffset": 158528,
+                    "startOffset": 158531,
                     "endColumn": 85,
-                    "endOffset": 158609
+                    "endOffset": 158612
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20921,10 +20921,10 @@
                 "to": {
                     "startLine": 2189,
                     "startColumn": 4,
-                    "startOffset": 158614,
+                    "startOffset": 158617,
                     "endLine": 2190,
                     "endColumn": 12,
-                    "endOffset": 158721
+                    "endOffset": 158724
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20942,10 +20942,10 @@
                 "to": {
                     "startLine": 2191,
                     "startColumn": 4,
-                    "startOffset": 158726,
+                    "startOffset": 158729,
                     "endLine": 2192,
                     "endColumn": 12,
-                    "endOffset": 158845
+                    "endOffset": 158848
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20963,9 +20963,9 @@
                 "to": {
                     "startLine": 2193,
                     "startColumn": 4,
-                    "startOffset": 158850,
+                    "startOffset": 158853,
                     "endColumn": 66,
-                    "endOffset": 158912
+                    "endOffset": 158915
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -20982,10 +20982,10 @@
                 "to": {
                     "startLine": 2194,
                     "startColumn": 4,
-                    "startOffset": 158917,
+                    "startOffset": 158920,
                     "endLine": 2195,
                     "endColumn": 12,
-                    "endOffset": 159038
+                    "endOffset": 159041
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21003,9 +21003,9 @@
                 "to": {
                     "startLine": 2196,
                     "startColumn": 4,
-                    "startOffset": 159043,
+                    "startOffset": 159046,
                     "endColumn": 67,
-                    "endOffset": 159106
+                    "endOffset": 159109
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21022,10 +21022,10 @@
                 "to": {
                     "startLine": 2197,
                     "startColumn": 4,
-                    "startOffset": 159111,
+                    "startOffset": 159114,
                     "endLine": 2198,
                     "endColumn": 12,
-                    "endOffset": 159234
+                    "endOffset": 159237
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21043,10 +21043,10 @@
                 "to": {
                     "startLine": 2199,
                     "startColumn": 4,
-                    "startOffset": 159239,
+                    "startOffset": 159242,
                     "endLine": 2200,
                     "endColumn": 12,
-                    "endOffset": 159378
+                    "endOffset": 159381
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21064,10 +21064,10 @@
                 "to": {
                     "startLine": 2201,
                     "startColumn": 4,
-                    "startOffset": 159383,
+                    "startOffset": 159386,
                     "endLine": 2202,
                     "endColumn": 12,
-                    "endOffset": 159506
+                    "endOffset": 159509
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21085,9 +21085,9 @@
                 "to": {
                     "startLine": 2203,
                     "startColumn": 4,
-                    "startOffset": 159511,
+                    "startOffset": 159514,
                     "endColumn": 68,
-                    "endOffset": 159575
+                    "endOffset": 159578
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21104,9 +21104,9 @@
                 "to": {
                     "startLine": 2204,
                     "startColumn": 4,
-                    "startOffset": 159580,
+                    "startOffset": 159583,
                     "endColumn": 94,
-                    "endOffset": 159670
+                    "endOffset": 159673
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21123,9 +21123,9 @@
                 "to": {
                     "startLine": 2205,
                     "startColumn": 4,
-                    "startOffset": 159675,
+                    "startOffset": 159678,
                     "endColumn": 114,
-                    "endOffset": 159785
+                    "endOffset": 159788
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21142,9 +21142,9 @@
                 "to": {
                     "startLine": 2206,
                     "startColumn": 4,
-                    "startOffset": 159790,
+                    "startOffset": 159793,
                     "endColumn": 112,
-                    "endOffset": 159898
+                    "endOffset": 159901
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21161,9 +21161,9 @@
                 "to": {
                     "startLine": 2207,
                     "startColumn": 4,
-                    "startOffset": 159903,
+                    "startOffset": 159906,
                     "endColumn": 98,
-                    "endOffset": 159997
+                    "endOffset": 160000
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21180,9 +21180,9 @@
                 "to": {
                     "startLine": 2208,
                     "startColumn": 4,
-                    "startOffset": 160002,
+                    "startOffset": 160005,
                     "endColumn": 108,
-                    "endOffset": 160106
+                    "endOffset": 160109
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21199,9 +21199,9 @@
                 "to": {
                     "startLine": 2209,
                     "startColumn": 4,
-                    "startOffset": 160111,
+                    "startOffset": 160114,
                     "endColumn": 110,
-                    "endOffset": 160217
+                    "endOffset": 160220
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21218,9 +21218,9 @@
                 "to": {
                     "startLine": 2210,
                     "startColumn": 4,
-                    "startOffset": 160222,
+                    "startOffset": 160225,
                     "endColumn": 110,
-                    "endOffset": 160328
+                    "endOffset": 160331
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21237,9 +21237,9 @@
                 "to": {
                     "startLine": 2211,
                     "startColumn": 4,
-                    "startOffset": 160333,
+                    "startOffset": 160336,
                     "endColumn": 100,
-                    "endOffset": 160429
+                    "endOffset": 160432
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21256,9 +21256,9 @@
                 "to": {
                     "startLine": 2212,
                     "startColumn": 4,
-                    "startOffset": 160434,
+                    "startOffset": 160437,
                     "endColumn": 104,
-                    "endOffset": 160534
+                    "endOffset": 160537
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21275,10 +21275,10 @@
                 "to": {
                     "startLine": 2213,
                     "startColumn": 4,
-                    "startOffset": 160539,
+                    "startOffset": 160542,
                     "endLine": 2214,
                     "endColumn": 12,
-                    "endOffset": 160646
+                    "endOffset": 160649
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21296,10 +21296,10 @@
                 "to": {
                     "startLine": 2215,
                     "startColumn": 4,
-                    "startOffset": 160651,
+                    "startOffset": 160654,
                     "endLine": 2216,
                     "endColumn": 12,
-                    "endOffset": 160776
+                    "endOffset": 160779
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21317,9 +21317,9 @@
                 "to": {
                     "startLine": 2217,
                     "startColumn": 4,
-                    "startOffset": 160781,
+                    "startOffset": 160784,
                     "endColumn": 90,
-                    "endOffset": 160867
+                    "endOffset": 160870
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21336,9 +21336,9 @@
                 "to": {
                     "startLine": 2218,
                     "startColumn": 4,
-                    "startOffset": 160872,
+                    "startOffset": 160875,
                     "endColumn": 122,
-                    "endOffset": 160990
+                    "endOffset": 160993
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21355,10 +21355,10 @@
                 "to": {
                     "startLine": 2219,
                     "startColumn": 4,
-                    "startOffset": 160995,
+                    "startOffset": 160998,
                     "endLine": 2220,
                     "endColumn": 12,
-                    "endOffset": 161102
+                    "endOffset": 161105
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21376,9 +21376,9 @@
                 "to": {
                     "startLine": 2221,
                     "startColumn": 4,
-                    "startOffset": 161107,
+                    "startOffset": 161110,
                     "endColumn": 85,
-                    "endOffset": 161188
+                    "endOffset": 161191
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21395,9 +21395,9 @@
                 "to": {
                     "startLine": 2222,
                     "startColumn": 4,
-                    "startOffset": 161193,
+                    "startOffset": 161196,
                     "endColumn": 103,
-                    "endOffset": 161292
+                    "endOffset": 161295
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21414,10 +21414,10 @@
                 "to": {
                     "startLine": 2223,
                     "startColumn": 4,
-                    "startOffset": 161297,
+                    "startOffset": 161300,
                     "endLine": 2224,
                     "endColumn": 12,
-                    "endOffset": 161400
+                    "endOffset": 161403
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21435,10 +21435,10 @@
                 "to": {
                     "startLine": 2225,
                     "startColumn": 4,
-                    "startOffset": 161405,
+                    "startOffset": 161408,
                     "endLine": 2226,
                     "endColumn": 12,
-                    "endOffset": 161500
+                    "endOffset": 161503
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21456,10 +21456,10 @@
                 "to": {
                     "startLine": 2227,
                     "startColumn": 4,
-                    "startOffset": 161505,
+                    "startOffset": 161508,
                     "endLine": 2228,
                     "endColumn": 12,
-                    "endOffset": 161618
+                    "endOffset": 161621
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21477,10 +21477,10 @@
                 "to": {
                     "startLine": 2229,
                     "startColumn": 4,
-                    "startOffset": 161623,
+                    "startOffset": 161626,
                     "endLine": 2230,
                     "endColumn": 12,
-                    "endOffset": 161722
+                    "endOffset": 161725
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21498,10 +21498,10 @@
                 "to": {
                     "startLine": 2231,
                     "startColumn": 4,
-                    "startOffset": 161727,
+                    "startOffset": 161730,
                     "endLine": 2232,
                     "endColumn": 12,
-                    "endOffset": 161826
+                    "endOffset": 161829
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21519,10 +21519,10 @@
                 "to": {
                     "startLine": 2233,
                     "startColumn": 4,
-                    "startOffset": 161831,
+                    "startOffset": 161834,
                     "endLine": 2234,
                     "endColumn": 12,
-                    "endOffset": 161952
+                    "endOffset": 161955
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21540,9 +21540,9 @@
                 "to": {
                     "startLine": 2235,
                     "startColumn": 4,
-                    "startOffset": 161957,
+                    "startOffset": 161960,
                     "endColumn": 87,
-                    "endOffset": 162040
+                    "endOffset": 162043
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21559,9 +21559,9 @@
                 "to": {
                     "startLine": 2236,
                     "startColumn": 4,
-                    "startOffset": 162045,
+                    "startOffset": 162048,
                     "endColumn": 89,
-                    "endOffset": 162130
+                    "endOffset": 162133
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21578,9 +21578,9 @@
                 "to": {
                     "startLine": 2237,
                     "startColumn": 4,
-                    "startOffset": 162135,
+                    "startOffset": 162138,
                     "endColumn": 109,
-                    "endOffset": 162240
+                    "endOffset": 162243
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21597,9 +21597,9 @@
                 "to": {
                     "startLine": 2238,
                     "startColumn": 4,
-                    "startOffset": 162245,
+                    "startOffset": 162248,
                     "endColumn": 83,
-                    "endOffset": 162324
+                    "endOffset": 162327
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21616,9 +21616,9 @@
                 "to": {
                     "startLine": 2239,
                     "startColumn": 4,
-                    "startOffset": 162329,
+                    "startOffset": 162332,
                     "endColumn": 53,
-                    "endOffset": 162378
+                    "endOffset": 162381
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21635,9 +21635,9 @@
                 "to": {
                     "startLine": 2240,
                     "startColumn": 4,
-                    "startOffset": 162383,
+                    "startOffset": 162386,
                     "endColumn": 63,
-                    "endOffset": 162442
+                    "endOffset": 162445
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21654,9 +21654,9 @@
                 "to": {
                     "startLine": 2241,
                     "startColumn": 4,
-                    "startOffset": 162447,
+                    "startOffset": 162450,
                     "endColumn": 105,
-                    "endOffset": 162548
+                    "endOffset": 162551
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21673,9 +21673,9 @@
                 "to": {
                     "startLine": 2242,
                     "startColumn": 4,
-                    "startOffset": 162553,
+                    "startOffset": 162556,
                     "endColumn": 109,
-                    "endOffset": 162658
+                    "endOffset": 162661
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21692,9 +21692,9 @@
                 "to": {
                     "startLine": 2243,
                     "startColumn": 4,
-                    "startOffset": 162663,
+                    "startOffset": 162666,
                     "endColumn": 83,
-                    "endOffset": 162742
+                    "endOffset": 162745
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21711,9 +21711,9 @@
                 "to": {
                     "startLine": 2244,
                     "startColumn": 4,
-                    "startOffset": 162747,
+                    "startOffset": 162750,
                     "endColumn": 119,
-                    "endOffset": 162862
+                    "endOffset": 162865
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml",
@@ -21730,10 +21730,10 @@
                 "to": {
                     "startLine": 2245,
                     "startColumn": 4,
-                    "startOffset": 162867,
+                    "startOffset": 162870,
                     "endLine": 2255,
                     "endColumn": 12,
-                    "endOffset": 163463
+                    "endOffset": 163466
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/values/values.xml",
@@ -21751,10 +21751,10 @@
                 "to": {
                     "startLine": 2256,
                     "startColumn": 4,
-                    "startOffset": 163468,
+                    "startOffset": 163471,
                     "endLine": 2258,
                     "endColumn": 12,
-                    "endOffset": 163642
+                    "endOffset": 163645
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/values/values.xml",
@@ -21772,10 +21772,10 @@
                 "to": {
                     "startLine": 2259,
                     "startColumn": 4,
-                    "startOffset": 163647,
+                    "startOffset": 163650,
                     "endLine": 2263,
                     "endColumn": 12,
-                    "endOffset": 163989
+                    "endOffset": 163992
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/values/values.xml",
@@ -21793,10 +21793,10 @@
                 "to": {
                     "startLine": 2264,
                     "startColumn": 4,
-                    "startOffset": 163994,
+                    "startOffset": 163997,
                     "endLine": 2267,
                     "endColumn": 12,
-                    "endOffset": 164240
+                    "endOffset": 164243
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/values/values.xml",
@@ -21814,10 +21814,10 @@
                 "to": {
                     "startLine": 2268,
                     "startColumn": 4,
-                    "startOffset": 164245,
+                    "startOffset": 164248,
                     "endLine": 2270,
                     "endColumn": 12,
-                    "endOffset": 164422
+                    "endOffset": 164425
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/values/values.xml",
@@ -21835,10 +21835,10 @@
                 "to": {
                     "startLine": 2271,
                     "startColumn": 4,
-                    "startOffset": 164427,
+                    "startOffset": 164430,
                     "endLine": 2275,
                     "endColumn": 12,
-                    "endOffset": 164746
+                    "endOffset": 164749
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/values/values.xml",
@@ -21856,10 +21856,10 @@
                 "to": {
                     "startLine": 2276,
                     "startColumn": 4,
-                    "startOffset": 164751,
+                    "startOffset": 164754,
                     "endLine": 2283,
                     "endColumn": 12,
-                    "endOffset": 165106
+                    "endOffset": 165109
                 },
                 "from": {
                     "file": "/Users/ocakcit/projects/audiosocial/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/res/values/values.xml",

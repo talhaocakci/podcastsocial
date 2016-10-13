@@ -31,6 +31,7 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.javathlon.CatalogData;
 import com.javathlon.CommonStaticClass;
@@ -41,6 +42,7 @@ import com.javathlon.db.DBAccessor;
 import com.javathlon.download.DownloadHandler;
 import com.javathlon.download.DownloadProgressThread;
 import com.javathlon.download.DownloadReceiver;
+import com.javathlon.download.PodcstModernUtil;
 import com.javathlon.download.RSSDownloaderParser;
 import com.javathlon.download.SpreakerUtil;
 import com.javathlon.memsoft.MemsoftUtil;
@@ -222,9 +224,18 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
                         }
                     });
                 } else {
+
+                    String signedUrl = PodcstModernUtil.getSignedUrl("javacore-course", path, false);
+                    if(signedUrl == null)
+                    {
+                        Toast.makeText(RssListPlayerActivity.this.getActivity(), "Can not open, upgrade your account", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     Intent i = new Intent(getActivity(), VideoSample.class);
                     CommonStaticClass.setCurrentPodcast(pod);
-                    i.putExtra("video_path", path);
+                    i.putExtra("video_item", path);
+                    i.putExtra("video_item_id", pod.id);
                     startActivity(i);
                 }
             }

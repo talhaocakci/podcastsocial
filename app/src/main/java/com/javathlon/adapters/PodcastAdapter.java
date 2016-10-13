@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.javathlon.PodcastData;
 import com.javathlon.R;
+import com.javathlon.download.PodcstModernUtil;
 import com.javathlon.rss.RssListPlayerActivity;
 
 import java.text.DateFormat;
@@ -75,6 +76,16 @@ public class PodcastAdapter extends BaseAdapter {
 
                 downloadManager = (DownloadManager) view.getContext().getSystemService(Context.DOWNLOAD_SERVICE);
 
+
+                if(!dataList.get(position).url.contains("http")) {
+                    String signedUrl = PodcstModernUtil.getSignedUrl("javacore-course", dataList.get(position).url, false);
+                    if(signedUrl == null)
+                    {
+                        Toast.makeText(view.getContext(), "Can not open, upgrade your account", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    dataList.get(position).url = signedUrl;
+                }
                 Uri Download_Uri = Uri.parse(dataList.get(position).url);
                // Uri Download_Uri = Uri.parse("http://www.google.com");
                 DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
@@ -89,7 +100,12 @@ public class PodcastAdapter extends BaseAdapter {
                 request.setDescription(context.getResources().getString(R.string.notificationtitle));
                 //Set the local destination for the downloaded file to a path within the application's external files directory
 
-                String fileName = dataList.get(position).editionTitle.replaceAll("[^\\x30-\\x5A\\x61-\\x7A\\x30-\\x39]", "") + ".mp3";
+                String extension = ".mp3";
+
+                if(!dataList.get(position).url.isEmpty() && dataList.get(position).url.contains(".mp4"))
+                    extension = ".mp4";
+
+                String fileName = dataList.get(position).editionTitle.replaceAll("[^\\x30-\\x5A\\x61-\\x7A\\x30-\\x39]", "") + extension;
                 request.setDestinationInExternalPublicDir(Environment.DIRECTORY_PODCASTS, fileName);
 
 
