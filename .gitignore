@@ -19,3 +19,8 @@ findbugs/
 version.properties
 build.properties
 container_settings.json
+local.properties
+import-summary.txt
+gradlew.bat
+app/build/
+app/libs/
