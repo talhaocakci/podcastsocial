@@ -8,8 +8,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,7 +54,7 @@ public class MainActivity extends BaseActivity {
     private String mTitle = "";
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    private static final String TAG = "BuySubscriptionActivity";
+    private static final String TAG = "MainActivity";
 
 
     @Override
@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity {
 
         // iconu ve açýlýp kapandýðýnda görünecek texti veriyoruz.
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.drawable.ic_drawer, R.string.drawer_open,
+                R.string.drawer_open,
                 R.string.drawer_close) {
 
             // drawer kapatýldýðýnda tetiklenen method
@@ -281,7 +281,7 @@ public class MainActivity extends BaseActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
         // navigationDrawer açýldýðýnda ayarlarý gizlemek için
-        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        //menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 

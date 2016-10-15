@@ -1,0 +1,21 @@
+syntax: glob
+
+build/
+out/
+dist/
+.idea/
+*.iml
+*.orig
+*.class
+.classpath
+.project
+.settings/
+.DS_Store
+catalina-ant/
+.checkstyle
+.empty
+target/
+findbugs/
+version.properties
+build.properties
+container_settings.json

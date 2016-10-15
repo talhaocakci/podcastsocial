@@ -46,8 +46,7 @@ public class PodcstModernUtil {
             return fileKey;
         }
 
-        if(!isFree || (ApplicationSettings.memberMode != ApplicationSettings.MemberMode.JAVACORE
-                && ApplicationSettings.memberMode != ApplicationSettings.MemberMode.FULL)) {
+        if(!isFree && (ApplicationSettings.memberMode == ApplicationSettings.MemberMode.FREE)) {
             return null;
         }
 
