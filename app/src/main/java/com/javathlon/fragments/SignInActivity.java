@@ -81,7 +81,7 @@ public class SignInActivity extends Activity implements OnClickListener,
 
     //password: android
     //alias: podcastmoderndevelopment
-    private static String podcastmoderndevelopment = "334941374162-evcoffbh8a5sjj64khpo6jblambu9uh5.apps.googleusercontent.com";
+    private static String podcastmoderndevelopment = "634509108343-lhhvoqthbhptt2cfbc0r7qmoib6miv66.apps.googleusercontent.com";
 
     /*
      * Stores the connection result from onConnectionFailed callbacks so that we can resolve them
@@ -276,6 +276,8 @@ public class SignInActivity extends Activity implements OnClickListener,
 
         mGoogleApiClient = buildGoogleApiClient(true);
 
+        Plus.PeopleApi.loadVisible(mGoogleApiClient, null).setResultCallback(this);
+
         mSignInStatus = (TextView) findViewById(R.id.sign_in_status);
         mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
         mSignInButton.setOnClickListener(this);
@@ -355,9 +357,9 @@ public class SignInActivity extends Activity implements OnClickListener,
 
 
             builder.addApi(Plus.API, Plus.PlusOptions.builder()
-                    .setServerClientId(serverClientId)
                     .build())
-                    .addScope(Plus.SCOPE_PLUS_LOGIN).addScope(Plus.SCOPE_PLUS_PROFILE);
+                    .addScope(Plus.SCOPE_PLUS_LOGIN)
+                    .addScope(Plus.SCOPE_PLUS_PROFILE);
 
 
         return builder.build();
@@ -455,18 +457,26 @@ public class SignInActivity extends Activity implements OnClickListener,
         String currentPersonName = person != null
                 ? person.getDisplayName()
                 : getString(R.string.unknown_person);
-        if(person == null) {
-            return;
+
+        String birthday = "";
+        String name = "";
+        int gender = 0;
+        Person.Image image = null;
+        String currentLocation = "";
+        String id = "";
+        String lang ="";
+        int relationShip = 0;
+
+        if(person != null) {
+             birthday = person.getBirthday();
+             name = person.getDisplayName();
+             gender = person.getGender();
+            image = person.getImage();
+            currentLocation = person.getCurrentLocation();
+             id = person.getId();
+             lang = person.getLanguage();
+             relationShip = person.getRelationshipStatus();
         }
-            String birthday = person.getBirthday();
-            String name = person.getDisplayName();
-            int gender = person.getGender();
-            Person.Image image = person.getImage();
-            String currentLocation = person.getCurrentLocation();
-            String id = person.getId();
-            String lang = person.getLanguage();
-            int relationShip = person.getRelationshipStatus();
-            Person.AgeRange ageRange = person.getAgeRange();
 
 
         if (dbAccessor == null) {
@@ -490,11 +500,7 @@ public class SignInActivity extends Activity implements OnClickListener,
             else
                 user.setGender("f");
             user.setEmail(email);
-            if(ageRange != null )
-                user.setMinAge(ageRange.getMin());
             user.setGoogleToken(id);
-
-
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
             String gcmToken = sharedPreferences.getString(QuickstartPreferences.GCM_TOKEN, "");

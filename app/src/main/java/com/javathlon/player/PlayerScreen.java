@@ -55,6 +55,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.javathlon.BaseActivity;
 import com.javathlon.CatalogData;
 import com.javathlon.CommonStaticClass;
+import com.javathlon.NoteUtil;
 import com.javathlon.PodcastData;
 import com.javathlon.R;
 import com.javathlon.Utils;
@@ -85,16 +86,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import ogrelab.org.apache.http.HttpEntity;
-import ogrelab.org.apache.http.HttpResponse;
-import ogrelab.org.apache.http.NameValuePair;
-import ogrelab.org.apache.http.client.ClientProtocolException;
-import ogrelab.org.apache.http.client.HttpClient;
-import ogrelab.org.apache.http.client.entity.UrlEncodedFormEntity;
-import ogrelab.org.apache.http.client.methods.HttpPost;
-import ogrelab.org.apache.http.impl.client.DefaultHttpClient;
-import ogrelab.org.apache.http.message.BasicNameValuePair;
-import ogrelab.org.apache.http.util.EntityUtils;
 
 public class PlayerScreen extends BaseActivity implements MediaPlayerControl, SeekBar.OnSeekBarChangeListener {
 
@@ -124,7 +115,7 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
     private Context c;
     private Uri mainAudioUri;
     private long podcastID;
-            int numberOfNotePerMedia;
+    int numberOfNotePerMedia;
     private ImageView albumArt;
     private TextView beginView, songTitleView,
             musicCurLoc, musicDuration;
@@ -331,10 +322,10 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
             @Override
             public void onClick(View view) {
 
-                    albumArt.setVisibility(View.GONE);
-                    addNoteLayout.setVisibility(View.GONE);
-                    infoScroll.setVisibility(View.VISIBLE);
-                    infoText.setText(CommonStaticClass.getCurrentPodcast().description);
+                albumArt.setVisibility(View.GONE);
+                addNoteLayout.setVisibility(View.GONE);
+                infoScroll.setVisibility(View.VISIBLE);
+                infoText.setText(CommonStaticClass.getCurrentPodcast().description);
 
             }
         });
@@ -375,16 +366,16 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
         });
     }
 
-    private void tryConnecting(){
-        if(path.contains("http://")||path.contains("https://")){
+    private void tryConnecting() {
+        if (path.contains("http://") || path.contains("https://")) {
             progressDialog = ProgressDialog.show(con, "Loading...", "Please wait while loading mp3 file from url");
-            Thread t = new Thread(){
+            Thread t = new Thread() {
 
                 @Override
                 public void run() {
                     boolean a = true;
-                    while(a){
-                        if(maxToMark>0){
+                    while (a) {
+                        if (maxToMark > 0) {
                             a = false;
                             Message msg = new Message();
                             msg.what = STOPSEEKING;
@@ -395,7 +386,7 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
                 }
 
             };
-                    t.start();
+            t.start();
             try {
                 Thread.currentThread().join();
             } catch (InterruptedException e) {
@@ -405,27 +396,21 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
     }
 
     public void playPauseStream() {
-
-
         if (!isPlaying()) {
-           // tryConnecting();
+            // tryConnecting();
             Log.e("play button", "click");
             if (checkInPodcast(path)) {
                 updateInPodcast(path);
             } else {
                 insertInPodcast(path);
-
             }
-
-
             start();
 
-            if(ps > 0 ){
+            if (ps > 0) {
                 currentPosition = ps;
-                seekTo((ps*1000));
-                seekBar.setProgress((ps*100000)/getDuration());
-            }
-            else {
+                seekTo((ps * 1000));
+                seekBar.setProgress((ps * 100000) / getDuration());
+            } else {
                 statisticHolder.startStatistic(CommonStaticClass.getCurrentPodcast().id, currentPosition);
             }
             isStopped = false;
@@ -440,7 +425,6 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
             MusicService.pausedByUser = true;
             playPauseButton.setText(R.string.material_play);
         }
-
     }
 
     @Override
@@ -450,10 +434,7 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
         if (CommonStaticClass.streaming) {
             Log.e("streaming", "is playing from stream");
         }
-
-
         PlayerScreen.statisticHolder = new ListenStatisticHolder(this.getApplicationContext());
-
 
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -471,12 +452,12 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
         Intent intent = getIntent();
         c = this;
         Bundle bundle = intent.getExtras();
-        if(bundle == null || null == bundle.getString("mediapath")){
+        if (bundle == null || null == bundle.getString("mediapath")) {
             this.showMyDialog(getResources().getString(R.string.noitemselected));
             return;
         }
         path = intent.getExtras().getString("mediapath");
-        if(intent.getExtras().get("fromnotification")!=null){
+        if (intent.getExtras().get("fromnotification") != null) {
             PodcastData p = new PodcastData();
             p.durationString = intent.getExtras().getString("duration", "Unknown duration");
             p.publishDateLong = intent.getExtras().getLong("publishtime", 0L);
@@ -487,8 +468,8 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
 
             List<PodcastData> dataList = new ArrayList<PodcastData>();
             dataList.add(p);
-           if(null ==  dbHelper.getPodcastByUrl(p.url))
-             dbHelper.bulkInsertPodcastData(dataList,p.catalogId);
+            if (null == dbHelper.getPodcastByUrl(p.url))
+                dbHelper.bulkInsertPodcastData(dataList, p.catalogId);
 
             CommonStaticClass.setCurrentPodcast(p);
         }
@@ -502,7 +483,7 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
 
             long catalogId = CommonStaticClass.getCurrentPodcast().catalogId;
             CatalogData catalogData = dbHelper.getPodcastCatalogById(catalogId);
-            if(catalogData != null)
+            if (catalogData != null)
                 ImageUtil.displayImage(albumArt, catalogData.image, null);
             else {
 
@@ -516,15 +497,14 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
 //		albumArt.setImageBitmap(bmp);
         }
 
-
         CommonStaticClass.currentSongPath = path;
         if (path.contains("http://") || path.contains("https://")) {
             showMyDialog("Connecting to the host...");
             CommonStaticClass.streaming = true;
             Log.e("streaming", "is playing from stream");
             PodcastData d = dbHelper.getPodcastByUrl(path);
-            if(d != null)
-            CommonStaticClass.setCurrentPodcast(d);
+            if (d != null)
+                CommonStaticClass.setCurrentPodcast(d);
         } else {
             CommonStaticClass.streaming = false;
 
@@ -634,8 +614,6 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
 
             @Override
             public void onClick(View v) {
-
-
                 String note = "";
                 if (noteEditText.getText().toString().length() > 0) {
                     note = noteEditText.getText().toString();
@@ -646,30 +624,6 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
                     endPosInt = beginPosInt;
                 saveState(beginPosInt, endPosInt,
                         note);
-                /*
-					if(usingMarker){
-						saveState(beginPosInt + "", endPosInt + "",
-								note);
-					}else{
-                        if(endPosInt == 0)
-                            endPosInt = beginPosInt;
-						if (beginPosSelected && endPosSelected) {
-							saveState(beginPosInt + "", endPosInt + "",
-									note);
-						} else if (beginPosSelected) {
-							int totalEnd = getDuration() - beginPosInt;
-							String totalPosEnd = totalEnd + "";
-							endView.setText((Float.parseFloat(totalPosEnd) / 1000)
-									+ "");
-							saveState(beginPosInt + "", totalEnd + "", note);
-						} else {
-							Toast.makeText(c,
-									"Begin and end points are unknown. You can set them by touching \"start\" and \"end\" buttons at the bottom.",
-									Toast.LENGTH_SHORT).show();
-						}
-					}*/
-
-
                 noteEditText.setText("");
             }
         });
@@ -748,7 +702,6 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
             startActivity(i);
             finish();
         }
-
     }
 
     public void skipToPrevSong() {
@@ -777,9 +730,9 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
 
     }
 
-    private void startPlaying(){
+    private void startPlaying() {
 
-        String musicRedirectedPath ="";
+        String musicRedirectedPath = "";
         try {
             musicRedirectedPath = MusicService.followRedirectUrl(path);
         } catch (ExecutionException e) {
@@ -803,7 +756,6 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
             }
         }
 
-
         if (!isMyServiceRunning()) {
 
             songThread = new Thread(new Runnable() {
@@ -826,8 +778,6 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
                     }
                 }
             });
-
-
             songThread.start();
             MusicService.pausedByUser = false;
         }
@@ -861,7 +811,7 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
             songTitle = intent.getStringExtra("filelabel");
         }
 
-        final long podId =  intent.getLongExtra("podid", 0);
+        final long podId = intent.getLongExtra("podid", 0);
         songTitleView.setText(CommonStaticClass.getCurrentPodcast().editionTitle);
 
         podcastID = getPodcastNumber(path);
@@ -883,11 +833,7 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
         fromBackground = intent.getBooleanExtra("fromBackground", false);
         isSongNavigation = intent.getBooleanExtra("isSongNavigation", false);
 
-
-
         if (!fromBackground) {
-
-
 
             if (path.startsWith("NOACCESS")) {
                 String[] s = path.split("-");
@@ -896,51 +842,47 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
                 return;
             }
 
-            if(!path.startsWith("http")){
+            if (!path.startsWith("http")) {
                 String extState = Environment.getExternalStorageState();
-                if(!extState.equals(Environment.MEDIA_MOUNTED)) {
+                if (!extState.equals(Environment.MEDIA_MOUNTED)) {
                     System.out.println("unmounted");
                 }
-                File f = new File(path.replaceAll("file:///",""));
-                if(!f.exists()){
-                        showConfirmDialog(getResources().getString(R.string.downloadedfiledeletedbefore),
-                                getResources().getString(R.string.yes),
-                                getResources().getString(R.string.no),
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        PodcastData data = dbHelper.getPodcastById(podId);
-                                        path = data.url;
-                                        startPlaying();
-                                        playPauseStream();
+                File f = new File(path.replaceAll("file:///", ""));
+                if (!f.exists()) {
+                    showConfirmDialog(getResources().getString(R.string.downloadedfiledeletedbefore),
+                            getResources().getString(R.string.yes),
+                            getResources().getString(R.string.no),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    PodcastData data = dbHelper.getPodcastById(podId);
+                                    path = data.url;
+                                    startPlaying();
+                                    playPauseStream();
 
-                                    }
                                 }
-                        , null);
-                        return;
+                            }
+                            , null);
+                    return;
                 }
             }
 
+            startPlaying();
 
-
-                startPlaying();
-
-
-            if(MusicService.getInstance(PlayerScreen.this) != null)
+            if (MusicService.getInstance(PlayerScreen.this) != null)
                 MusicService.getInstance(PlayerScreen.this).getMediaPlayer().setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mediaPlayer) {
                         hideDialog();
                     }
                 });
-
         }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if(path == null)
+        if (path == null)
             return;
 
         CommonStaticClass.playerScreenFocused = true;
@@ -974,7 +916,7 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
     protected void onStop() {
         super.onStop();
         CommonStaticClass.playerScreenFocused = false;
-        if(plTherad == null){
+        if (plTherad == null) {
             return;
         }
         plTherad.stopThread();
@@ -1098,10 +1040,10 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
     private long getPodcastNumber(String path) {
         String sql = "";
 
-        if(path.startsWith("http"))
-            sql= "Select _id from podcast where download_link = '" + path+"'";
+        if (path.startsWith("http"))
+            sql = "Select _id from podcast where download_link = '" + path + "'";
         else
-            sql = "Select _id from podcast where full_device_path = '" + path+"'";
+            sql = "Select _id from podcast where full_device_path = '" + path + "'";
 
         Cursor mCursor = null;
         long num = -1l;
@@ -1205,14 +1147,14 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
         public void onItemClick(AdapterView<?> parent, View v, int pos, long id) {
             // pos = pos;
             Message msg = new Message();
-            Note note =  (Note)parent.getItemAtPosition(pos);
+            Note note = (Note) parent.getItemAtPosition(pos);
             Bundle bundle = new Bundle();
             bundle.putString("filepath", note.getAudioPath());
             bundle.putInt("beginsecond", note.getBeginSec());
             msg.setData(bundle);
             stopButSeeked = true;
             playPauseButton.setText(R.string.material_pause);
-            
+
             msg.what = NOTEUPDATE;
             searchHandler.sendMessage(msg);
         }
@@ -1221,15 +1163,15 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
 
     private void saveState(int beginpos, int endpos, String notetext) {
         long podnumber = podcastID;
-        if(podcastID <=0)
-                podnumber = getPodcastNumber(path);
+        if (podcastID <= 0)
+            podnumber = getPodcastNumber(path);
         long id = dbHelper.createNote(
                 podnumber,
                 numberOfNotePerMedia++,
                 beginpos / 1000,
-                endpos /1000,
+                endpos / 1000,
                 path, notetext,
-                "me", getCurrentDate(), new Date().getTime(), "");
+                "me", NoteUtil.getCurrentDate(), new Date().getTime(), "");
         if (path.contains("http://")) {
             Log.e("in save state streaming", "is playing from stream");
             String author = "anonymous";
@@ -1263,7 +1205,7 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
 
     }
 
-    private void noteAction(String action, String path, String author, String beginpos,
+  /*  private void noteAction(String action, String path, String author, String beginpos,
                             String endpos, String noteText, String likeStart, String likeEnd) {
         // TODO Auto-generated method stub
         Log.e("in note action streaming", "is playing from stream");
@@ -1336,25 +1278,14 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
             }
         }
     }
+    */
 
-    private String getCurrentDate() {
-        DateFormat parser = new SimpleDateFormat("dd MM yyyy hh:mm:ss");
-        long now = System.currentTimeMillis();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(now);
-        Date d1 = null;
-        try {
-            d1 = parser.parse(parser.format(calendar.getTime()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return d1.toString();
-    }
+
 
     private void fillData(String path) {
 
         List<Note> noteList = dbHelper.fetchAllNotes(podcastID);
-        NoteAdapter adapter  = new NoteAdapter(PlayerScreen.this.getApplicationContext(), noteList, this, CommonStaticClass.getCurrentPodcast().getIsDownloaded());
+        NoteAdapter adapter = new NoteAdapter(PlayerScreen.this.getApplicationContext(), noteList, this, CommonStaticClass.getCurrentPodcast().getIsDownloaded());
         lv.setAdapter(adapter);
 
 
@@ -1376,7 +1307,7 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
 
         // ends the stream if note has an end point
         /*if (cur >= ep) {
-			if (selectionPlaying) {
+            if (selectionPlaying) {
 				Log.e("it's here","kjkdjskfds");
 				pause();
 			}
@@ -1548,42 +1479,41 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
                         enPos = noteSelect.get("endPos");
                         nText = noteSelect.get("noteText");
                         bp = Float.parseFloat(begPos);
-                    }
-                    else {
+                    } else {
 
-                        bp = (Integer)msg.getData().get("beginsecond")*1000;
+                        bp = (Integer) msg.getData().get("beginsecond") * 1000;
 
                     }
 //					String filePath = noteSelect.get("audioFilePath");
 
-                        ep = Float.parseFloat(enPos);
-                        float bpSec = bp / 1000;
-                        float epSec = ep / 1000;
-                        beginView.setText(getAsTime((int) bpSec));
+                    ep = Float.parseFloat(enPos);
+                    float bpSec = bp / 1000;
+                    float epSec = ep / 1000;
+                    beginView.setText(getAsTime((int) bpSec));
 
-                        noteEditText.setText(nText);
-                        DateFormat parser = new SimpleDateFormat(
-                                "dd MM yyyy hh:mm:ss");
-                        long now = System.currentTimeMillis();
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.setTimeInMillis(now);
-                        Date dd = null;
-                        try {
-                            dd = parser.parse(parser.format(calendar.getTime()));
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        dbHelper.updateLastListenDate(Long.parseLong(rowID),
-                                dd.toString(), now + "");
-                        start();
-                        isStopped = false;
-                        if (stopButSeeked) {
-                            seekTo((int) bp);
-                        }
-                        selectionPlaying = true;
-                        startPlayProgressUpdater();
-                    break;
+                    noteEditText.setText(nText);
+                    DateFormat parser = new SimpleDateFormat(
+                            "dd MM yyyy hh:mm:ss");
+                    long now = System.currentTimeMillis();
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTimeInMillis(now);
+                    Date dd = null;
+                    try {
+                        dd = parser.parse(parser.format(calendar.getTime()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
+                    dbHelper.updateLastListenDate(Long.parseLong(rowID),
+                            dd.toString(), now + "");
+                    start();
+                    isStopped = false;
+                    if (stopButSeeked) {
+                        seekTo((int) bp);
+                    }
+                    selectionPlaying = true;
+                    startPlayProgressUpdater();
+                    break;
+            }
 
 
         }

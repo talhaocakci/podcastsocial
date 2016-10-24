@@ -17,6 +17,7 @@ import android.widget.ListView;
 
 import com.facebook.CallbackManager;
 import com.google.gson.Gson;
+import com.javathlon.model.podcastmodern.Application;
 import com.nhaarman.listviewanimations.appearance.simple.SwingBottomInAnimationAdapter;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
@@ -25,7 +26,7 @@ import com.javathlon.BaseActivity;
 import com.javathlon.CatalogData;
 import com.javathlon.R;
 import com.javathlon.db.DBAccessor;
-import com.javathlon.download.PodcstModernUtil;
+import com.javathlon.download.PodcastModernClient;
 import com.javathlon.memsoft.GoogleCardAdapter;
 import com.javathlon.memsoft.MemsoftUtil;
 import com.javathlon.memsoft.ResponseHolder;
@@ -34,19 +35,20 @@ import com.javathlon.model.podcastmodern.Podcast;
 import com.javathlon.model.spreaker.Author;
 import com.javathlon.model.spreaker.ShowResult;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class FragmentHome extends Fragment implements OnDismissCallback {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+public class FragmentHome extends Fragment implements OnDismissCallback {
 
     private static final int INITIAL_DELAY_MILLIS = 300;
     DBAccessor dbHelper;
-    private GoogleCardAdapter mGoogleCardsAdapter;
-
+    GoogleCardAdapter adapterBackup;
     private CallbackManager callbackManager;
-
     Button openSocialConnectButton;
 
     @SuppressLint("NewApi")
@@ -54,63 +56,65 @@ public class FragmentHome extends Fragment implements OnDismissCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         View view = inflater.inflate(R.layout.list_view, container, false);
         ListView listView = (ListView) view.findViewById(R.id.list_view);
         openSocialConnectButton = (Button) view.findViewById(R.id.openSocialConnect);
-
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
 
-        if(!pref.getString("fbtoken","").equals("") || !pref.getString("googletoken","").equals("")){
+        if (!pref.getString("fbtoken", "").equals("") || !pref.getString("googletoken", "").equals("")) {
             openSocialConnectButton.setVisibility(View.GONE);
-        }else
-        {
+        } else {
             openSocialConnectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(getActivity(), SignInActivity.class);
-                    i.putExtra("intentionally",true);
+                    i.putExtra("intentionally", true);
                     startActivity(i);
                 }
             });
         }
 
-        List<CatalogData> list = new ArrayList();
-
         if (dbHelper == null) {
             dbHelper = new DBAccessor(getActivity());
             dbHelper.open();
         }
-        list = dbHelper.getMainCatalogList();
 
-        int i=1;
-        if(list == null || list.size() <= 0) {
-            List<Podcast> podcastList = PodcstModernUtil.getPodcastsByApplication(ApplicationSettings.appId.intValue());
-            if (podcastList == null) {
-                //Toast.makeText(this.getActivity(), R.string.podcast_catalog_refresh_error, Toast.LENGTH_SHORT).show();
-                //return view;
-                Podcast podcast = new Podcast();
-                podcast.setAuthor("Talha Ocakçı");
-                podcast.setName("Java Core Course");
-                podcast.setOtherRssUrl("https://s3.ap-south-1.amazonaws.com/javacore-course/javacourse.xml");
-                list.add(createCatalogDataItem(podcast));
+        final List<CatalogData> list = dbHelper.getMainCatalogList();
 
-            } else {
+        final GoogleCardAdapter mGoogleCardsAdapter = new GoogleCardAdapter(this.getActivity(), list, (BaseActivity) (this.getActivity()));
+        adapterBackup = mGoogleCardsAdapter;
 
-                for (Podcast podcast : podcastList) {
-
-                    list.add(createCatalogDataItem(podcast));
-                }
+        int i = 1;
+        if (list == null || list.size() <= 0) {
+            List<Podcast> podcastList = null;
+            try {
+                PodcastModernClient.getPodcastsByApplication(
+                        ApplicationSettings.appId.intValue(), new Callback<Application>() {
+                            @Override
+                            public void onResponse(Call<Application> call, Response<Application> response) {
+                                for (Podcast podcast : response.body().getPodcasts()) {
+                                    list.add(createCatalogDataItem(podcast));
+                                }
+                                mGoogleCardsAdapter.notifyDataSetChanged();
+                            }
+                            @Override
+                            public void onFailure(Call<Application> call, Throwable t) {
+                                Podcast podcast = new Podcast();
+                                podcast.setAuthor("Default");
+                                podcast.setName("Default");
+                                podcast.setOtherRssUrl("https://s3.ap-south-1.amazonaws.com/javacore-course/javacourse.xml");
+                                list.add(createCatalogDataItem(podcast));
+                            }
+                        });
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
             }
-
         }
 
-
-
-        // list.add(new CatalogData(999992,"NomadTopia", "http://pengaja.com/uiapptemplate/newphotos/listviews/googlecards/travel/0.jpg", "http://nomadtopiaradio.libsyn.com/rss", "Acayip güzel bir podcast","Dan & Danielle Greason"));
-        // list.add(new CatalogData(999990,"Become Nomad ", "http://pengaja.com/uiapptemplate/newphotos/listviews/googlecards/travel/0.jpg", "http://www.curtworrell.com/feed/podcast", "Confessions of a LifestylePreneur ","Curt Worrell"));
-        // list.add(new CatalogData(999991,"Travel Like A Boss", "http://pengaja.com/uiapptemplate/newphotos/listviews/googlecards/travel/0.jpg", "http://www.travellikeabosspodcast.com/1/feed", "Acayip güzel bir podcast çok uzun açıklama gelecek ","Johnny FD"));
-        mGoogleCardsAdapter = new GoogleCardAdapter(this.getActivity(), list, (BaseActivity)(this.getActivity()));
         SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
                 new SwipeDismissAdapter(mGoogleCardsAdapter, this));
         swingBottomInAnimationAdapter.setAbsListView(listView);
@@ -133,8 +137,6 @@ public class FragmentHome extends Fragment implements OnDismissCallback {
         listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
         listView.setAdapter(swingBottomInAnimationAdapter);
 
-        //   getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // getSupportActionBar().setTitle("Google cards travel");
         return view;
     }
 
@@ -158,19 +160,13 @@ public class FragmentHome extends Fragment implements OnDismissCallback {
         return data;
     }
 
-    private CatalogData getSpreakerDetail(String rss){
+    private CatalogData getSpreakerDetail(String rss) {
 
         CatalogData data = new CatalogData();
         try {
-
             ResponseHolder s = new WebServiceAsyncTaskGet().execute(rss).get();
-
-
-            System.out.print(s.getResponseText());
             Gson gson = new Gson();
             ShowResult show = gson.fromJson(s.getResponseText(), ShowResult.class);
-
-
             data.image = show.getResponse().getShow().getImage().getLargeUrl();
             data.imageSmall = show.getResponse().getShow().getImage().getMediumUrl();
             data.author = show.getResponse().getShow().getAuthors().toString();
@@ -181,36 +177,27 @@ public class FragmentHome extends Fragment implements OnDismissCallback {
                 for (Author a : show.getResponse().getShow().getAuthors()) {
                     b.append(a.getFullname()).append(", ");
                 }
-                //b.replace(b.length()-1, b.length(), "");
                 data.author = b.toString();
             }
             data.createDate = MemsoftUtil.getTimeAsString();
             data.name = show.getResponse().getShow().getTitle();
             data.infoUrl = show.getResponse().getShow().getSiteUrl();
-            //data.lastRssUpdate = MemsoftUtil.getTimeAsString();
-            //   data.summary = show.getResponse().getShow().
             data.rss = rss;
             data.isMainCatalog = "y";
-
-
-
-
-
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-            return data;
+        return data;
     }
-
 
     @Override
     public void onDismiss(final ViewGroup listView,
                           final int[] reverseSortedPositions) {
         for (int position : reverseSortedPositions) {
-            mGoogleCardsAdapter.remove(mGoogleCardsAdapter.getItem(position));
+            adapterBackup.remove(adapterBackup.getItem(position));
         }
+        adapterBackup.notifyDataSetChanged();
     }
 }

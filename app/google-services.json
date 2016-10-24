@@ -1,1 +1,51 @@
-{"project_info":{"project_id":"podcast-gcm","project_number":"391757024332","name":"Podcast GCM"},"client":[{"client_info":{"mobilesdk_app_id":"1:391757024332:android:a7676ecd2e8a68cd","client_id":"android:com.paperify.podmark","client_type":1,"android_client_info":{"package_name":"com.paperify.podmark"}},"oauth_client":[{"client_id":"391757024332-a4fj8s9mn9nl94jgnvv72p4flgf2j4g4.apps.googleusercontent.com","client_type":1,"android_info":{"package_name":"com.paperify.podmark","certificate_hash":"0032FF76CDB62569C955947DF89DDF6EF04EF3F0"}}],"api_key":[],"services":{"analytics_service":{"status":2,"analytics_property":{"tracking_id":"UA-70383510-1"}},"cloud_messaging_service":{"status":2,"apns_config":[]},"appinvite_service":{"status":2,"other_platform_oauth_client":[]},"google_signin_service":{"status":2},"ads_service":{"status":2,"test_banner_ad_unit_id":"ca-app-pub-3940256099942544/6300978111","test_interstitial_ad_unit_id":"ca-app-pub-3940256099942544/1033173712"}}}],"client_info":[],"ARTIFACT_VERSION":"1"}
+{
+  "project_info": {
+    "project_number": "634509108343",
+    "project_id": "firebase-javathlon"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634509108343:android:04958b5485349025",
+        "android_client_info": {
+          "package_name": "com.javathlon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634509108343-lhhvoqthbhptt2cfbc0r7qmoib6miv66.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.javathlon",
+            "certificate_hash": "0032FF76CDB62569C955947DF89DDF6EF04EF3F0"
+          }
+        },
+        {
+          "client_id": "634509108343-76kakqljdaci0q6d77vdhlrrkglo0d6v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBypVWENi3Q04fG4xRQ6idv6tjJ2umMoXU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-70383510-3"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

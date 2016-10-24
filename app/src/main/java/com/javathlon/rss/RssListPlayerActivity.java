@@ -42,53 +42,39 @@ import com.javathlon.db.DBAccessor;
 import com.javathlon.download.DownloadHandler;
 import com.javathlon.download.DownloadProgressThread;
 import com.javathlon.download.DownloadReceiver;
-import com.javathlon.download.PodcstModernUtil;
+import com.javathlon.download.PodcastModernClient;
 import com.javathlon.download.RSSDownloaderParser;
 import com.javathlon.download.SpreakerUtil;
 import com.javathlon.memsoft.MemsoftUtil;
 import com.javathlon.player.PlayerScreen;
-import com.javathlon.video.VideoSample;
+import com.javathlon.video.VideoScreen;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayout.OnRefreshListener, OnClickListener, OnTouchListener, OnCompletionListener, OnBufferingUpdateListener {
+public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayout.OnRefreshListener, OnClickListener, OnTouchListener {
 
     public static HashMap<Long, PodcastData> storeTable = new HashMap<Long, PodcastData>();
     private final Handler handler = new Handler();
     public MyXMLHandlerItems myXMLHandler = new MyXMLHandlerItems();
-    protected int dialogCount = 1;
     String artworkImage;
     SwipeRefreshLayout swipeRefreshLayout;
     DBAccessor dbHelper;
     AlertDialog alert = null;
-
-    private ImageButton buttonPlayPause;
-    private SeekBar seekBarProgress;
     private String rssUrl = "";
-    private ListView notesList;
-    private String songUrl = "";
-    private MediaPlayer mediaPlayer;
-    private int mediaFileLengthInMilliseconds; // this value contains the song duration in milliseconds. Look at getDuration() method in MediaPlayer class
-    private TextView podcastLabel, downloadPodcast, searchPodcastButton, searchKeyword;
+    private ListView itemsList;
+    private TextView searchPodcastButton, searchKeyword;
     private Spinner searchOptions;
     private PodcastAdapter adapter;
     private Context con;
-    private AlertDialog downLoadDialog;
-    private AlertDialog.Builder builder;
-    private int notifyUser = 0;
-    private String podcastDescription;
     private String candidateArtwork;
     private long catalogId;
     public static List<PodcastData> podcastDataList = new ArrayList<PodcastData>();
-    private  DownloadProgressThread downloadProgressRunnable;
+    public static int currentIndexInPodcastList = 0;
+    private DownloadProgressThread downloadProgressRunnable;
+    private Thread downloadProgressThread;
 
-    private  Thread downloadProgressThread;
-
-    /**
-     * This method initialise all the views in project
-     */
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.catalogeditions, container, false);
@@ -109,24 +95,18 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
         else
             candidateArtwork = getArguments().getString("artwork");
 
-        notesList = (ListView) view.findViewById(R.id.editionList);
+        itemsList = (ListView) view.findViewById(R.id.editionList);
         con = this.getActivity();
 
-        podcastLabel = (TextView) view.findViewById(R.id.podcastlabel);
-
-
-
-
-        searchOptions = (Spinner)view.findViewById(R.id.searchOptions);
+        searchOptions = (Spinner) view.findViewById(R.id.searchOptions);
         final String[] items = new String[]{"All", "Downloaded", "Not downloaded", "Left half finished", "Not started"};
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, items) ;
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, items);
         searchOptions.setAdapter(arrayAdapter);
 
         searchOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String keyword = searchKeyword.getText().toString();
-
                 searchPodcasts(keyword, position);
             }
 
@@ -143,12 +123,9 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
                 new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int searchOption =  searchOptions.getSelectedItemPosition();
-
+                        int searchOption = searchOptions.getSelectedItemPosition();
                         String keyword = searchKeyword.getText().toString();
-
                         searchPodcasts(keyword, searchOption);
-
                     }
                 }
         );
@@ -164,19 +141,14 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
             public void onReceive(Context context, Intent intent) {
                 int count = 0;
                 Integer downloadId = null;
-                if(intent.getExtras() != null) {
+                if (intent.getExtras() != null) {
                     intent.getExtras().getInt("downloadCount");
                     downloadId = intent.getExtras().getInt("downloadid");
-
-
                 }
-
-
                 adapter.notifyDataSetChanged();
-                if(count == 0)
-                {
-                    if(downloadProgressThread != null)
-                      downloadProgressThread.interrupt();
+                if (count == 0) {
+                    if (downloadProgressThread != null)
+                        downloadProgressThread.interrupt();
                     //downloadProgressThread = null;
                 }
             }
@@ -189,26 +161,22 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
             }
         }, new IntentFilter("startDownloadProgress"));
 
-        notesList.setOnItemClickListener(new OnItemClickListener() {
+        itemsList.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int pos,
                                     long id) {
-                // TODO Auto-generated method stub
-                Log.e("item", "clicked");
-                songUrl = podcastDataList.get(pos).url;
-
                 final int index = pos;
+                currentIndexInPodcastList = pos;
                 PodcastData pod = podcastDataList.get(index);
                 String path = pod.url;
                 if (pod.getIsDownloaded() != null && pod.getIsDownloaded().equals("y")) {
                     path = pod.devicePath;
                     CommonStaticClass.streaming = false;
-                }
-                else
+                } else
                     CommonStaticClass.streaming = true;
 
-                if(!path.contains(".mp4")) {
+                if (!path.contains(".mp4")) {
                     Intent i = new Intent(getActivity(), PlayerScreen.class);
                     CommonStaticClass.setCurrentPodcast(pod);
                     i.putExtra("mediapath", path);
@@ -225,14 +193,14 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
                     });
                 } else {
 
-                    String signedUrl = PodcstModernUtil.getSignedUrl("javacore-course", path, false);
-                    if(signedUrl == null)
-                    {
+                    String signedUrl = null;
+                    signedUrl = PodcastModernClient.getSignedUrl("javacore-course", path, false);
+                    if (signedUrl == null) {
                         Toast.makeText(RssListPlayerActivity.this.getActivity(), "Can not open, upgrade your account", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    Intent i = new Intent(getActivity(), VideoSample.class);
+                    Intent i = new Intent(getActivity(), VideoScreen.class);
                     CommonStaticClass.setCurrentPodcast(pod);
                     i.putExtra("video_item", path);
                     i.putExtra("video_item_id", pod.id);
@@ -244,38 +212,35 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
         return view;
     }
 
-    private void searchPodcasts(String keyword, int searchOption){
+    private void searchPodcasts(String keyword, int searchOption) {
         if (dbHelper == null) {
             dbHelper = new DBAccessor(getActivity());
             dbHelper.open();
         }
 
-
         int progress = -1;
         String downloaded = null;
 
-        if(searchOption == 1)
+        if (searchOption == 1)
             downloaded = "y";
-        if(searchOption == 2)
+        if (searchOption == 2)
             downloaded = "n";
-        if(searchOption == 3)
+        if (searchOption == 3)
             progress = 40;
-        if(searchOption == 4)
+        if (searchOption == 4)
             progress = 0;
 
-
         podcastDataList.clear();
-        podcastDataList.addAll(dbHelper.getPodcastsByFilter(catalogId,keyword, downloaded, progress ));
+        podcastDataList.addAll(dbHelper.getPodcastsByFilter(catalogId, keyword, downloaded, progress));
         adapter.notifyDataSetChanged();
-
     }
 
-    public  void startDownloadProgressThread(){
-        if(downloadProgressRunnable == null)
+    public void startDownloadProgressThread() {
+        if (downloadProgressRunnable == null)
 
-        downloadProgressRunnable = new DownloadProgressThread((DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE),this.getActivity());
+            downloadProgressRunnable = new DownloadProgressThread((DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE), this.getActivity());
 
-        if(downloadProgressThread == null || downloadProgressThread.isInterrupted() ||downloadProgressThread.getState().equals(Thread.State.TERMINATED) ) {
+        if (downloadProgressThread == null || downloadProgressThread.isInterrupted() || downloadProgressThread.getState().equals(Thread.State.TERMINATED)) {
             downloadProgressThread = new Thread(downloadProgressRunnable);
             downloadProgressThread.start();
         }
@@ -304,30 +269,26 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
             }
         }
         adapter = new PodcastAdapter(this.getActivity(), podcastDataList);
-        notesList.setAdapter(adapter);
+        itemsList.setAdapter(adapter);
         if (podcastDataList.size() > 0 && !forceRssDownload) {
             adapter.notifyDataSetChanged();
             return;
         }
 
-        if(rssUrl.startsWith("http://api.spreaker.com/show/")){
-            if(data == null || data.id == null || new Long(0).equals(data.id))
+        if (rssUrl.startsWith("http://api.spreaker.com/show/")) {
+            if (data == null || data.id == null || new Long(0).equals(data.id))
                 return;
             List<PodcastData> dataList = SpreakerUtil.getEpisodesFromSpreakerUrl(rssUrl, data.id.intValue());
 
-                List<PodcastData> podcastListToAdd = new ArrayList<PodcastData>();
-                for(PodcastData podcastData : dataList){
-                    if(data.lastRssUpdate == null || podcastData.publishDateLong >  MemsoftUtil.getTimeFromString(data.lastRssUpdate).getTime())
-                        podcastListToAdd.add(podcastData);
+            List<PodcastData> podcastListToAdd = new ArrayList<PodcastData>();
+            for (PodcastData podcastData : dataList) {
+                if (data.lastRssUpdate == null || podcastData.publishDateLong > MemsoftUtil.getTimeFromString(data.lastRssUpdate).getTime())
+                    podcastListToAdd.add(podcastData);
+            }
 
-
-                }
-
-                dbHelper.bulkInsertPodcastData(podcastListToAdd, data.id);
-                podcastDataList.clear();
-                podcastDataList.addAll(dbHelper.getPodcastsByCatalogId(data.id, needDownloaded));
-
-
+            dbHelper.bulkInsertPodcastData(podcastListToAdd, data.id);
+            podcastDataList.clear();
+            podcastDataList.addAll(dbHelper.getPodcastsByCatalogId(data.id, needDownloaded));
 
             adapter.notifyDataSetChanged();
             swipeRefreshLayout.setRefreshing(false);
@@ -336,30 +297,11 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
             return;
         }
 
-
         CommonStaticClass.progressDialog = ProgressDialog.show(con, "Refreshing...", "Please wait");
         DownloadHandler handler = new DownloadHandler(getActivity().getBaseContext(), adapter, myXMLHandler, data.id, dbHelper, rssUrl, podcastDataList, candidateArtwork, artworkImage, swipeRefreshLayout, CommonStaticClass.progressDialog);
         RSSDownloaderParser parser = new RSSDownloaderParser(getActivity(), true, handler, myXMLHandler, podcastDataList);
         parser.getRSSListFromUrl(rssUrl, getActivity());
-
     }
-
-    /**
-     * Method which updates the SeekBar primary progress by current song playing position
-     */
-    private void primarySeekBarProgressUpdater() {
-        seekBarProgress.setProgress((int) (((float) mediaPlayer.getCurrentPosition() / mediaFileLengthInMilliseconds) * 100)); // This math construction give a percentage of "was playing"/"song length"
-        if (mediaPlayer.isPlaying()) {
-            Runnable notification = new Runnable() {
-                public void run() {
-                    primarySeekBarProgressUpdater();
-                }
-            };
-            handler.postDelayed(notification, 1000);
-        }
-    }
-
-
 
     @Override
     public void onClick(View v) {
@@ -371,19 +313,6 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
 
         return false;
     }
-
-    @Override
-    public void onCompletion(MediaPlayer mp) {
-        /** MediaPlayer onCompletion event handler. Method which calls then song playing is complete*/
-        buttonPlayPause.setImageResource(R.drawable.button_play);
-    }
-
-    @Override
-    public void onBufferingUpdate(MediaPlayer mp, int percent) {
-        /** Method which updates the SeekBar secondary progress by current song loading from URL position*/
-        seekBarProgress.setSecondaryProgress(percent);
-    }
-
 
     public void showMyDialog(String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
@@ -398,8 +327,8 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
         alert.show();
     }
 
-    public void hideDialog(){
-        if(alert != null && alert.isShowing())
+    public void hideDialog() {
+        if (alert != null && alert.isShowing())
             alert.hide();
     }
 
@@ -416,7 +345,3 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
         System.out.println("Update et");
     }
 }
-
-
-
-

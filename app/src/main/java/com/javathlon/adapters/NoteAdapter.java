@@ -58,11 +58,9 @@ public class NoteAdapter extends ArrayAdapter<Note> {
             holder.uploadNoteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     Note note = NoteAdapter.this.noteList.get(i);
                     int sec = note.getBeginSec() / 1000;
                     new Mp3Cropper(context, Mp3Cropper.CropResultType.URL).execute(note.getPodcastId(), sec, note.getId());
-
                 }
             });
         }

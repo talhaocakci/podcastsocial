@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.javathlon"
-    android:versionCode="5"
-    android:versionName="2.0.3" >
+    android:versionCode="7"
+    android:versionName="2.0.5">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -40,12 +40,12 @@
     <application
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:theme="@style/PodcastModernTheme" >
+        android:theme="@style/PodcastModernTheme">
         <activity
-            android:name="com.javathlon.SplashActivity"
+            android:name=".SplashActivity"
             android:configChanges="orientation"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,7 +64,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
-            android:name="com.javathlon.LoginPref"
+            android:name=".LoginPref"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -79,23 +79,23 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
-            android:name="com.javathlon.player.PlayerScreen"
+            android:name=".player.PlayerScreen"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name="com.javathlon.SongSelectionList"
+            android:name=".SongSelectionList"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.javathlon.BaseActivity"
+            android:name=".BaseActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.javathlon.fragments.SignInActivity"
+            android:name=".fragments.SignInActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -103,55 +103,51 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.javathlon.download.DownLoadController"
+            android:name=".download.DownLoadController"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
         <activity
-            android:name="com.javathlon.upload.UploadController"
+            android:name=".upload.UploadController"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.javathlon.video.VideoSample"
+            android:name=".video.VideoScreen"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar" />
 
-        <service android:name="com.javathlon.player.MusicService" >
+        <service android:name=".player.MusicService">
             <intent-filter>
                 <action android:name="com.paperify.podmark.ACTION_PLAY_MUSIC" />
             </intent-filter>
         </service>
 
         <activity
-            android:name="com.javathlon.MainActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_main" >
-        </activity>
-
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name="com.javathlon.BuySubscriptionActivity"
-            android:label="@string/title_activity_main" >
-        </activity>
+            android:name=".BuySubscriptionActivity"
+            android:label="@string/title_activity_main"></activity>
 
         <receiver
-            android:name="com.javathlon.scheduledtask.RssUpdateTask"
-            android:enabled="true" >
+            android:name=".scheduledtask.RssUpdateTask"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="com.paperify.podmark.scheduledtask.RssUpdateTask" />
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.javathlon.scheduledtask.BootInit"
-            android:enabled="true" >
+            android:name=".scheduledtask.BootInit"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
         <activity
-            android:name="com.javathlon.fragments.SettingsActivity"
-            android:label="@string/title_activity_social_settings" >
-        </activity>
+            android:name=".fragments.SettingsActivity"
+            android:label="@string/title_activity_social_settings"></activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -166,7 +162,7 @@
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
@@ -179,8 +175,8 @@
 
         <!-- [START gcm_listener] -->
         <service
-            android:name="com.javathlon.MyGcmListenerService"
-            android:exported="false" >
+            android:name=".MyGcmListenerService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
@@ -188,20 +184,26 @@
         <!-- [END gcm_listener] -->
         <!-- [START instanceId_listener] -->
         <service
-            android:name="com.javathlon.MyInstanceIDListenerService"
-            android:exported="false" >
+            android:name=".MyInstanceIDListenerService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
         <!-- [END instanceId_listener] -->
         <service
-            android:name="com.javathlon.RegistrationIntentService"
-            android:exported="false" >
-        </service>
+            android:name=".RegistrationIntentService"
+            android:exported="false"></service>
 
-        <activity android:name="com.javathlon.WebViewActivity" >
-        </activity>
+        <activity android:name=".WebViewActivity"></activity>
+        <activity
+            android:name=".GoogleSignInActivity"
+            android:exported="true"
+            android:label="@string/title_activity_google_sign_in"
+            android:theme="@style/Theme.AppCompat.Light"></activity>
+        <activity
+            android:name=".ItemNavigationActivity"
+            android:label="@string/title_activity_item_navigation"></activity>
     </application>
 
 </manifest>

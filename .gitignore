@@ -2,8 +2,12 @@ syntax: glob
 
 build/
 out/
+.gradle/
 dist/
 .idea/
+.jar
+.apk
+.bin
 *.iml
 *.orig
 *.class

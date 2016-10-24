@@ -20,6 +20,7 @@ import com.javathlon.adapters.LastPlayedListAdapter;
 import com.javathlon.components.LastPlayClass;
 import com.javathlon.db.DBAccessor;
 import com.javathlon.player.PlayerScreen;
+import com.javathlon.video.VideoScreen;
 
 import java.util.ArrayList;
 
@@ -138,6 +139,20 @@ public class LastNotesFragment extends Fragment {
 
             Log.e("mediapath", lastPlayObj.getSongpath().get(pos) + "");
             Log.e("sppos", lastPlayObj.getBegin_sec().get(pos) + "");
+
+            String filePath =  lastPlayObj.getSongpath().get(pos);
+
+            if(filePath.endsWith(".mp4")) {
+                Intent i = new Intent(getActivity(), VideoScreen.class);
+                PodcastData podcastData = dbHelper.getPodcastByUrl(filePath);
+                CommonStaticClass.setCurrentPodcast(podcastData);
+                i.putExtra("video_item", filePath);
+                i.putExtra("video_item_id", podcastData.id);
+                i.putExtra("sppos", Integer.parseInt(lastPlayObj.getBegin_sec().get(pos)));
+                startActivity(i);
+                return;
+            }
+
             Intent i = new Intent(getActivity(), PlayerScreen.class);
             i.putExtra("mediapath", lastPlayObj.getSongpath().get(pos));
             i.putExtra("sppos",

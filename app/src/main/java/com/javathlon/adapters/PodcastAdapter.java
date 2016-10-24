@@ -1,15 +1,12 @@
 package com.javathlon.adapters;
 
-/**
- * Created by talha on 28.02.2015.
- */
-
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +18,7 @@ import android.widget.Toast;
 
 import com.javathlon.PodcastData;
 import com.javathlon.R;
-import com.javathlon.download.PodcstModernUtil;
+import com.javathlon.download.PodcastModernClient;
 import com.javathlon.rss.RssListPlayerActivity;
 
 import java.text.DateFormat;
@@ -30,28 +27,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-
 public class PodcastAdapter extends BaseAdapter {
     Activity context;
     List<PodcastData> dataList;
-    ImageView imageView;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     DownloadManager downloadManager;
     private LayoutInflater mInflater;
     private long downloadReference;
 
-    public PodcastAdapter(Activity context,
-                          List<PodcastData> dataList) {
-
+    public PodcastAdapter(Activity context, List<PodcastData> dataList) {
         this.context = context;
         mInflater = LayoutInflater.from(context);
         this.dataList = dataList;
     }
 
-
-
-    public View getView(final int position, View convertView,
-                        ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder;
 
@@ -67,6 +57,8 @@ public class PodcastAdapter extends BaseAdapter {
         holder.size = (TextView) convertView.findViewById(R.id.podcastSize);
         holder.progress = (TextView) convertView.findViewById(R.id.podcastProgress);
 
+        final View linearLayout = convertView;
+
         holder.downloadStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,9 +68,11 @@ public class PodcastAdapter extends BaseAdapter {
 
                 downloadManager = (DownloadManager) view.getContext().getSystemService(Context.DOWNLOAD_SERVICE);
 
-
                 if(!dataList.get(position).url.contains("http")) {
-                    String signedUrl = PodcstModernUtil.getSignedUrl("javacore-course", dataList.get(position).url, false);
+                    String signedUrl = null;
+
+                    signedUrl = PodcastModernClient.getSignedUrl("javacore-course", dataList.get(position).url, false);
+
                     if(signedUrl == null)
                     {
                         Toast.makeText(view.getContext(), "Can not open, upgrade your account", Toast.LENGTH_SHORT).show();
@@ -87,6 +81,7 @@ public class PodcastAdapter extends BaseAdapter {
                     dataList.get(position).url = signedUrl;
                 }
                 Uri Download_Uri = Uri.parse(dataList.get(position).url);
+
                // Uri Download_Uri = Uri.parse("http://www.google.com");
                 DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
 
@@ -108,23 +103,16 @@ public class PodcastAdapter extends BaseAdapter {
                 String fileName = dataList.get(position).editionTitle.replaceAll("[^\\x30-\\x5A\\x61-\\x7A\\x30-\\x39]", "") + extension;
                 request.setDestinationInExternalPublicDir(Environment.DIRECTORY_PODCASTS, fileName);
 
-
-
                 dataList.get(position).devicePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PODCASTS).getPath() + "/" + fileName;
-
-
-
 
                 //Enqueue a new download and same the referenceId
                 downloadReference = downloadManager.enqueue(request);
                 RssListPlayerActivity.storeTable.put(downloadReference, dataList.get(position));
 
-
                 Toast.makeText(context, R.string.downloadstarted, Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent("startDownloadProgress");
                 LocalBroadcastManager.getInstance(context).sendBroadcast(i);
-
 
               /*Intent intent = new Intent();
                 intent.setAction(DownloadManager.ACTION_VIEW_DOWNLOADS);
@@ -138,9 +126,6 @@ public class PodcastAdapter extends BaseAdapter {
 
         DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH);
         Date d = new Date(dataList.get(position).publishDateLong);
-           /* Date now = new Date();
-            long millis = now.getTime() - d.getTime() ;
-            int days = millis*/
         holder.pubDate.setText(sdf.format(d));
 
         long sizeInMB = Long.valueOf(dataList.get(position).size) / 1024 / 1024;
@@ -149,11 +134,8 @@ public class PodcastAdapter extends BaseAdapter {
 
         holder.duration.setText(dataList.get(position).durationString);
 
-        // holder.size.setText(Long.valueOf(dataList.get(position).size).toString());
-
         holder.positionTxt.setText(title);
         if(dataList.get(position).downloadPercentage == 100)
-
             holder.downloadStatus.setText(R.string.material_ok);
         else if(dataList.get(position).downloadPercentage == 0)
             holder.downloadStatus.setText(R.string.material_downloadindicator);
@@ -161,6 +143,12 @@ public class PodcastAdapter extends BaseAdapter {
             holder.downloadStatus.setText(dataList.get(position).downloadPercentage+ "%");
 
         holder.progress.setText("%" + dataList.get(position).progressPercentage);
+
+        if(dataList.get(position).url.contains("http")) {
+            linearLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.material_light_green_100));
+        } else {
+            linearLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.material_red_100));
+        }
 
         return (convertView);
     }

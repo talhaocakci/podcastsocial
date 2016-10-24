@@ -21,6 +21,7 @@ public class User {
     private String location;
     private String language;
     private String gcmToken;
+    private String gooogleIdTokenForServer;
 
     public enum SOCIAL_TYPES{
         FACEBOOK, GOOGLE;
@@ -152,6 +153,14 @@ public class User {
 
     public void setGcmToken(String gcmToken) {
         this.gcmToken = gcmToken;
+    }
+
+    public String getGooogleIdTokenForServer() {
+        return gooogleIdTokenForServer;
+    }
+
+    public void setGooogleIdTokenForServer(String gooogleIdTokenForServer) {
+        this.gooogleIdTokenForServer = gooogleIdTokenForServer;
     }
 }
 

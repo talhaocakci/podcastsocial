@@ -26,16 +26,17 @@
             <Button
                 android:id="@+id/full_upgrade_button"
                 android:onClick="onUpgradeAppButtonClicked"
-                android:layout_width="wrap_content"
+                android:background="@color/main_color_100"
+                android:layout_width="fill_parent"
                 android:text="Unlock all courses for 4$ for month"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp" />
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/java_core_upgrade_button"
                 android:onClick="onInfiniteGasButtonClicked"
                 android:text="Unlock Java core for 2$ for month"
-                android:layout_width="wrap_content"
+                android:background="@color/main_color_100"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 </FrameLayout>

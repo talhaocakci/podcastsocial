@@ -56,6 +56,8 @@ public class MainActivity extends BaseActivity {
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
 
+    DownloadReceiver dr = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,8 +136,12 @@ public class MainActivity extends BaseActivity {
             AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(ALARM_SERVICE);
             Intent i = new Intent("com.paperify.podmark.scheduledtask.RssUpdateTask");
             IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
-            DownloadReceiver dr = new DownloadReceiver();
-            this.registerReceiver(dr, filter);
+
+
+            // rsss için burada biraz uğraşmak lazım. şu an bozduk burayı
+
+           // dr = new DownloadReceiver();
+           // this.registerReceiver(dr, filter);
 
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.HOUR_OF_DAY,15);
@@ -169,7 +175,7 @@ public class MainActivity extends BaseActivity {
                     ft.replace(R.id.content_frame, fragmentHome).addToBackStack("tag");
                     ft.commit();
                 } else if (position == 1) {
-                    Intent i = new Intent(MainActivity.this, SignInActivity.class);
+                    Intent i = new Intent(MainActivity.this, GoogleSignInActivity.class);
                     i.putExtra("intentionally",true);
                     startActivity(i);
 
@@ -290,4 +296,6 @@ public class MainActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+
 }

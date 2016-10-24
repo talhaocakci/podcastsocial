@@ -342,6 +342,7 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
             if (purchase.getSku().equals(FULL_MEMBERSHIP_MONTHLY)) {
                 // bought 1/4 tank of gas. So consume it.
                 Log.d(TAG, "Purchase is gas. Starting gas consumption.");
+                ApplicationSettings.memberMode = ApplicationSettings.MemberMode.FULL;
                 try {
                     mHelper.consumeAsync(purchase, mConsumeFinishedListener);
                 } catch (IabHelper.IabAsyncInProgressException e) {

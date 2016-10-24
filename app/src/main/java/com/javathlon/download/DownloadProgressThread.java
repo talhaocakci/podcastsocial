@@ -15,8 +15,6 @@ import com.javathlon.rss.RssListPlayerActivity;
  * Created by talha on 23.07.2015.
  */
 public class DownloadProgressThread implements Runnable {
-
-
     DownloadManager downloadManager;
     DownloadManager.Query q;
     Context context;
@@ -26,7 +24,6 @@ public class DownloadProgressThread implements Runnable {
         this.downloadManager = manager;
         q = new DownloadManager.Query();
         this.context = context;
-
     }
 
     @Override
@@ -47,21 +44,18 @@ public class DownloadProgressThread implements Runnable {
                     continue;
                 } else
                     Thread.currentThread().sleep(2000);
-
             } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+                //Thread.currentThread().interrupt();
                 Log.d("", "interrupted");
             }
 
             if (lArray.length > 0) {
-
                 Cursor cursor = downloadManager.query(q);
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
                     long bytesDownloaded = cursor.getLong(cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
                     long totalBytes = cursor.getLong(cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
                     Log.d("downloaded", bytesDownloaded + "");
-
 
                     long id = cursor.getLong(cursor.getColumnIndex(DownloadManager.COLUMN_ID));
                     long podcastId = -1;
@@ -87,19 +81,14 @@ public class DownloadProgressThread implements Runnable {
                             if (data.downloadPercentage == 100) {
                                 String filePath = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
                                 data.devicePath = filePath;
-
-
                                 if (dbAccessor == null) {
                                     dbAccessor = new DBAccessor(context);
                                     dbAccessor.open();
                                 }
                                 dbAccessor.updatePodcastIsDownloaded(data.id, "y", filePath);
-
                             }
-
                             break;
                         }
-
                     }
                     cursor.moveToNext();
                 }
