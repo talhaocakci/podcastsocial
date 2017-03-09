@@ -1,4 +1,3 @@
-
 package com.javathlon.model.spreaker;
 
 
@@ -15,36 +14,28 @@ public class Tag {
     private String name;
 
     /**
-     * 
-     * @return
-     *     The tagId
+     * @return The tagId
      */
     public Long getTagId() {
         return tagId;
     }
 
     /**
-     * 
-     * @param tagId
-     *     The tag_id
+     * @param tagId The tag_id
      */
     public void setTagId(Long tagId) {
         this.tagId = tagId;
     }
 
     /**
-     * 
-     * @return
-     *     The name
+     * @return The name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 
-     * @param name
-     *     The name
+     * @param name The name
      */
     public void setName(String name) {
         this.name = name;

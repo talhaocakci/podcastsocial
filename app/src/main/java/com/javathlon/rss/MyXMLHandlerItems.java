@@ -109,18 +109,18 @@ public class MyXMLHandlerItems extends DefaultHandler {
         currentElement = false;
         currentValue = currentValue.trim();
         if (localName.equalsIgnoreCase("result")) {
-       //     v.add(itemList);
+            //     v.add(itemList);
         } else if (localName.equalsIgnoreCase("item")) {
             v.add(itemList);
             itemCOunt++;
 
         } else if (localName.equals("rss")) {
             itemList.setIsEmpty(true);
-        //    v.add(itemList);
+            //    v.add(itemList);
         }
         if (localName.equals("channel")) {
             itemList.setIsEmpty(true);
-        //    v.add(itemList);
+            //    v.add(itemList);
             channelTrue = false;
         } else if (localName.equalsIgnoreCase("pid")) {
             itemList.setPid(currentValue);

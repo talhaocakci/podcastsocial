@@ -1,4 +1,3 @@
-
 package com.javathlon.model.spreaker;
 
 
@@ -11,18 +10,14 @@ public class ShowResponse {
     private Show show;
 
     /**
-     * 
-     * @return
-     *     The show
+     * @return The show
      */
     public Show getShow() {
         return show;
     }
 
     /**
-     * 
-     * @param show
-     *     The show
+     * @param show The show
      */
     public void setShow(Show show) {
         this.show = show;

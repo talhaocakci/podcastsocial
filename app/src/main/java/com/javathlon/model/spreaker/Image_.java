@@ -1,4 +1,3 @@
-
 package com.javathlon.model.spreaker;
 
 
@@ -30,126 +29,98 @@ public class Image_ {
     private String playUrl;
 
     /**
-     * 
-     * @return
-     *     The imageId
+     * @return The imageId
      */
     public Long getImageId() {
         return imageId;
     }
 
     /**
-     * 
-     * @param imageId
-     *     The image_id
+     * @param imageId The image_id
      */
     public void setImageId(Long imageId) {
         this.imageId = imageId;
     }
 
     /**
-     * 
-     * @return
-     *     The type
+     * @return The type
      */
     public Long getType() {
         return type;
     }
 
     /**
-     * 
-     * @param type
-     *     The type
+     * @param type The type
      */
     public void setType(Long type) {
         this.type = type;
     }
 
     /**
-     * 
-     * @return
-     *     The userId
+     * @return The userId
      */
     public Long getUserId() {
         return userId;
     }
 
     /**
-     * 
-     * @param userId
-     *     The user_id
+     * @param userId The user_id
      */
     public void setUserId(Long userId) {
         this.userId = userId;
     }
 
     /**
-     * 
-     * @return
-     *     The smallUrl
+     * @return The smallUrl
      */
     public String getSmallUrl() {
         return smallUrl;
     }
 
     /**
-     * 
-     * @param smallUrl
-     *     The small_url
+     * @param smallUrl The small_url
      */
     public void setSmallUrl(String smallUrl) {
         this.smallUrl = smallUrl;
     }
 
     /**
-     * 
-     * @return
-     *     The mediumUrl
+     * @return The mediumUrl
      */
     public String getMediumUrl() {
         return mediumUrl;
     }
 
     /**
-     * 
-     * @param mediumUrl
-     *     The medium_url
+     * @param mediumUrl The medium_url
      */
     public void setMediumUrl(String mediumUrl) {
         this.mediumUrl = mediumUrl;
     }
 
     /**
-     * 
-     * @return
-     *     The largeUrl
+     * @return The largeUrl
      */
     public String getLargeUrl() {
         return largeUrl;
     }
 
     /**
-     * 
-     * @param largeUrl
-     *     The large_url
+     * @param largeUrl The large_url
      */
     public void setLargeUrl(String largeUrl) {
         this.largeUrl = largeUrl;
     }
 
     /**
-     * 
-     * @return
-     *     The playUrl
+     * @return The playUrl
      */
     public String getPlayUrl() {
         return playUrl;
     }
 
     /**
-     * 
-     * @param playUrl
-     *     The play_url
+     * @param playUrl The play_url
      */
     public void setPlayUrl(String playUrl) {
         this.playUrl = playUrl;

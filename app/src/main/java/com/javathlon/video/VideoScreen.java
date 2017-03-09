@@ -26,11 +26,12 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.javathlon.CommonStaticClass;
 import com.javathlon.ItemNavigationActivity;
 import com.javathlon.NoteUtil;
 import com.javathlon.R;
 import com.javathlon.db.DBAccessor;
-import com.javathlon.download.PodcastModernClient;
+import com.javathlon.model.ListenStatisticHolder;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -55,8 +56,10 @@ public class VideoScreen extends Activity implements OnSeekBarChangeListener, Ca
     protected DBAccessor dbHelper = null;
     String filePath;
     long fileId;
-    long sppos=0;
-    int notePosition= 0;
+    long sppos = 0;
+    int notePosition = 0;
+    private boolean isEnteringNote = false;
+    static ListenStatisticHolder statisticHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,20 +114,14 @@ public class VideoScreen extends Activity implements OnSeekBarChangeListener, Ca
         player.setOnSeekCompleteListener(this);
         player.setScreenOnWhilePlaying(true);
 
+        statisticHolder = new ListenStatisticHolder(this.getApplicationContext());
     }
+
 
     private void playVideo() {
 
-        String signedUrl = PodcastModernClient.getSignedUrl("javacore-course", extras.getString("video_item"), false);
-        if(signedUrl == null)
-        {
-            Toast.makeText(getApplicationContext(), "Can not open, upgrade your account", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        filePath = signedUrl;
-
-        final String url = signedUrl;
+        filePath = extras.getString("video_item");
 
         long id = extras.getLong("video_item_id");
 
@@ -133,17 +130,17 @@ public class VideoScreen extends Activity implements OnSeekBarChangeListener, Ca
 
         fileId = id;
 
-        dbHelper.updateDownloadLink(id, url);
+        dbHelper.updateDownloadLink(id, filePath);
 
         player.setDisplay(holder);
 
-        if (url.equals("VIDEO_URI")) {
+        if (filePath.equals("VIDEO_URI")) {
             showToast("Please, set the video URI in HelloAndroidActivity.java in onClick(View v) method");
         } else {
             new Thread(new Runnable() {
                 public void run() {
                     try {
-                        player.setDataSource(url);
+                        player.setDataSource(filePath);
                         player.prepareAsync();
                     } catch (IllegalArgumentException e) {
                         showToast("Error while playing video");
@@ -157,6 +154,7 @@ public class VideoScreen extends Activity implements OnSeekBarChangeListener, Ca
                     }
                 }
             }).start();
+
         }
     }
 
@@ -170,10 +168,11 @@ public class VideoScreen extends Activity implements OnSeekBarChangeListener, Ca
         });
         markButton.setText("Save");
         newNoteTextView.setVisibility(View.VISIBLE);
+        isEnteringNote = true;
     }
 
     public void saveNote(final View view) {
-        NoteUtil.saveNote(view.getContext(), filePath, fileId,  notePosition, notePosition, "super note");
+        NoteUtil.saveNote(view.getContext(), filePath, fileId, notePosition, notePosition, newNoteTextView.getText().toString());
         markButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,6 +181,7 @@ public class VideoScreen extends Activity implements OnSeekBarChangeListener, Ca
         });
         markButton.setText("Mark");
         newNoteTextView.setVisibility(View.GONE);
+        isEnteringNote = false;
     }
 
     public void nextItem(final View view) {
@@ -252,8 +252,10 @@ public class VideoScreen extends Activity implements OnSeekBarChangeListener, Ca
     }
 
     public void onPrepared(MediaPlayer mp) {
-        Log.i(TAG, "========== onPrepared ===========");
         int duration = mp.getDuration() / 1000; // duration in seconds
+
+        CommonStaticClass.getCurrentPodcast().duration = duration;
+
         seekBarProgress.setMax(duration);
         textViewLength.setText(VidUtils.durationInSecondsToString(duration));
         progressBarWait.setVisibility(View.GONE);
@@ -285,6 +287,7 @@ public class VideoScreen extends Activity implements OnSeekBarChangeListener, Ca
         surfaceViewFrame.setLayoutParams(lp);
 
         // Start video
+        player.seekTo((int) sppos);
         if (!player.isPlaying()) {
             player.start();
             updateMediaProgress();
@@ -292,7 +295,7 @@ public class VideoScreen extends Activity implements OnSeekBarChangeListener, Ca
             hideMediaController();
         }
         surfaceViewFrame.setClickable(true);
-        player.seekTo((int)sppos * 1000);
+
     }
 
     public void onCompletion(MediaPlayer mp) {
@@ -300,10 +303,13 @@ public class VideoScreen extends Activity implements OnSeekBarChangeListener, Ca
         if (updateTimer != null) {
             updateTimer.cancel();
         }
-
-        Intent i = new Intent(this, ItemNavigationActivity.class);
-        startActivity(i);
-       // finish();
+        if (mp.getCurrentPosition() > 0) {
+            statisticHolder.endStatistic(player.getCurrentPosition());
+            Intent i = new Intent(this, ItemNavigationActivity.class);
+            i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(i);
+        }
+        // finish();
     }
 
     /**
@@ -332,14 +338,17 @@ public class VideoScreen extends Activity implements OnSeekBarChangeListener, Ca
         if (v.getId() == R.id.surfaceViewFrame) {
             if (linearLayoutMediaController.getVisibility() == View.GONE) {
                 linearLayoutMediaController.setVisibility(View.VISIBLE);
-                hideMediaController();
+                if (!isEnteringNote)
+                    hideMediaController();
             } else if (player != null) {
                 if (player.isPlaying()) {
                     player.pause();
                     imageViewPauseIndicator.setVisibility(View.VISIBLE);
+                    statisticHolder.endStatistic(player.getCurrentPosition());
                 } else {
                     player.start();
                     imageViewPauseIndicator.setVisibility(View.GONE);
+                    statisticHolder.startStatistic(CommonStaticClass.getCurrentPodcast().id, player.getCurrentPosition());
                 }
             }
         }
@@ -367,6 +376,7 @@ public class VideoScreen extends Activity implements OnSeekBarChangeListener, Ca
     public void onBackPressed() {
         try {
             player.stop();
+            statisticHolder.endStatistic(player.getCurrentPosition());
         } catch (Exception e) {
             // TODO: handle exception
         }

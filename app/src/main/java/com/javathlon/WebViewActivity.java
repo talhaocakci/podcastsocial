@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.javathlon.R;
-
 public class WebViewActivity extends Activity {
 
     WebView webView;
@@ -20,7 +18,7 @@ public class WebViewActivity extends Activity {
 
         Bundle b = getIntent().getExtras();
 
-        if(b != null && b.getString("url") != null) {
+        if (b != null && b.getString("url") != null) {
 
             webView.setWebViewClient(new WebViewController());
 
@@ -31,7 +29,7 @@ public class WebViewActivity extends Activity {
 
     }
 
-     class WebViewController extends WebViewClient {
+    class WebViewController extends WebViewClient {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {

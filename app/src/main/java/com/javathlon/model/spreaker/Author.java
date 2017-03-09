@@ -1,4 +1,3 @@
-
 package com.javathlon.model.spreaker;
 
 
@@ -49,288 +48,224 @@ public class Author {
     private Boolean fan;
 
     /**
-     * 
-     * @return
-     *     The userId
+     * @return The userId
      */
     public Long getUserId() {
         return userId;
     }
 
     /**
-     * 
-     * @param userId
-     *     The user_id
+     * @param userId The user_id
      */
     public void setUserId(Long userId) {
         this.userId = userId;
     }
 
     /**
-     * 
-     * @return
-     *     The fullname
+     * @return The fullname
      */
     public String getFullname() {
         return fullname;
     }
 
     /**
-     * 
-     * @param fullname
-     *     The fullname
+     * @param fullname The fullname
      */
     public void setFullname(String fullname) {
         this.fullname = fullname;
     }
 
     /**
-     * 
-     * @return
-     *     The type
+     * @return The type
      */
     public String getType() {
         return type;
     }
 
     /**
-     * 
-     * @param type
-     *     The type
+     * @param type The type
      */
     public void setType(String type) {
         this.type = type;
     }
 
     /**
-     * 
-     * @return
-     *     The siteUrl
+     * @return The siteUrl
      */
     public String getSiteUrl() {
         return siteUrl;
     }
 
     /**
-     * 
-     * @param siteUrl
-     *     The site_url
+     * @param siteUrl The site_url
      */
     public void setSiteUrl(String siteUrl) {
         this.siteUrl = siteUrl;
     }
 
     /**
-     * 
-     * @return
-     *     The showsUrl
+     * @return The showsUrl
      */
     public String getShowsUrl() {
         return showsUrl;
     }
 
     /**
-     * 
-     * @param showsUrl
-     *     The shows_url
+     * @param showsUrl The shows_url
      */
     public void setShowsUrl(String showsUrl) {
         this.showsUrl = showsUrl;
     }
 
     /**
-     * 
-     * @return
-     *     The permalink
+     * @return The permalink
      */
     public String getPermalink() {
         return permalink;
     }
 
     /**
-     * 
-     * @param permalink
-     *     The permalink
+     * @param permalink The permalink
      */
     public void setPermalink(String permalink) {
         this.permalink = permalink;
     }
 
     /**
-     * 
-     * @return
-     *     The profileName
+     * @return The profileName
      */
     public String getProfileName() {
         return profileName;
     }
 
     /**
-     * 
-     * @param profileName
-     *     The profile_name
+     * @param profileName The profile_name
      */
     public void setProfileName(String profileName) {
         this.profileName = profileName;
     }
 
     /**
-     * 
-     * @return
-     *     The occupation
+     * @return The occupation
      */
     public Long getOccupation() {
         return occupation;
     }
 
     /**
-     * 
-     * @param occupation
-     *     The occupation
+     * @param occupation The occupation
      */
     public void setOccupation(Long occupation) {
         this.occupation = occupation;
     }
 
     /**
-     * 
-     * @return
-     *     The image
+     * @return The image
      */
     public Image_ getImage() {
         return image;
     }
 
     /**
-     * 
-     * @param image
-     *     The image
+     * @param image The image
      */
     public void setImage(Image_ image) {
         this.image = image;
     }
 
     /**
-     * 
-     * @return
-     *     The username
+     * @return The username
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * 
-     * @param username
-     *     The username
+     * @param username The username
      */
     public void setUsername(String username) {
         this.username = username;
     }
 
     /**
-     * 
-     * @return
-     *     The fbUserId
+     * @return The fbUserId
      */
     public String getFbUserId() {
         return fbUserId;
     }
 
     /**
-     * 
-     * @param fbUserId
-     *     The fb_user_id
+     * @param fbUserId The fb_user_id
      */
     public void setFbUserId(String fbUserId) {
         this.fbUserId = fbUserId;
     }
 
     /**
-     * 
-     * @return
-     *     The description
+     * @return The description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * 
-     * @param description
-     *     The description
+     * @param description The description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * 
-     * @return
-     *     The location
+     * @return The location
      */
     public String getLocation() {
         return location;
     }
 
     /**
-     * 
-     * @param location
-     *     The location
+     * @param location The location
      */
     public void setLocation(String location) {
         this.location = location;
     }
 
     /**
-     * 
-     * @return
-     *     The locationLatitude
+     * @return The locationLatitude
      */
     public String getLocationLatitude() {
         return locationLatitude;
     }
 
     /**
-     * 
-     * @param locationLatitude
-     *     The location_latitude
+     * @param locationLatitude The location_latitude
      */
     public void setLocationLatitude(String locationLatitude) {
         this.locationLatitude = locationLatitude;
     }
 
     /**
-     * 
-     * @return
-     *     The locationLongitude
+     * @return The locationLongitude
      */
     public String getLocationLongitude() {
         return locationLongitude;
     }
 
     /**
-     * 
-     * @param locationLongitude
-     *     The location_longitude
+     * @param locationLongitude The location_longitude
      */
     public void setLocationLongitude(String locationLongitude) {
         this.locationLongitude = locationLongitude;
     }
 
     /**
-     * 
-     * @return
-     *     The fan
+     * @return The fan
      */
     public Boolean getFan() {
         return fan;
     }
 
     /**
-     * 
-     * @param fan
-     *     The fan
+     * @param fan The fan
      */
     public void setFan(Boolean fan) {
         this.fan = fan;

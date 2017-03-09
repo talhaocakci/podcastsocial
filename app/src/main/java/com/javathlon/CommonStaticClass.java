@@ -11,7 +11,8 @@ public class CommonStaticClass {
     public static String APP_ID = "263435310362974";
 
     public static final String CONSUMER_KEY = "M7K1ZX9dtRYChao9oWDIIQ";//"DjTC91wLeKyTJQLSW5Jyiw";
-    public static final String CONSUMER_SECRET = "8449befc531b3c9adcbdb3f8fdd63751";;
+    public static final String CONSUMER_SECRET = "8449befc531b3c9adcbdb3f8fdd63751";
+    ;
 
     public static final String REQUEST_URL = "http://api.twitter.com/oauth/request_token";
     public static final String ACCESS_URL = "http://api.twitter.com/oauth/access_token";

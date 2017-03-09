@@ -4,19 +4,10 @@
     tools:context="com.javathlon.MainActivity">
 
     <item
-        android:id="@+id/searchActionBar"
+        android:id="@+id/search"
         android:title="@string/search"
-        android:icon="@drawable/ic_search_white_24dp"
-        javathlon:actionViewClass="android.support.v7.widget.SearchView"
-        javathlon:showAsAction="always"
-        android:orderInCategory="90"/>
-
-    <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        javathlon:showAsAction="never"
-        android:orderInCategory="100"/>
-
+        javathlon:showAsAction="ifRoom"
+        android:actionViewClass="android.widget.SearchView" />
 
 
 </menu>

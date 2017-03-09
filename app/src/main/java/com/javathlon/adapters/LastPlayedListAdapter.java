@@ -39,11 +39,11 @@ public class LastPlayedListAdapter extends BaseAdapter {
         holder.icon.setBackgroundResource(R.drawable.ic_menu_compose);
         String testNote = (String) mFileList.get(position);
         String testSong = (String) podcastNames.get(position);
-        String songName = testSong != null  &&  testSong.contains("/") ?  testSong.substring(testSong.lastIndexOf("/") + 1) : "";
+        String songName = testSong != null && testSong.contains("/") ? testSong.substring(testSong.lastIndexOf("/") + 1) : "";
         if (testNote.length() > 100) {
             testNote = testNote.substring(0, 100) + "\n..." + songName;
         } else {
-            testNote = testNote + "\n..." +  songName;
+            testNote = testNote + "\n..." + songName;
         }
         holder.positionTxt.setText(testNote);
 

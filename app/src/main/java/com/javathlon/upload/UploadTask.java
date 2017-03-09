@@ -112,7 +112,7 @@ public class UploadTask extends AsyncTask<String, Integer, String> {
 
 
         String clusterName = "podaddict";
-        String  s="";
+        String s = "";
         TransferManager manager = new TransferManager(cred);
         Upload upload = manager.upload(new PutObjectRequest(clusterName, fileName, new File(existingFileName)).withCannedAcl(CannedAccessControlList.PublicRead));
         try {
@@ -124,7 +124,6 @@ public class UploadTask extends AsyncTask<String, Integer, String> {
                 dbAccessor.open();
             }
             dbAccessor.updateNoteRemoteLink(noteId, s);
-
 
 
         } catch (InterruptedException e) {

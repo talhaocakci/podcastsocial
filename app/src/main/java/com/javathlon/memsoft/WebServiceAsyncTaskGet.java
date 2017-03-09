@@ -3,7 +3,7 @@ package com.javathlon.memsoft;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.javathlon.ApplicationSettings;
+import com.javathlon.apiclient.ApiClient;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -42,18 +42,17 @@ public class WebServiceAsyncTaskGet extends AsyncTask<String, Void, ResponseHold
             String path = arg[0];
 
 
-
             DefaultHttpClient httpclient = new DefaultHttpClient();
 
             // url with the post data
             HttpGet httpGet = new HttpGet(path);
 
             // passes the results to a string builder/entity
-
-            if(ApplicationSettings.isProxyOpen) {
+            ApiClient apiClient = ApiClient.getApiClient(null);
+            if (apiClient.proxyOpen) {
                 HttpParams httpParameters = new BasicHttpParams();
                 DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
-                httpGet.getParams().setParameter(ApplicationSettings.proxyAddress, Long.parseLong(ApplicationSettings.proxyHost));
+                httpGet.getParams().setParameter(apiClient.proxyAddress, Long.parseLong(apiClient.proxyHost));
             }
 
             // sets a request header so the page receving the request

@@ -37,7 +37,6 @@ import android.view.animation.AnimationSet;
 import android.view.animation.LayoutAnimationController;
 import android.view.animation.TranslateAnimation;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -60,22 +59,16 @@ import com.javathlon.PodcastData;
 import com.javathlon.R;
 import com.javathlon.Utils;
 import com.javathlon.adapters.NoteAdapter;
+import com.javathlon.components.LastPlayClass;
 import com.javathlon.db.DBAccessor;
 import com.javathlon.memsoft.ImageUtil;
 import com.javathlon.model.ListenStatistic;
 import com.javathlon.model.ListenStatisticHolder;
 import com.javathlon.model.Note;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileDescriptor;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -83,6 +76,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -125,6 +119,7 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
     private static int MINUTE_DIVIDER = 60 * 1000;
     private Context con;
     private boolean firstPlay = false;
+    LastPlayClass lastPlayObj = null;
 
     static ListenStatisticHolder statisticHolder;
 
@@ -937,6 +932,118 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
         return false;
     }
 
+    protected void fillLastPlayedList() {
+        lastPlayObj = new LastPlayClass();
+
+        Cursor mCursor = null;
+        try {
+            mCursor = dbHelper.getLastPlayedNotesListResult();
+            if (mCursor.moveToFirst()) {
+                do {
+
+                    String name = mCursor.getString(mCursor
+                            .getColumnIndex("name"));
+
+                    String podcast_id = mCursor.getString(mCursor
+                            .getColumnIndex("podcast_id"));
+                    String song_sp_id = mCursor.getString(mCursor
+                            .getColumnIndex("song_sp_id"));
+                    String begin_sec = mCursor.getString(mCursor
+                            .getColumnIndex("begin_sec"));
+                    String end_sec = mCursor.getString(mCursor
+                            .getColumnIndex("end_sec"));
+                    String beginend = mCursor.getString(mCursor
+                            .getColumnIndex("beginend"));
+                    String songpath = mCursor.getString(mCursor
+                            .getColumnIndex("songpath"));
+                    String note_text = mCursor.getString(mCursor
+                            .getColumnIndex("note_text"));
+                    String author = mCursor.getString(mCursor
+                            .getColumnIndex("author"));
+                    String create_date = mCursor.getString(mCursor
+                            .getColumnIndex("create_date"));
+                    String last_listen_date_mil = mCursor.getString(mCursor
+                            .getColumnIndex("last_listen_date_mil"));
+                    String last_listen_date = mCursor.getString(mCursor
+                            .getColumnIndex("last_listen_date"));
+                    lastPlayObj.setPodcast_id(podcast_id);
+                    lastPlayObj.setSong_sp_id(song_sp_id);
+                    lastPlayObj.setBegin_sec(begin_sec);
+                    lastPlayObj.setEnd_sec(end_sec);
+                    lastPlayObj.setBeginend(beginend);
+                    lastPlayObj.setSongpath(songpath);
+                    lastPlayObj.setNote_text(note_text);
+                    lastPlayObj.setAuthor(author);
+                    lastPlayObj.setCreate_date(create_date);
+                    lastPlayObj.setLast_listen_date_mil(last_listen_date_mil);
+                    lastPlayObj.setLast_listen_date(last_listen_date);
+
+                } while (mCursor.moveToNext());
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        } finally {
+            if (mCursor != null && !mCursor.isClosed()) {
+                mCursor.close();
+            }
+        }
+
+    }
+
+    public HashMap<String, String> audioFilePathFromNote(int pos) {
+        Cursor audioCursor = null;
+        int i = 0;
+        HashMap<String, String> note = new HashMap<String, String>();
+        try {
+            String[] projection = {DBAccessor.KEY_BEGINSEC,
+                    DBAccessor.KEY_ENDSEC, DBAccessor.KEY_NOTETEXT,
+                    DBAccessor.KEY_SONGPATH};
+            if (path == null) {
+                Log.e("", "it is null");
+                if (lastPlayObj == null) {
+                    fillLastPlayedList();
+                    audioCursor = dbHelper.fetchNote(pos, lastPlayObj
+                            .getSongpath().get(pos));
+                } else {
+                    audioCursor = dbHelper.fetchNote(pos, lastPlayObj
+                            .getSongpath().get(pos));
+                }
+
+            } else {
+                Log.e("pos", "" + pos);
+                audioCursor = dbHelper.fetchNote(pos, path);
+            }
+
+            if (audioCursor.moveToFirst()) {
+                do {
+                    int rowID = audioCursor.getInt(audioCursor
+                            .getColumnIndex(DBAccessor.KEY_ID));
+                    note.put("rowID", rowID + "");
+                    String beginPos = audioCursor.getString(audioCursor
+                            .getColumnIndex(DBAccessor.KEY_BEGINSEC));
+                    note.put("beginPos", beginPos);
+                    String endPos = audioCursor.getString(audioCursor
+                            .getColumnIndex(DBAccessor.KEY_ENDSEC));
+                    note.put("endPos", endPos);
+                    String noteText = audioCursor.getString(audioCursor
+                            .getColumnIndex(DBAccessor.KEY_NOTETEXT));
+                    note.put("noteText", noteText);
+                    String audioFilePath = audioCursor.getString(audioCursor
+                            .getColumnIndex(DBAccessor.KEY_SONGPATH));
+                    note.put("audioFilePath", audioFilePath);
+
+                    return note;
+                } while (audioCursor.moveToNext());
+            }
+        } finally {
+            if (null != audioCursor) {
+                audioCursor.close();
+            }
+        }
+
+        return null;
+    }
+
     private String getAsTime(int dur) {
         String a = "";
         sec = (dur / 1000);
@@ -1017,15 +1124,6 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
         String podcastIncr = (dbHelper.getPodcastCount() + 1) + "";
         String filename = songTitle;
 
-        /*if((filename == null || filename.equals("")) && path.contains("http:") || path.contains("https://"))
-        {
-            if(path.contains("/") && path.contains("."))
-                filename = path.substring(path.lastIndexOf("/"), path.lastIndexOf("."));
-        }
-        else{
-        filename = path.substring(path.lastIndexOf("/") + 1,
-				path.length());
-        }*/
         filename = songTitle;
         // String sql =
         // "Insert into podcast (podcast_id,full_device_path,file_name,download_link,last_listen_date,last_listen_date_mil,create_date) Values('"+podcastIncr+"','"+path+"','"+filname+"','','"+dd.toString()+"','"+currentNowMil+"','"+dd.toString()+"')";
@@ -1281,7 +1379,6 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
     */
 
 
-
     private void fillData(String path) {
 
         List<Note> noteList = dbHelper.fetchAllNotes(podcastID);
@@ -1524,7 +1621,7 @@ public class PlayerScreen extends BaseActivity implements MediaPlayerControl, Se
         super.onPause();
         AppEventsLogger.deactivateApp(this);
         CommonStaticClass.pressedHomeWhileInPlayer = true;
-		/*if(dbHelper!=null){
+        /*if(dbHelper!=null){
 			dbHelper.close();
 			dbHelper = null;
 		}        */

@@ -34,8 +34,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.javathlon.R;
-
 public class DonationDialog extends Dialog {
 
     //    static final int FB_BLUE = 0xFF6D84B4;

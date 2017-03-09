@@ -2,7 +2,6 @@ package com.javathlon;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,31 +28,31 @@ public class NoteUtil {
             dbHelper.open();
         }
 
-            long podnumber = podcastId;
+        long podnumber = podcastId;
 
-            if(podcastId <=0)
-                podnumber = getPodcastNumber(filePath);
-            long id = dbHelper.createNote(
-                    podnumber,
-                    0,
-                    beginpos,
-                    endpos,
-                    filePath, noteText,
-                    "me", getCurrentDate(), new Date().getTime(), "");
+        if (podcastId <= 0)
+            podnumber = getPodcastNumber(filePath);
+        long id = dbHelper.createNote(
+                podnumber,
+                0,
+                beginpos,
+                endpos,
+                filePath, noteText,
+                "me", getCurrentDate(), new Date().getTime(), "");
 
-            Toast.makeText(context,
-                    "Your bookmark has been saved",
-                    Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,
+                "Your bookmark has been saved",
+                Toast.LENGTH_SHORT).show();
 
-        }
+    }
 
     private static long getPodcastNumber(String path) {
         String sql = "";
 
-        if(path.startsWith("http"))
-            sql= "Select _id from podcast where download_link = '" + path+"'";
+        if (path.startsWith("http"))
+            sql = "Select _id from podcast where download_link = '" + path + "'";
         else
-            sql = "Select _id from podcast where full_device_path = '" + path+"'";
+            sql = "Select _id from podcast where full_device_path = '" + path + "'";
 
         Cursor mCursor = null;
         long num = -1l;
@@ -75,7 +74,6 @@ public class NoteUtil {
 
         return num;
     }
-
 
 
     public static String getCurrentDate() {

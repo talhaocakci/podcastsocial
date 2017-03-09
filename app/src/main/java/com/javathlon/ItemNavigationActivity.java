@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.javathlon.db.DBAccessor;
 import com.javathlon.rss.RssListPlayerActivity;
 import com.javathlon.video.VideoScreen;
 
@@ -15,8 +16,10 @@ public class ItemNavigationActivity extends Activity {
     private PodcastData nextItem;
     private PodcastData currentItem;
 
-    private TextView nextItemDescription;
+    private TextView nextItemDescription, nextItemTitle;
     Button nextItemButton, replayButton;
+
+    DBAccessor dbAccessor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,15 +29,23 @@ public class ItemNavigationActivity extends Activity {
         nextItemDescription = (TextView) findViewById(R.id.nextItemDescription);
         replayButton = (Button) findViewById(R.id.prevItemButton);
         nextItemButton = (Button) findViewById(R.id.nextItemButton);
+        nextItemTitle = (TextView) findViewById(R.id.nextItemTitle);
 
-        if(RssListPlayerActivity.currentIndexInPodcastList < RssListPlayerActivity.podcastDataList.size()) {
-            nextItem =  RssListPlayerActivity.podcastDataList.get(RssListPlayerActivity.currentIndexInPodcastList+1);
-            nextItemDescription.setText(nextItem.editionTitle);
-            nextItemButton.setVisibility(View.VISIBLE);
+        if (dbAccessor == null) {
+            dbAccessor = new DBAccessor(this);
+            dbAccessor.open();
         }
 
-            currentItem = RssListPlayerActivity.podcastDataList.get(RssListPlayerActivity.currentIndexInPodcastList);
-            replayButton.setVisibility(View.VISIBLE);
+        nextItem = dbAccessor.getPodcastById(RssListPlayerActivity.currentIndexInPodcastList + 1);
+
+        if (RssListPlayerActivity.currentIndexInPodcastList < RssListPlayerActivity.podcastDataList.size()) {
+            nextItem = RssListPlayerActivity.podcastDataList.get(RssListPlayerActivity.currentIndexInPodcastList + 1);
+            nextItemDescription.setText(nextItem.description);
+            nextItemTitle.setText(nextItem.editionTitle);
+            nextItemButton.setVisibility(View.VISIBLE);
+        }
+        currentItem = RssListPlayerActivity.podcastDataList.get(RssListPlayerActivity.currentIndexInPodcastList);
+        replayButton.setVisibility(View.VISIBLE);
 
     }
 

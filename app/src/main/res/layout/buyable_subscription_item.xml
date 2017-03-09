@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="340dp"
+    android:background="@drawable/card_background_white"
+    android:minHeight="340dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:layout_weight="1"
+        android:minHeight="190dp">
+
+        <com.javathlon.memsoft.RobotoTextView
+            android:id="@+id/itemdescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:padding="5sp"
+            android:background="@color/main_color_500"
+            android:text="Explanation"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"></com.javathlon.memsoft.RobotoTextView>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@drawable/google_cards_background_bottom"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <com.javathlon.memsoft.RobotoTextView
+            android:id="@+id/itemname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Eat at Joe"
+            android:textColor="@color/material_blue_grey_300"
+            android:textSize="16sp" />
+
+        <com.javathlon.memsoft.RobotoTextView
+            android:id="@+id/itemprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Eat at Joe"
+            android:textColor="@color/material_blue_grey_300"
+            android:textSize="16sp" />
+
+        <com.javathlon.memsoft.RobotoTextView
+            android:id="@+id/itemduration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Eat at Joe"
+            android:textColor="@color/material_blue_grey_300"
+            android:textSize="16sp" />
+
+
+        <com.javathlon.memsoft.RobotoTextView
+            android:id="@+id/artistName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="right"
+            android:maxLines="3"
+            android:text="Baya uzun string gelecek buraya"
+            android:textColor="@color/material_blue_grey_700"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

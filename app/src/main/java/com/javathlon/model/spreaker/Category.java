@@ -1,4 +1,3 @@
-
 package com.javathlon.model.spreaker;
 
 
@@ -19,72 +18,56 @@ public class Category {
     private Long level;
 
     /**
-     * 
-     * @return
-     *     The categoryId
+     * @return The categoryId
      */
     public Long getCategoryId() {
         return categoryId;
     }
 
     /**
-     * 
-     * @param categoryId
-     *     The category_id
+     * @param categoryId The category_id
      */
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 
     /**
-     * 
-     * @return
-     *     The name
+     * @return The name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 
-     * @param name
-     *     The name
+     * @param name The name
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * 
-     * @return
-     *     The permalink
+     * @return The permalink
      */
     public String getPermalink() {
         return permalink;
     }
 
     /**
-     * 
-     * @param permalink
-     *     The permalink
+     * @param permalink The permalink
      */
     public void setPermalink(String permalink) {
         this.permalink = permalink;
     }
 
     /**
-     * 
-     * @return
-     *     The level
+     * @return The level
      */
     public Long getLevel() {
         return level;
     }
 
     /**
-     * 
-     * @param level
-     *     The level
+     * @param level The level
      */
     public void setLevel(Long level) {
         this.level = level;

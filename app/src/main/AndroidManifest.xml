@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.javathlon"
-    android:versionCode="7"
-    android:versionName="2.0.5">
+    android:versionCode="17"
+    android:versionName="2.0.17">
 
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="14"
+        android:minSdkVersion="23"
+        android:targetSdkVersion="23"
         tools:overrideLibrary="com.dd.circular.progress.button" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -40,18 +40,12 @@
     <application
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:theme="@style/PodcastModernTheme">
+        android:theme="@style/Theme.AppCompat.Light">
         <activity
             android:name=".SplashActivity"
             android:configChanges="orientation"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -93,15 +87,21 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ExpandableMediaListViewActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".fragments.SignInActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+
+            </activity>
         <activity
             android:name=".download.DownLoadController"
             android:configChanges="orientation"
@@ -125,10 +125,10 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".BuySubscriptionActivity"
-            android:label="@string/title_activity_main"></activity>
+            android:label="@string/title_activity_main" />
 
         <receiver
             android:name=".scheduledtask.RssUpdateTask"
@@ -147,7 +147,7 @@
 
         <activity
             android:name=".fragments.SettingsActivity"
-            android:label="@string/title_activity_social_settings"></activity>
+            android:label="@string/title_activity_social_settings" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -193,17 +193,36 @@
         <!-- [END instanceId_listener] -->
         <service
             android:name=".RegistrationIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
 
-        <activity android:name=".WebViewActivity"></activity>
+        <activity android:name=".WebViewActivity" />
         <activity
             android:name=".GoogleSignInActivity"
             android:exported="true"
             android:label="@string/title_activity_google_sign_in"
-            android:theme="@style/Theme.AppCompat.Light"></activity>
+            android:theme="@style/Theme.AppCompat.Light" >
+
+            </activity>
         <activity
             android:name=".ItemNavigationActivity"
-            android:label="@string/title_activity_item_navigation"></activity>
+            android:label="@string/title_activity_item_navigation"
+            android:noHistory="true" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login">
+
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/title_activity_register"></activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="18ce652ff1e9694ab565ec98e796d24c8dc484f7" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

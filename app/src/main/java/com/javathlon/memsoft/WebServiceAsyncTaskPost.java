@@ -49,7 +49,7 @@ public class WebServiceAsyncTaskPost extends AsyncTask<String, Void, ResponseHol
 
             // passes the results to a string builder/entity
 
-            if(arg.length  > 1) {
+            if (arg.length > 1) {
                 StringEntity se = new StringEntity(json);
 
                 // sets the post request as the resulting string

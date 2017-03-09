@@ -16,34 +16,64 @@
 
 package com.javathlon;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Point;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.os.RemoteException;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-
+import com.javathlon.adapters.BuyableSubscriptionAdapter;
+import com.javathlon.adapters.GroupAndChildAdapter;
+import com.javathlon.apiclient.ApiClient;
+import com.javathlon.apiclient.api.PurchaseresourceApi;
+import com.javathlon.apiclient.api.SubscriptionitemresourceApi;
+import com.javathlon.apiclient.model.Podcast;
+import com.javathlon.apiclient.model.PurchaseDTO;
+import com.javathlon.apiclient.model.SubscriptionItem;
+import com.javathlon.db.DBAccessor;
 import com.javathlon.inapp_purchase.IabBroadcastReceiver;
 import com.javathlon.inapp_purchase.IabHelper;
 import com.javathlon.inapp_purchase.IabResult;
 import com.javathlon.inapp_purchase.Inventory;
 import com.javathlon.inapp_purchase.Purchase;
+import com.javathlon.model.podcastmodern.Subscription;
+
+import org.joda.time.LocalDate;
+import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class BuySubscriptionActivity extends Activity implements IabBroadcastReceiver.IabBroadcastListener,
+
+public class BuySubscriptionActivity extends BaseActivity implements IabBroadcastReceiver.IabBroadcastListener,
         OnClickListener {
     // Debug tag, for logging
     static final String TAG = "Javathlon";
+
+    private TextView descriptionTextView;
+
+    private ListView itemsList;
 
     // Does the user have the premium upgrade?
     boolean mIsPremium = false;
@@ -63,8 +93,22 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
     // The helper object
     IabHelper mHelper;
 
+    boolean isServiceRegistered = false;
+
     // Provides purchase notification while this app is running
     IabBroadcastReceiver mBroadcastReceiver;
+
+    GroupAndChildAdapter adapter;
+
+    List<GroupAndChildAdapter.GroupItem> items = new ArrayList<GroupAndChildAdapter.GroupItem>();
+
+    List<SubscriptionItem> subscriptionItems = new ArrayList<>();
+
+    private SubscriptionItem selectedSubscription;
+
+    private DBAccessor dbAccessor;
+
+    AnimatedExpandableListView listView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,8 +116,57 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
 
         setContentView(R.layout.buy_subscription);
 
-        // load game data
+        this.getSupportActionBar().hide();
+
+        adapter = new GroupAndChildAdapter(this);
+
+        adapter.setData(items);
+
+        listView = (AnimatedExpandableListView) findViewById(R.id.listView);
+        listView.setDividerHeight(0);
+        listView.setAdapter(adapter);
+
+        // In order to show animations, we need to use a custom click handler
+        // for our ExpandableListView.
+        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v,
+                                        int groupPosition, long id) {
+                // We call collapseGroupWithAnimation(int) and
+                // expandGroupWithAnimation(int) to animate group
+                // expansion/collapse.
+                if (listView.isGroupExpanded(groupPosition)) {
+                    listView.collapseGroupWithAnimation(groupPosition);
+                } else {
+                    listView.expandGroupWithAnimation(groupPosition);
+                }
+                return true;
+            }
+
+        });
+
+        // Set indicator (arrow) to the right
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        Resources r = getResources();
+        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                50, r.getDisplayMetrics());
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            listView.setIndicatorBounds(width - px, width);
+        } else {
+            listView.setIndicatorBoundsRelative(width - px, width);
+        }
+
+        if (dbAccessor == null) {
+            dbAccessor = new DBAccessor(this.getApplicationContext());
+            dbAccessor.open();
+        }
+
         loadData();
+
 
         /* base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY
          * (that you got from the Google Play developer console). This is not your
@@ -120,6 +213,7 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
                 // Have we been disposed of in the meantime? If so, quit.
                 if (mHelper == null) return;
 
+                isServiceRegistered = true;
                 // Important: Dynamically register for broadcast messages about updated purchases.
                 // We register the receiver here instead of as a <receiver> in the Manifest
                 // because we always call getPurchases() at startup, so therefore we can ignore
@@ -184,23 +278,21 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
             // renewing
             mSubscribedToInfiniteGas = (fullMembership != null && verifyDeveloperPayload(fullMembership))
                     || (javaCore != null && verifyDeveloperPayload(javaCore));
-            Log.d(TAG, "User " + (mSubscribedToInfiniteGas ? "HAS" : "DOES NOT HAVE")
-                    + " infinite gas subscription.");
 
             Purchase gasPurchase = inventory.getPurchase(FULL_MEMBERSHIP_MONTHLY);
             if (gasPurchase != null && verifyDeveloperPayload(gasPurchase)) {
-                Log.d(TAG, "We have gas. Consuming it.");
+
                 try {
                     mHelper.consumeAsync(inventory.getPurchase(FULL_MEMBERSHIP_MONTHLY), mConsumeFinishedListener);
                 } catch (IabHelper.IabAsyncInProgressException e) {
-                    complain("Error consuming gas. Another async operation in progress.");
+
                 }
                 return;
             }
 
             updateUi();
             setWaitScreen(false);
-            Log.d(TAG, "Initial inventory query finished; enabling main UI.");
+
         }
     };
 
@@ -215,19 +307,11 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
         }
     }
 
-    // User clicked the "Buy Gas" button
-    public void onBuyGasButtonClicked(View arg0) {
-        Log.d(TAG, "Buy gas button clicked.");
 
-        if (mSubscribedToInfiniteGas) {
-            complain("No need! You're subscribed to infinite gas. Isn't that awesome?");
-            return;
-        }
-
-        // launch the gas purchase UI flow.
-        // We will be notified of completion via mPurchaseFinishedListener
+    public void initiatePurchasingItem(int position) {
         setWaitScreen(true);
-        Log.d(TAG, "Launching purchase flow for gas.");
+
+        selectedSubscription = subscriptionItems.get(position);
 
         /* TODO: for security, generate your payload here for verification. See the comments on
          *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
@@ -235,39 +319,11 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
         String payload = "";
 
         try {
-            mHelper.launchPurchaseFlow(this, FULL_MEMBERSHIP_MONTHLY, RC_REQUEST,
+            mHelper.launchPurchaseFlow(this, selectedSubscription.getSkuName(), RC_REQUEST,
                     mPurchaseFinishedListener, payload);
         } catch (IabHelper.IabAsyncInProgressException e) {
             complain("Error launching purchase flow. Another async operation in progress.");
             setWaitScreen(false);
-        }
-    }
-
-    // User clicked the "Upgrade to Premium" button.
-    public void onUpgradeAppButtonClicked(View arg0) {
-        Log.d(TAG, "Upgrade button clicked; launching purchase flow for upgrade.");
-        setWaitScreen(true);
-
-        /* TODO: for security, generate your payload here for verification. See the comments on
-         *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
-         *        an empty string, but on a production app you should carefully generate this. */
-        String payload = "";
-
-        try {
-            mHelper.launchPurchaseFlow(this, FULL_MEMBERSHIP_MONTHLY, RC_REQUEST,
-                    mPurchaseFinishedListener, payload);
-        } catch (IabHelper.IabAsyncInProgressException e) {
-            complain("Error launching purchase flow. Another async operation in progress.");
-            setWaitScreen(false);
-        }
-    }
-
-    // "Subscribe to infinite gas" button clicked. Explain to user, then start purchase
-    // flow for subscription.
-    public void onInfiniteGasButtonClicked(View arg0) {
-        if (!mHelper.subscriptionsSupported()) {
-            complain("Subscriptions not supported on your device yet. Sorry!");
-            return;
         }
     }
 
@@ -282,13 +338,14 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
             // perform any handling of activity results not related to in-app
             // billing...
             super.onActivityResult(requestCode, resultCode, data);
-        }
-        else {
+        } else {
             Log.d(TAG, "onActivityResult handled by IABUtil.");
         }
     }
 
-    /** Verifies the developer payload of a purchase. */
+    /**
+     * Verifies the developer payload of a purchase.
+     */
     boolean verifyDeveloperPayload(Purchase p) {
         String payload = p.getDeveloperPayload();
 
@@ -318,6 +375,63 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
         return true;
     }
 
+
+    private void savePurchasedItem(SubscriptionItem subscription) {
+
+        for(Podcast p : subscription.getPodcasts()) {
+            dbAccessor.savePurchasedPodcastItem(p.getId(), new Date());
+        }
+
+    }
+
+    private void savePurchaseToserver(final PurchaseDTO purchaseDTO) {
+        ApiClient apiClient = ApiClient.getApiClient(getApplicationContext());
+        PurchaseresourceApi api = apiClient.createService(PurchaseresourceApi.class);
+        api.createPurchaseUsingPOST(purchaseDTO).enqueue(new Callback<PurchaseDTO>() {
+
+            @Override
+            public void onResponse(Call<PurchaseDTO> call, Response<PurchaseDTO> response) {
+                if (response.isSuccessful()) {
+                    complain("Purchase is successful, thank you!");
+                } else {
+                    if(response.code() == 401) {
+                        login();
+                        savePurchaseToserver(purchaseDTO);
+                    }
+
+                    complain("Purchase is successful,  but operation failed!");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PurchaseDTO> call, Throwable t) {
+                complain("Purchase failed!");
+            }
+        });
+    }
+
+    private void createPurchase(Double price, Long subscriptionId) {
+        ApiClient apiClient = ApiClient.getApiClient(getApplicationContext());
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String subscriberID = preferences.getString(QuickstartPreferences.SUBSCRIBER_ID, "");
+
+        savePurchasedItem(selectedSubscription);
+
+        PurchaseDTO purchaseDTO = new PurchaseDTO();
+        purchaseDTO.setPurchaseDate(LocalDate.now());
+        purchaseDTO.setChannel("android-app");
+        purchaseDTO.setPrice(price);
+        purchaseDTO.setItemId(subscriptionId);
+        purchaseDTO.setApplicationId(apiClient.appId);
+        purchaseDTO.setSubscriberId(Long.valueOf(subscriberID));
+        purchaseDTO.setPaymentType("google wallet");
+
+        savePurchaseToserver(purchaseDTO);
+
+    }
+
     // Callback for when a purchase is finished
     IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
         public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
@@ -326,8 +440,15 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
             // if we were disposed of in the meantime, quit.
             if (mHelper == null) return;
 
-            if (result.isFailure()) {
-                complain("Error purchasing: " + result);
+
+            if (result.isFailure() || purchase == null) {
+
+                // item already owned
+                if(result.getResponse() == 7) {
+                    complain("You already bought this item, thank you!");
+                } else {
+                    //complain("Error purchasing: " + result);
+                }
                 setWaitScreen(false);
                 return;
             }
@@ -337,39 +458,26 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
                 return;
             }
 
-            Log.d(TAG, "Purchase successful.");
+            try {
 
-            if (purchase.getSku().equals(FULL_MEMBERSHIP_MONTHLY)) {
-                // bought 1/4 tank of gas. So consume it.
-                Log.d(TAG, "Purchase is gas. Starting gas consumption.");
-                ApplicationSettings.memberMode = ApplicationSettings.MemberMode.FULL;
-                try {
-                    mHelper.consumeAsync(purchase, mConsumeFinishedListener);
-                } catch (IabHelper.IabAsyncInProgressException e) {
-                    complain("Error consuming gas. Another async operation in progress.");
-                    setWaitScreen(false);
-                    return;
-                }
+                Double price = mHelper.getPricesDev(getPackageName(), selectedSubscription.getSkuName());
+
+                createPurchase(price, selectedSubscription.getId());
+
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            else if (purchase.getSku().equals(FULL_MEMBERSHIP_MONTHLY)) {
-                // bought the premium upgrade!
-                Log.d(TAG, "Purchase is premium upgrade. Congratulating user.");
-                alert("Thank you for upgrading to premium!");
-                mIsPremium = true;
-                ApplicationSettings.memberMode = ApplicationSettings.MemberMode.FULL;
-                updateUi();
+
+            try {
+                mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+            } catch (IabHelper.IabAsyncInProgressException e) {
+                complain("Error consuming gas. Another async operation in progress.");
                 setWaitScreen(false);
+                return;
             }
-            else if (purchase.getSku().equals(JAVA_CORE_MONTHLY)) {
-                // bought the infinite gas subscription
-                Log.d(TAG, "Infinite gas subscription purchased.");
-                alert("Thank you for subscribing to infinite gas!");
-                mSubscribedToInfiniteGas = true;
-                mAutoRenewEnabled = purchase.isAutoRenewing();
-                ApplicationSettings.memberMode = ApplicationSettings.MemberMode.JAVACORE;
-                updateUi();
-                setWaitScreen(false);
-            }
+
         }
     };
 
@@ -381,17 +489,11 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
             // if we were disposed of in the meantime, quit.
             if (mHelper == null) return;
 
-            // We know this is the "gas" sku because it's the only one we consume,
-            // so we don't check which sku was consumed. If you have more than one
-            // sku, you probably should check...
             if (result.isSuccess()) {
-                // successfully consumed, so we apply the effects of the item in our
-                // game world's logic, which in our case means filling the gas tank a bit
                 Log.d(TAG, "Consumption successful. Provisioning.");
                 saveData();
 
-            }
-            else {
+            } else {
                 complain("Error while consuming: " + result);
             }
             updateUi();
@@ -414,36 +516,16 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
         // very important:
         Log.d(TAG, "Destroying helper.");
         if (mHelper != null) {
-            mHelper.disposeWhenFinished();
-            mHelper = null;
+            if (isServiceRegistered) {
+                mHelper.disposeWhenFinished();
+                mHelper = null;
+            }
         }
     }
 
-    // updates UI to reflect model
     public void updateUi() {
-        // update the car color to reflect premium status or lack thereof
-      /*  ((ImageView)findViewById(R.id.free_or_premium)).setImageResource(mIsPremium ? R.drawable.premium : R.drawable.free);
 
-        // "Upgrade" button is only visible if the user is not premium
-        findViewById(R.id.upgrade_button).setVisibility(mIsPremium ? View.GONE : View.VISIBLE);
 
-        ImageView infiniteGasButton = (ImageView) findViewById(R.id.infinite_gas_button);
-        if (mSubscribedToInfiniteGas) {
-            // If subscription is active, show "Manage Infinite Gas"
-            infiniteGasButton.setImageResource(R.drawable.manage_infinite_gas);
-        } else {
-            // The user does not have infinite gas, show "Get Infinite Gas"
-            infiniteGasButton.setImageResource(R.drawable.get_infinite_gas);
-        }
-
-        // update gas gauge to reflect tank status
-        if (mSubscribedToInfiniteGas) {
-            ((ImageView)findViewById(R.id.gas_gauge)).setImageResource(R.drawable.gas_inf);
-        }
-        else {
-            int index = mTank >= TANK_RES_IDS.length ? TANK_RES_IDS.length - 1 : mTank;
-            ((ImageView)findViewById(R.id.gas_gauge)).setImageResource(TANK_RES_IDS[index]);
-        }*/
     }
 
     // Enables or disables the "please wait" screen.
@@ -453,15 +535,13 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
     }
 
     void complain(String message) {
-        Log.e(TAG, "**** TrivialDrive Error: " + message);
-        alert("Error: " + message);
+        alert(message);
     }
 
     void alert(String message) {
         Builder bld = new Builder(this);
         bld.setMessage(message);
         bld.setNeutralButton("OK", null);
-        Log.d(TAG, "Showing alert dialog: " + message);
         bld.create().show();
     }
 
@@ -474,15 +554,59 @@ public class BuySubscriptionActivity extends Activity implements IabBroadcastRec
          */
 
         SharedPreferences.Editor spe = getPreferences(MODE_PRIVATE).edit();
-       // spe.putInt("tank", mTank);
+        // spe.putInt("tank", mTank);
         spe.apply();
-       // Log.d(TAG, "Saved data: tank = " + String.valueOf(mTank));
+        // Log.d(TAG, "Saved data: tank = " + String.valueOf(mTank));
     }
 
     void loadData() {
+
+        SubscriptionitemresourceApi api = ApiClient.getApiClient(getApplicationContext()).createService(SubscriptionitemresourceApi.class);
+
+        api.getSubscriptionItemsByPodcast(ApiClient.getApiClient(getApplicationContext()).appId).enqueue(new Callback<List<SubscriptionItem>>() {
+
+            @Override
+            public void onResponse(Call<List<SubscriptionItem>> call, Response<List<SubscriptionItem>> response) {
+                if (response.isSuccessful()) {
+
+                    for(SubscriptionItem subscriptionItem : response.body()) {
+                        GroupAndChildAdapter.GroupItem item = new GroupAndChildAdapter.GroupItem();
+                        item.title = subscriptionItem.getName();
+                        item.subtitle = subscriptionItem.getDescription();
+                        item.imageUrl = "http://www.centerforfinancialinclusion.org/storage/images/Logo/SC_logo_clear.png";
+                        item.items = new ArrayList<GroupAndChildAdapter.ChildItem>();
+                        for(Podcast podcast : subscriptionItem.getPodcasts()) {
+                            GroupAndChildAdapter.ChildItem child;
+                            child = new GroupAndChildAdapter.ChildItem();
+                            child.title = podcast.getName();
+                            child.imageUrl = "http://www.centerforfinancialinclusion.org/storage/images/Logo/SC_logo_clear.png";
+                            item.items.add(child);
+                        }
+                        item.skuName = subscriptionItem.getSkuName();
+                        items.add(item);
+                        subscriptionItems.add(subscriptionItem);
+                    }
+
+                    adapter.notifyDataSetChanged();
+                } else {
+                    boolean reauthenticate = anyFailedRequest(response);
+                    if (reauthenticate) {
+                        loadData();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<SubscriptionItem>> call, Throwable t) {
+                Log.d("alamadik", "itemlari alamadik");
+            }
+        });
+
+
         SharedPreferences sp = getPreferences(MODE_PRIVATE);
         //mTank = sp.getInt("tank", 2);
-       // Log.d(TAG, "Loaded data: tank = " + String.valueOf(mTank));
+        // Log.d(TAG, "Loaded data: tank = " + String.valueOf(mTank));
     }
 
     @Override

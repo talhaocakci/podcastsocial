@@ -49,7 +49,7 @@ public class NotificationHelper {
         mContentIntent = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
 
         //add the additional content and intent to the notification
-       // mNotification.setLatestEventInfo(mContext, mContentTitle, contentText, mContentIntent);
+        // mNotification.setLatestEventInfo(mContext, mContentTitle, contentText, mContentIntent);
 
         //make this notification appear in the 'Ongoing events' section
         mNotification.flags = Notification.FLAG_ONGOING_EVENT;
@@ -67,7 +67,7 @@ public class NotificationHelper {
         //build up the new status message
         CharSequence contentText = percentageComplete + "% complete";
         //publish it to the status bar
-       // mNotification.setLatestEventInfo(mContext, mContentTitle, contentText + " of " + fileName, mContentIntent);
+        // mNotification.setLatestEventInfo(mContext, mContentTitle, contentText + " of " + fileName, mContentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mNotification);
         checkActivityForeground(fileName, contentText.toString(), percentageComplete);
     }

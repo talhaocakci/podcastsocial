@@ -7,6 +7,5 @@
     android:minHeight="60dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:textStyle="bold"
     android:textSize="16dp"
-    android:textColor="@color/material_purple_900" />
+    android:textColor="@color/themetextcolor" />

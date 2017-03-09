@@ -10,12 +10,14 @@ import android.util.Log;
 
 import com.javathlon.CatalogData;
 import com.javathlon.PodcastData;
+import com.javathlon.PurchasedPodcastItem;
 import com.javathlon.memsoft.MemsoftUtil;
 import com.javathlon.model.ListenStatistic;
 import com.javathlon.model.Note;
 import com.javathlon.model.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DBAccessor {
@@ -33,6 +35,7 @@ public class DBAccessor {
     public static final String KEY_NOTETEXT = "note_text";
     public static final String KEY_AUTHOR = "author";
     public static final String KEY_CREATEDATE = "create_date";
+    public static final String KEY_BUCKETNAME = "bucket_name";
     public static final String KEY_LASTLISTENDATEMIL = "last_listen_date_mil";
     public static final String KEY_LASTLISTENDATE = "last_listen_date";
     private static final String DB_TABLE_NOTE = "podcast_notes";
@@ -105,22 +108,22 @@ public class DBAccessor {
         return db.insert(KEY_USER, null, values);
     }
 
-    public  long getUserIdWithEmail(String email){
-        String sql = "select _id from " + KEY_USER + " where email= '" + email+"'";
+    public long getUserIdWithEmail(String email) {
+        String sql = "select _id from " + KEY_USER + " where email= '" + email + "'";
         Cursor mCursor = db.rawQuery(sql, null);
         long id = -1;
-        if(mCursor.moveToFirst()){
+        if (mCursor.moveToFirst()) {
             id = mCursor.getLong(mCursor.getColumnIndex("_id"));
         }
         return id;
     }
 
-    public  User getAnyUser(){
+    public User getAnyUser() {
         String sql = "select * from " + KEY_USER + "";
         Cursor mCursor = db.rawQuery(sql, null);
         User user = new User();
         long id = -1;
-        if(mCursor.moveToFirst()){
+        if (mCursor.moveToFirst()) {
             user.setUserId(mCursor.getLong(mCursor.getColumnIndex("_id")));
             user.setDisplayName(mCursor.getString(mCursor.getColumnIndex("display_name")));
             user.setEmail(mCursor.getString(mCursor.getColumnIndex("email")));
@@ -135,13 +138,13 @@ public class DBAccessor {
         return user;
     }
 
-    public boolean updateUserSocialId(long userId, User.SOCIAL_TYPES type, String id){
+    public boolean updateUserSocialId(long userId, User.SOCIAL_TYPES type, String id) {
 
         ContentValues values = new ContentValues();
-        if(User.SOCIAL_TYPES.FACEBOOK.equals(type))
-             values.put("fb_id", id);
-        else if(User.SOCIAL_TYPES.GOOGLE.equals(type)){
-             values.put("google_id",id);
+        if (User.SOCIAL_TYPES.FACEBOOK.equals(type))
+            values.put("fb_id", id);
+        else if (User.SOCIAL_TYPES.GOOGLE.equals(type)) {
+            values.put("google_id", id);
         }
 
         return db.update("user", values, "_id" + "=" + userId, null) > 0;
@@ -167,7 +170,7 @@ public class DBAccessor {
 
     public long createNote(long podcast_id, int song_sp_id, int begin_sec, int end_sec, String songpath, String notetext, String author, String create_date, long last_listen_date_mil, String last_listen_date) {
         ContentValues values = createNoteTableContentValues(podcast_id, song_sp_id, begin_sec,
-                end_sec,  songpath, notetext, author, create_date, last_listen_date_mil, last_listen_date);
+                end_sec, songpath, notetext, author, create_date, last_listen_date_mil, last_listen_date);
 
         return db.insert(DB_TABLE_NOTE, null, values);
     }
@@ -181,10 +184,19 @@ public class DBAccessor {
         values.put("image_small", data.imageSmall);
         values.put("author", data.author);
         values.put("summary", data.summary);
-        values.put("isMainCatalog", isMain);
-        values.put("create_date", MemsoftUtil.getTimeAsString());
-        values.put("last_rss_download_date", data.lastRssUpdate);
-        return db.insert("podcast_catalog", null, values);
+        values.put("bucket_name", data.bucketName);
+
+        CatalogData catalogData = getPodcastCatalogById(data.id);
+
+        if (catalogData.id != 0L) {
+            db.update("podcast_catalog", values, "_id=" + catalogData.id, null);
+            return data.id;
+        } else {
+            values.put("create_date", MemsoftUtil.getTimeAsString());
+            values.put("isMainCatalog", isMain);
+            values.put("last_rss_download_date", data.lastRssUpdate);
+            return db.insert("podcast_catalog", null, values);
+        }
 
 
     }
@@ -238,6 +250,7 @@ public class DBAccessor {
                 data.durationString = mCursor.getString(mCursor.getColumnIndex("duration_string"));
                 data.devicePath = mCursor.getString(mCursor.getColumnIndex("full_device_path"));
                 data.progressPercentage = mCursor.getInt(mCursor.getColumnIndex("progress_percentage"));
+                data.catalogId = (int) catalogId;
 
                 podcastList.add(data);
             } while (mCursor.moveToNext());
@@ -246,20 +259,20 @@ public class DBAccessor {
 
     }
 
-    public List<PodcastData> getPodcastsByFilter(long catalogId, String keyword, String downloaded, int progress){
+    public List<PodcastData> getPodcastsByFilter(long catalogId, String keyword, String downloaded, int progress) {
 
 
-        String sql = "select * from podcast where catalog_id = "+ catalogId ;
-        if(keyword != null && !keyword.equals(""))
-                sql += " and (description like "+"'%"+keyword+"%' OR name like '%"+keyword+"%') ";
-        if(downloaded != null){
-            sql += " and is_downloaded = '"+downloaded+"'";
+        String sql = "select * from podcast where catalog_id = " + catalogId;
+        if (keyword != null && !keyword.equals(""))
+            sql += " and (description like " + "'%" + keyword + "%' OR name like '%" + keyword + "%') ";
+        if (downloaded != null) {
+            sql += " and is_downloaded = '" + downloaded + "'";
         }
-        if(progress != -1)
-            if(progress > 0)
-                 sql += " and  progress_percentage >= "+progress;
+        if (progress != -1)
+            if (progress > 0)
+                sql += " and  progress_percentage >= " + progress;
             else
-                sql +=  " and progress_percentage = "+0;
+                sql += " and progress_percentage = " + 0;
 
         List<PodcastData> dataList = new ArrayList<PodcastData>();
         Cursor mCursor = db.rawQuery(sql, null);
@@ -278,6 +291,7 @@ public class DBAccessor {
                 data.devicePath = mCursor.getString(mCursor.getColumnIndex("full_device_path"));
                 data.progressPercentage = mCursor.getInt(mCursor.getColumnIndex("progress_percentage"));
                 data.description = mCursor.getString(mCursor.getColumnIndex("description"));
+                data.catalogId = (int) catalogId;
 
                 dataList.add(data);
             } while (mCursor.moveToNext());
@@ -286,12 +300,12 @@ public class DBAccessor {
     }
 
 
-       public PodcastData getPodcastByUrl(String url) {
-           String sql = "";
-           if(url.startsWith("http"))
-                 sql = "select * from podcast where download_link ='" + url + "'";
-           else
-                  sql = "select * from podcast where full_device_path ='" + url + "'";
+    public PodcastData getPodcastByUrl(String url) {
+        String sql = "";
+        if (url.startsWith("http"))
+            sql = "select * from podcast where download_link ='" + url + "'";
+        else
+            sql = "select * from podcast where full_device_path ='" + url + "'";
         PodcastData data = null;
         Cursor mCursor = db.rawQuery(sql, null);
         if (mCursor.moveToFirst()) {
@@ -318,7 +332,7 @@ public class DBAccessor {
     }
 
     public PodcastData getPodcastById(long id) {
-        String sql = "select * from podcast where _id = "+ id;
+        String sql = "select * from podcast where _id = " + id;
         PodcastData data = null;
         Cursor mCursor = db.rawQuery(sql, null);
         if (mCursor.moveToFirst()) {
@@ -357,6 +371,35 @@ public class DBAccessor {
         db.endTransaction();
     }
 
+    public void savePurchasedPodcastItem(Long podcastId, Date validTill) {
+        PurchasedPodcastItem item = getPurchasedPodcastItem(podcastId);
+        if (item == null) {
+            ContentValues values = new ContentValues();
+            values.put("podcast_id", podcastId);
+            values.put("valid_till", MemsoftUtil.dateToString(validTill));
+            db.insert("purchased_podcasts", null, values);
+        } else {
+            ContentValues values = new ContentValues();
+            values.put("podcast_id", podcastId);
+            values.put("valid_till", MemsoftUtil.dateToString(validTill));
+            db.update("purchased_podcasts", values, "podcast_id=" + podcastId, null);
+        }
+
+    }
+
+    public PurchasedPodcastItem getPurchasedPodcastItem(Long podcastId) {
+
+        String sql = "select * from purchased_podcasts where podcast_id = " + podcastId;
+        PurchasedPodcastItem purchasedPodcastItem = null;
+        Cursor mCursor = db.rawQuery(sql, null);
+        if (mCursor.moveToFirst()) {
+            purchasedPodcastItem = new PurchasedPodcastItem();
+            purchasedPodcastItem.setId(mCursor.getLong(mCursor.getColumnIndex("_id")));
+            purchasedPodcastItem.setPodcastId(mCursor.getLong(mCursor.getColumnIndex("podcast_id")));
+            purchasedPodcastItem.setValidTill(MemsoftUtil.getTimeFromString(mCursor.getString(mCursor.getColumnIndex("valid_till"))));
+        }
+        return purchasedPodcastItem;
+    }
 
     public void bulkInsertPodcastData(List<PodcastData> dataList, long catalogId) {
 
@@ -391,7 +434,7 @@ public class DBAccessor {
             statement.bindLong(12, data.publishDateLong);
             statement.bindLong(13, data.size);
             statement.bindString(14, data.durationString == null ? "" : data.durationString);
-            statement.bindString(15, data.description == null ? "" : data.description );
+            statement.bindString(15, data.description == null ? "" : data.description);
             statement.execute();
         }
         db.setTransactionSuccessful();
@@ -463,7 +506,7 @@ public class DBAccessor {
     }
 
     public CatalogData getPodcastCatalogById(long id) {
-        String sql = "select * from podcast_catalog where _id =" +id;
+        String sql = "select * from podcast_catalog where _id =" + id;
         Cursor mCursor = db.rawQuery(sql, null);
         CatalogData data = new CatalogData();
         data.id = 0L;
@@ -555,7 +598,6 @@ public class DBAccessor {
      */
 
 
-
     public boolean updateNoteRemoteLink(long noteId, String shareLink) {
         ContentValues values = new ContentValues();
         values.put("upload_link", shareLink);
@@ -612,7 +654,7 @@ public class DBAccessor {
     public long updateDownloadLink(long id, String downlink) {
         ContentValues values = new ContentValues();
         values.put(KEY_DOWNLINK, downlink);
-        return db.update(DB_TABLE_PODCAST, values, KEY_PODCASTID + "= " + id , null);
+        return db.update(DB_TABLE_PODCAST, values, KEY_PODCASTID + "= " + id, null);
     }
 
     /**
@@ -633,7 +675,7 @@ public class DBAccessor {
     public List<Note> fetchAllNotes(String path) {
 
 
-        String sql = "select * from "+DB_TABLE_NOTE+" where path ='" + path + "'";
+        String sql = "select * from " + DB_TABLE_NOTE + " where path ='" + path + "'";
 
         List<Note> noteList = new ArrayList<Note>();
         Cursor mCursor = db.rawQuery(sql, null);
@@ -658,7 +700,7 @@ public class DBAccessor {
     }
 
     public List<Note> fetchAllNotes(long podcastId) {
-        String sql = "select * from "+DB_TABLE_NOTE + " where podcast_id = " + podcastId;
+        String sql = "select * from " + DB_TABLE_NOTE + " where podcast_id = " + podcastId;
 
         List<Note> noteList = new ArrayList<Note>();
         Cursor mCursor = db.rawQuery(sql, null);

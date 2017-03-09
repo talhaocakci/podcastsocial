@@ -1,12 +1,12 @@
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,7 +27,6 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
-import com.javathlon.R;
 
 public class MyGcmListenerService extends GcmListenerService {
 
@@ -43,9 +42,13 @@ public class MyGcmListenerService extends GcmListenerService {
     // [START receive_message]
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        String message = data.getString("message");
-        String type = data.getString("type");
-        String url = data.getString("url");
+        String title = (String) ((Bundle) data.get("notification")).get("title");
+        String message = (String) ((Bundle) data.get("notification")).get("message");
+        String type = (String) ((Bundle) data.get("notification")).get("actionType");
+        if (type == null) type = "podcast";
+        String url = (String) ((Bundle) data.get("notification")).get("targetUrl");
+
+
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
 
@@ -69,7 +72,7 @@ public class MyGcmListenerService extends GcmListenerService {
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification(message, type, url);
+        sendNotification(title, message, type, url);
         // [END_EXCLUDE]
     }
     // [END receive_message]
@@ -79,22 +82,19 @@ public class MyGcmListenerService extends GcmListenerService {
      *
      * @param message GCM message received.
      */
-    private void sendNotification(String message, String type, String url) {
+    private void sendNotification(String title, String message, String type, String url) {
         Intent resultIntent = null;
 
 
-        if(type.equals("podcast")) {
-            resultIntent =  new Intent(this, MainActivity.class);
+        if (type.equals("podcast")) {
+            resultIntent = new Intent(this, MainActivity.class);
             resultIntent.putExtra("needdownloaded", "y");
             resultIntent.putExtra("rss", url);
             resultIntent.putExtra("action", "rsslist");
 
 
-
-        }
-        else if(type.equals("web"))
-        {
-            resultIntent =  new Intent(this, WebViewActivity.class);
+        } else if (type.equals("web")) {
+            resultIntent = new Intent(this, WebViewActivity.class);
             resultIntent.putExtra("url", url);
 
         }
@@ -103,10 +103,10 @@ public class MyGcmListenerService extends GcmListenerService {
                 PendingIntent.FLAG_CANCEL_CURRENT);
 
 
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.controllers_play)
-                .setContentTitle("Podcast Modern New Notification")
+                .setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
@@ -115,12 +115,6 @@ public class MyGcmListenerService extends GcmListenerService {
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-
-
-
-
-
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
 

@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.Window;
 
-import com.javathlon.R;
-
 public class SplashActivity extends Activity {
     protected boolean _active = true;
     protected int _splashTime = 3000; // time to display the splash screen in ms

@@ -1,41 +1,38 @@
 {
   "project_info": {
-    "project_number": "634509108343",
-    "project_id": "firebase-javathlon"
+    "project_number": "448905929145",
+    "project_id": "javathlon-release"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:634509108343:android:04958b5485349025",
+        "mobilesdk_app_id": "1:448905929145:android:04958b5485349025",
         "android_client_info": {
           "package_name": "com.javathlon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "634509108343-lhhvoqthbhptt2cfbc0r7qmoib6miv66.apps.googleusercontent.com",
+          "client_id": "448905929145-cgvvhso5700jp7jhuqku0h4ah3ogdoen.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.javathlon",
-            "certificate_hash": "0032FF76CDB62569C955947DF89DDF6EF04EF3F0"
+            "certificate_hash": "C382937E509475BCC743D1A2A1A0B42372439AAB"
           }
         },
         {
-          "client_id": "634509108343-76kakqljdaci0q6d77vdhlrrkglo0d6v.apps.googleusercontent.com",
+          "client_id": "448905929145-nk32a0j39b13q6cd2m9thl6vhoelddbe.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBypVWENi3Q04fG4xRQ6idv6tjJ2umMoXU"
+          "current_key": "AIzaSyB7SJBtgkEJLPLrrdIrsKDYVSKi9AEZR5M"
         }
       ],
       "services": {
         "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": "UA-70383510-3"
-          }
+          "status": 1
         },
         "appinvite_service": {
           "status": 1,

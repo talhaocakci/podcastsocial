@@ -9,7 +9,7 @@ public class Note {
     private Long podcastId;
     private int beginSec;
     private int endSec;
-    private  String audioPath;
+    private String audioPath;
     private String text;
     private String author;
     private String createDate;

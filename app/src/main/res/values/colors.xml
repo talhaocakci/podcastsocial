@@ -2,8 +2,12 @@
 <resources>
 
 
-    <color name="themecolor">@color/material_blue_700</color>
+    <color name="white_15_percent">#26ffffff</color>
+    <color name="white_30_percent">#4Dffffff</color>
 
+
+    <color name="themecolor">@color/material_blue_700</color>
+    <color name="themetextcolor">@color/white</color>
     <!-- Purple -->
     <color name="material_purple_500">#8f3e97</color>
     <color name="material_purple_50">#f1e3f0</color>

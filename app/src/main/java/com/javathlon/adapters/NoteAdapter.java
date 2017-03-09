@@ -7,11 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.nhaarman.listviewanimations.ArrayAdapter;
 import com.javathlon.R;
 import com.javathlon.model.Note;
-
 import com.javathlon.upload.Mp3Cropper;
+import com.nhaarman.listviewanimations.ArrayAdapter;
 
 import java.util.List;
 
@@ -30,22 +29,22 @@ public class NoteAdapter extends ArrayAdapter<Note> {
         this.context = context;
         this.noteList = objects;
         this.activity = activity;
-        if(isDownloaded != null && isDownloaded.equals("y") )
+        if (isDownloaded != null && isDownloaded.equals("y"))
             this.isDownloaded = true;
-      }
+    }
 
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder = new ViewHolder();
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View noteView = layoutInflater.inflate(R.layout.note_item, viewGroup, false);
-        TextView noteText = (TextView)noteView.findViewById(R.id.noteText);
-        TextView noteUploadBtn = (TextView)noteView.findViewById(R.id.uploadNoteBtn);
-        TextView whatsAppText = (TextView)noteView.findViewById(R.id.whatsapp);
+        TextView noteText = (TextView) noteView.findViewById(R.id.noteText);
+        TextView noteUploadBtn = (TextView) noteView.findViewById(R.id.uploadNoteBtn);
+        TextView whatsAppText = (TextView) noteView.findViewById(R.id.whatsapp);
         holder.noteText = noteText;
         holder.uploadNoteButton = noteUploadBtn;
         holder.whatsAppText = whatsAppText;
-        if(isDownloaded) {
+        if (isDownloaded) {
             holder.whatsAppText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -63,8 +62,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
                     new Mp3Cropper(context, Mp3Cropper.CropResultType.URL).execute(note.getPodcastId(), sec, note.getId());
                 }
             });
-        }
-        else{
+        } else {
             noteUploadBtn.setVisibility(View.GONE);
             whatsAppText.setVisibility(View.GONE);
         }

@@ -90,7 +90,9 @@ public class DownloadHandler extends Handler {
 
                 // rss refresh ediliyor, her şeyi sıfırdan yapmaya gerek yok
                 if (catalogId != 0L && catalog.lastRssUpdate != null) {
-                    dbHelper.updatePodcastCatalogRSSDownload(catalogId, MemsoftUtil.getTimeAsString());
+
+                    if (podcastDataList.size() > 0)
+                        dbHelper.updatePodcastCatalogRSSDownload(catalogId, MemsoftUtil.getTimeAsString());
                     swipeRefreshLayout.setRefreshing(false);
                     List<PodcastData> newestItems = new ArrayList<PodcastData>();
                     for (PodcastData data : podcastDataList) {
@@ -120,6 +122,7 @@ public class DownloadHandler extends Handler {
                     data.author = myXMLHandler.podcastAuthor;
                     data.summary = myXMLHandler.podcastSubtitle;
                     data.trackCount = 0;
+                    data.bucketName = "javacore_course";
                     if (catalogId == 0L)
                         catalogId = dbHelper.createPodcastCatalogItem(data, "n");
                     else
@@ -129,10 +132,13 @@ public class DownloadHandler extends Handler {
                         dataSet.add(pdata);
                         podcastDataList.clear();
                         podcastDataList.addAll(dataSet);*/
+                    for (PodcastData p : podcastDataList) {
+                        p.catalogId = catalogId.intValue();
+                    }
                     dbHelper.bulkInsertPodcastData(podcastDataList, catalogId);
                     dbHelper.updatePodcastCatalogRSSDownload(catalogId, MemsoftUtil.getTimeAsString());
-                  //  podcastDataList.clear();
-                  //  podcastDataList.addAll(podcastDataList);
+                    //  podcastDataList.clear();
+                    //  podcastDataList.addAll(podcastDataList);
 
 
                 }

@@ -1,22 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:javathlon="http://schemas.android.com/apk/res-auto"
-    tools:context="com.javathlon.MainActivity">
-
+    tools:context=".ui.home.activities.TransactionSearchActivity">
     <item
-        android:id="@+id/searchActionBar"
+        android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
         android:title="@string/search"
-        android:icon="@drawable/ic_search_white_24dp"
-        javathlon:actionViewClass="android.support.v7.widget.SearchView"
-        javathlon:showAsAction="always"
-        android:orderInCategory="90"/>
-
-    <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        javathlon:showAsAction="never"
-        android:orderInCategory="100"/>
-
-
-
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom" />
 </menu>

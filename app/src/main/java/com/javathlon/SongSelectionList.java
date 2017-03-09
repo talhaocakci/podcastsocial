@@ -13,8 +13,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.javathlon.R;
-
 import java.util.ArrayList;
 
 public class SongSelectionList extends Activity {

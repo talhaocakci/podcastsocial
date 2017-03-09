@@ -1,12 +1,14 @@
 package com.javathlon.memsoft;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.javathlon.BaseActivity;
 import com.javathlon.CatalogData;
 import com.javathlon.R;
 import com.javathlon.db.DBAccessor;
@@ -29,16 +30,16 @@ public class GoogleCardAdapter extends ArrayAdapter<CatalogData>
     private LayoutInflater mInflater;
 
     DBAccessor db;
-    BaseActivity activity;
+    AppCompatActivity activity;
 
-    public GoogleCardAdapter(Context context, List<CatalogData> items, BaseActivity activity) {
+    public GoogleCardAdapter(Context context, List<CatalogData> items, AppCompatActivity activity) {
         super(context, 0, items);
         this.activity = activity;
         mInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    private void openRssActivity(String rss){
+    private void openRssActivity(String rss) {
         Intent intent = new Intent(getContext(), RssListPlayerActivity.class);
         FragmentManager fm = ((Activity) GoogleCardAdapter.this.getContext()).getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -89,7 +90,7 @@ public class GoogleCardAdapter extends ArrayAdapter<CatalogData>
                 @Override
                 public void onClick(View view) {
 
-                        openRssActivity(GoogleCardAdapter.this.getItem(position).rss);
+                    openRssActivity(GoogleCardAdapter.this.getItem(position).rss);
                 }
             });
             CatalogData catalog = GoogleCardAdapter.this.getItem(position);
@@ -101,18 +102,18 @@ public class GoogleCardAdapter extends ArrayAdapter<CatalogData>
                         @Override
                         public void onClick(View view) {
 
-                            String confirmText ="";
+                            String confirmText = "";
                             CatalogData data = (GoogleCardAdapter.this.getItem(position));
-                            if(data.isSubscribed != null && data.isSubscribed.equals("y"))
-                                    confirmText = activity.getResources().getString(R.string.unsubscribeConfirm);
+                            if (data.isSubscribed != null && data.isSubscribed.equals("y"))
+                                confirmText = activity.getResources().getString(R.string.unsubscribeConfirm);
                             else
-                            confirmText = activity.getResources().getString(R.string.subscribeConfirm);
+                                confirmText = activity.getResources().getString(R.string.subscribeConfirm);
 
 
-                            activity.showConfirmDialog(confirmText,activity.getResources().getString(R.string.yes), activity.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+                            showConfirmDialog(confirmText, activity.getResources().getString(R.string.yes), activity.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                   CatalogData data = (GoogleCardAdapter.this.getItem(position));
+                                    CatalogData data = (GoogleCardAdapter.this.getItem(position));
                                     if (db == null) {
                                         db = new DBAccessor(getContext());
                                         db.open();
@@ -146,6 +147,19 @@ public class GoogleCardAdapter extends ArrayAdapter<CatalogData>
         holder.rssItemsButton.setTag(position);
 
         return convertView;
+    }
+
+    public void showConfirmDialog(String message, String positiveText, String negativeText, DialogInterface.OnClickListener positiveListener, DialogInterface.OnClickListener negativeListener) {
+
+        // if(themeWrapper == null)
+        //   themeWrapper = new ContextThemeWrapper(this, R.style.THE);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+        builder.setMessage(message)
+                .setPositiveButton(positiveText, positiveListener);
+        builder.setNegativeButton(negativeText, negativeListener);
+        AlertDialog alert = builder.create();
+        alert.show();
+
     }
 
     private static class ViewHolder {

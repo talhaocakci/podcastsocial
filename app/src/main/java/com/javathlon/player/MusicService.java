@@ -112,8 +112,8 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent.getAction().equals(ACTION_PLAY)) {
-            if(mMediaPlayer!= null)
-            mMediaPlayer.release();
+            if (mMediaPlayer != null)
+                mMediaPlayer.release();
             mMediaPlayer = new MediaPlayer(); // initialize it here
             mMediaPlayer.setOnPreparedListener(this);
             mMediaPlayer.setOnErrorListener(this);
@@ -134,16 +134,12 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         } catch (IllegalArgumentException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }catch (IOException e){
+        } catch (IOException e) {
             activity.showMyDialog(activity.getResources().getString(R.string.filecorruptedornotsupported));
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             // TODO Workaround for bug: http://code.google.com/p/android/issues/detail?id=957
             mMediaPlayer.reset();
             try {
-
-
 
 
                 mMediaPlayer.setDataSource(MusicService.mUrl);
@@ -169,7 +165,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
                 mMediaPlayer.prepare();
             } catch (Exception e1) {
-               mMediaPlayer.reset();
+                mMediaPlayer.reset();
                 try {
                     mMediaPlayer.setDataSource(MusicService.mUrl);
                     mMediaPlayer.prepare();
@@ -207,12 +203,12 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
      */
     @Override
     public void onPrepared(MediaPlayer player) {
-		/*mState = State.Playing;
+        /*mState = State.Playing;
 		mMediaPlayer.start();
 		mState = State.Prepared;*/
 //		setUpAsForeground(mSongTitle + " (loaded)");
-  //      Toast.makeText(getApplicationContext(), "Prepared", Toast.LENGTH_LONG).show();
-        ((PlayerScreen)activity).hideDialog();
+        //      Toast.makeText(getApplicationContext(), "Prepared", Toast.LENGTH_LONG).show();
+        ((PlayerScreen) activity).hideDialog();
     }
 
     /**
@@ -234,7 +230,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         PendingIntent pi =
                 PendingIntent.getActivity(this, 0, i,
                         PendingIntent.FLAG_UPDATE_CURRENT);
-      //  mNotification.setLatestEventInfo(getApplicationContext(), getResources().getString(R.string.app_name), text, pi);
+        //  mNotification.setLatestEventInfo(getApplicationContext(), getResources().getString(R.string.app_name), text, pi);
         mNotificationManager.notify(NOTIFICATION_ID, mNotification);
     }
 
@@ -267,7 +263,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                 .setTicker("Listening")
                 .setWhen(System.currentTimeMillis())
                 .setContentIntent(pi)
-                        //.setDefaults(Notification.DEFAULT_SOUND)
+                //.setDefaults(Notification.DEFAULT_SOUND)
                 .setAutoCancel(false)
                 .setSmallIcon(R.drawable.ic_menu_play_clip)
                 .build();

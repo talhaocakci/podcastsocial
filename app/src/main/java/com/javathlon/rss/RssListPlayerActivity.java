@@ -9,14 +9,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnBufferingUpdateListener;
-import android.media.MediaPlayer.OnCompletionListener;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,32 +24,39 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazonaws.mobileconnectors.cognito.internal.util.StringUtils;
+import com.javathlon.BuySubscriptionActivity;
 import com.javathlon.CatalogData;
 import com.javathlon.CommonStaticClass;
 import com.javathlon.PodcastData;
+import com.javathlon.PurchasedPodcastItem;
 import com.javathlon.R;
 import com.javathlon.adapters.PodcastAdapter;
+import com.javathlon.apiclient.ApiClient;
+import com.javathlon.apiclient.api.UrlResourceApi;
+import com.javathlon.apiclient.model.SecureUrlVM;
 import com.javathlon.db.DBAccessor;
 import com.javathlon.download.DownloadHandler;
 import com.javathlon.download.DownloadProgressThread;
 import com.javathlon.download.DownloadReceiver;
-import com.javathlon.download.PodcastModernClient;
 import com.javathlon.download.RSSDownloaderParser;
 import com.javathlon.download.SpreakerUtil;
 import com.javathlon.memsoft.MemsoftUtil;
 import com.javathlon.player.PlayerScreen;
 import com.javathlon.video.VideoScreen;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import retrofit2.Response;
 
 public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayout.OnRefreshListener, OnClickListener, OnTouchListener {
 
@@ -74,14 +79,18 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
     public static int currentIndexInPodcastList = 0;
     private DownloadProgressThread downloadProgressRunnable;
     private Thread downloadProgressThread;
+    private Context context;
+    private Long podcastCatalogId;
 
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.catalogeditions, container, false);
         if (getArguments() == null || getArguments().getString("rss") == null)
             rssUrl = "https://s3.ap-south-1.amazonaws.com/javacore-course/javacourse.xml";
         else
             rssUrl = getArguments().getString("rss");
+
+        context = getActivity().getApplicationContext();
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -193,12 +202,21 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
                     });
                 } else {
 
-                    String signedUrl = null;
-                    signedUrl = PodcastModernClient.getSignedUrl("javacore-course", path, false);
-                    if (signedUrl == null) {
-                        Toast.makeText(RssListPlayerActivity.this.getActivity(), "Can not open, upgrade your account", Toast.LENGTH_SHORT).show();
+                    try {
+                        path = getSignedUrl(String.valueOf(pod.catalogId), path, false);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    if (path == null) {
+                        Intent i = new Intent(context, BuySubscriptionActivity.class);
+                        i.putExtra("podcastId", podcastCatalogId);
+                        startActivity(i);
+                        Toast.makeText(getActivity(), "Can not open, upgrade your account", Toast.LENGTH_SHORT).show();
                         return;
                     }
+
 
                     Intent i = new Intent(getActivity(), VideoScreen.class);
                     CommonStaticClass.setCurrentPodcast(pod);
@@ -210,6 +228,64 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
         });
 
         return view;
+    }
+
+    public String getSignedUrl(String podcastId, String fileKey, boolean isFree) throws IOException {
+
+        if (fileKey.startsWith("http") || fileKey.startsWith("file://")) {
+            return fileKey;
+        }
+
+        PurchasedPodcastItem item = dbHelper.getPurchasedPodcastItem(Long.parseLong(podcastId));
+
+        /**TODO: izin listesine göre kontrol et */
+
+        if (!isFree && item == null) {
+            return null;
+        }
+
+        final UrlResourceApi api = ApiClient.getApiClient(getActivity().getApplicationContext()).createService(UrlResourceApi.class);
+
+        Response<SecureUrlVM> secureURLResponse = null;
+        try {
+            secureURLResponse = new AsyncTask<String, Void, Response<SecureUrlVM>>() {
+                protected Response<SecureUrlVM> doInBackground(String... param) {
+
+                    Response<SecureUrlVM> urlVMResponse = null;
+                    try {
+                        urlVMResponse = api.generateURLUsingGET(param[0].toString(), param[1].toString()).execute();
+
+
+                        return urlVMResponse;
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    return null;
+                }
+
+            }.execute(podcastId, fileKey).get();
+
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        if (secureURLResponse == null || (!StringUtils.isEmpty(secureURLResponse.message()) && secureURLResponse.message().contains("Unauthorized"))) {
+
+            Intent i = new Intent(con, BuySubscriptionActivity.class);
+            startActivity(i);
+            return null;
+        }
+
+
+        if (secureURLResponse != null && secureURLResponse.isSuccessful())
+            return secureURLResponse.body().getUrl();
+        else
+            return null;
     }
 
     private void searchPodcasts(String keyword, int searchOption) {
@@ -252,10 +328,16 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
             dbHelper = new DBAccessor(getActivity());
             dbHelper.open();
         }
+
+
         CatalogData data = dbHelper.getPodcastCatalogByRss(rssUrl);
         catalogId = data.id;
+        podcastCatalogId = data.id;
 
-        getActivity().getActionBar().setTitle(data.name.toUpperCase());
+
+        PurchasedPodcastItem purchasedPodcastItem = dbHelper.getPurchasedPodcastItem(podcastCatalogId);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(data.name.toUpperCase());
 
         //set filter to only when download is complete and register broadcast receiver
         IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
@@ -269,6 +351,9 @@ public class RssListPlayerActivity extends Fragment implements SwipeRefreshLayou
             }
         }
         adapter = new PodcastAdapter(this.getActivity(), podcastDataList);
+
+        adapter.setPurchased(purchasedPodcastItem != null);
+
         itemsList.setAdapter(adapter);
         if (podcastDataList.size() > 0 && !forceRssDownload) {
             adapter.notifyDataSetChanged();

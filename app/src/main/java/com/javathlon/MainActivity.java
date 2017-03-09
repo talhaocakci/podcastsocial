@@ -7,9 +7,13 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,9 +23,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.javathlon.R;
 import com.javathlon.download.DownloadReceiver;
 import com.javathlon.download.DownloadTask;
 import com.javathlon.fragments.FragmentHome;
@@ -32,9 +36,10 @@ import com.javathlon.fragments.SignInActivity;
 import com.javathlon.player.PlayerScreen;
 import com.javathlon.rss.RssListPlayerActivity;
 
-
 import java.util.Calendar;
 import java.util.HashMap;
+
+import io.fabric.sdk.android.Fabric;
 
 
 public class MainActivity extends BaseActivity {
@@ -58,14 +63,21 @@ public class MainActivity extends BaseActivity {
 
     DownloadReceiver dr = null;
 
+    public void setTextColor(android.support.v7.app.ActionBar bar, int color, String text) {
+        Spannable spannablerTitle = new SpannableString(text);
+        spannablerTitle.setSpan(new ForegroundColorSpan(color), 0, spannablerTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        bar.setTitle(spannablerTitle);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main_for_drawer);
+        Fabric.with(this, new Crashlytics());
 
+        setContentView(R.layout.activity_main_for_drawer);
 
 
         // Content alanýna fragment yüklemek için
@@ -79,7 +91,14 @@ public class MainActivity extends BaseActivity {
         ft.commit();
 
         mTitle = getResources().getString(R.string.topmenutitle);
-        getActionBar().setTitle(mTitle);
+        final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(mTitle);
+
+        Spannable spannablerTitle = new SpannableString(mTitle);
+        spannablerTitle.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.themetextcolor)), 0, spannablerTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        actionBar.setTitle(spannablerTitle);
+
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.themecolor))); // set your desired color
 
         // Font path
         String fontPath = "Roboto-Medium.ttf";
@@ -97,14 +116,15 @@ public class MainActivity extends BaseActivity {
 
             // drawer kapatýldýðýnda tetiklenen method
             public void onDrawerClosed(View view) {
-                getActionBar().setTitle(mTitle);
+                setTextColor(actionBar, getResources().getColor(R.color.themetextcolor), mTitle);
                 invalidateOptionsMenu();
 
             }
 
             // drawer açýldýðýnda tetiklenen method
             public void onDrawerOpened(View drawerView) {
-                getActionBar().setTitle(getResources().getString(R.string.navigationdrawertitle));
+                setTextColor(actionBar, getResources().getColor(R.color.themetextcolor), getResources().getString(R.string.navigationdrawertitle));
+
                 invalidateOptionsMenu();
             }
 
@@ -124,7 +144,7 @@ public class MainActivity extends BaseActivity {
         // getActionBar().setHomeButtonEnabled(true);
 
         // navigationu týklanabilir hale getiriyoruz
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
         /**
@@ -140,11 +160,11 @@ public class MainActivity extends BaseActivity {
 
             // rsss için burada biraz uğraşmak lazım. şu an bozduk burayı
 
-           // dr = new DownloadReceiver();
-           // this.registerReceiver(dr, filter);
+            // dr = new DownloadReceiver();
+            // this.registerReceiver(dr, filter);
 
             Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.HOUR_OF_DAY,15);
+            cal.set(Calendar.HOUR_OF_DAY, 15);
             cal.set(Calendar.MINUTE, 53);
 
          /*   PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
@@ -171,37 +191,38 @@ public class MainActivity extends BaseActivity {
                 FragmentTransaction ft = fragmentManager.beginTransaction();
 
                 if (position == 0) {
+
                     FragmentHome fragmentHome = new FragmentHome();
                     ft.replace(R.id.content_frame, fragmentHome).addToBackStack("tag");
                     ft.commit();
                 } else if (position == 1) {
-                    Intent i = new Intent(MainActivity.this, GoogleSignInActivity.class);
-                    i.putExtra("intentionally",true);
+                    Intent i = new Intent(MainActivity.this, SignInActivity.class);
+                    i.putExtra("intentionally", true);
                     startActivity(i);
 
                 } else if (position == 2) {
                     LibraryFragment libraryFragment = new LibraryFragment();
                     ft.replace(R.id.content_frame, libraryFragment).addToBackStack("tag");
                     ft.commit();
-                }
-                else if (position == 3) {
+                } else if (position == 3) {
                     Intent i = new Intent(MainActivity.this, PlayerScreen.class);
                     startActivity(i);
 
-                }
-
-                else if (position == 4) {
+                } else if (position == 4) {
                     LastBrowsedFragment lastBrowsedFragment = new LastBrowsedFragment();
                     ft.replace(R.id.content_frame, lastBrowsedFragment).addToBackStack("tag");
                     ft.commit();
-                }
-                else if (position == 5) {
+                } else if (position == 5) {
                     LastNotesFragment lastNotesFragment = new LastNotesFragment();
                     ft.replace(R.id.content_frame, lastNotesFragment).addToBackStack("tag");
                     ft.commit();
-                }
-                else if (position == 6) {
-                    Intent i = new Intent(MainActivity.this, BuySubscriptionActivity.class);
+                } else if (position == 6) {
+                    Intent i = new Intent(MainActivity.this, SignInActivity.class);
+                    i.putExtra("intentionally", true);
+                    startActivity(i);
+
+                } else if (position == 7) {
+                    Intent i = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(i);
                 }
                  /*else if (position == 3) {
@@ -233,9 +254,8 @@ public class MainActivity extends BaseActivity {
 
         /* GCM messagindan gelen notification main activityi açar. o da rss list fragmentını koyar*/
         Bundle b = getIntent().getExtras();
-        if(b != null && b.getString("action")!= null)
-        {
-            if(b.getString("action").equals("rsslist")) {
+        if (b != null && b.getString("action") != null) {
+            if (b.getString("action").equals("rsslist")) {
                 RssListPlayerActivity fragmentRss = new RssListPlayerActivity();
                 fragmentRss.setArguments(b);
                 ft.replace(R.id.content_frame, fragmentRss);
@@ -244,8 +264,8 @@ public class MainActivity extends BaseActivity {
         }
 
 
-
     }
+
 
     @Override
     protected void onNewIntent(Intent intent) {

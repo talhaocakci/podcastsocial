@@ -5,9 +5,9 @@ import android.content.Context;
 import android.os.Message;
 import android.widget.Toast;
 
-import com.javathlon.ApplicationSettings;
 import com.javathlon.CheckInternet;
 import com.javathlon.PodcastData;
+import com.javathlon.apiclient.ApiClient;
 import com.javathlon.db.DBAccessor;
 import com.javathlon.rss.MyXMLHandlerItems;
 import com.javathlon.rss.XmlParseClass;
@@ -96,9 +96,10 @@ public class RSSDownloaderParser {
             XMLReader xr = sp.getXMLReader();
             URL sourceUrl = new URL(link);
 
-            if(ApplicationSettings.isProxyOpen) {
-                System.setProperty("http.proxyHost", ApplicationSettings.proxyAddress);
-                System.setProperty("http.proxyPort", ApplicationSettings.proxyHost);
+            ApiClient apiClient = ApiClient.getApiClient(context);
+            if (apiClient.proxyOpen) {
+                System.setProperty("http.proxyHost", apiClient.proxyAddress);
+                System.setProperty("http.proxyPort", apiClient.proxyHost);
             }
 
             xr.setContentHandler(myXMLHandler);
@@ -124,6 +125,7 @@ public class RSSDownloaderParser {
                     data.publishDateLong = listObj.getPublishDateLong();
                     data.durationString = listObj.getDurationString();
                     data.size = listObj.getSize();
+                    data.description = listObj.getDescription();
                     if (!data.url.contains(".mp3"))
                         data.url = listObj.getEnclosureUrl();
                     data.publishDateLong = listObj.getPublishDateLong();

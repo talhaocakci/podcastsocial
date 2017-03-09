@@ -44,7 +44,7 @@ public class WebServiceAsyncTaskFormPost extends AsyncTask<String, Void, Respons
             String path = arg[0];
 
             String json = "{}";
-            String argumentName= "";
+            String argumentName = "";
             if (arg.length > 1) {
                 argumentName = arg[1];
                 json = arg[2];
@@ -57,7 +57,7 @@ public class WebServiceAsyncTaskFormPost extends AsyncTask<String, Void, Respons
 
             // passes the results to a string builder/entity
 
-            if(arg.length  > 1) {
+            if (arg.length > 1) {
                 StringEntity se = new StringEntity(json);
 
                 // sets the post request as the resulting string

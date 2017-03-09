@@ -1,4 +1,3 @@
-
 package com.javathlon.model.spreaker;
 
 
@@ -11,18 +10,14 @@ public class Response {
     private Pager pager;
 
     /**
-     * 
-     * @return
-     *     The pager
+     * @return The pager
      */
     public Pager getPager() {
         return pager;
     }
 
     /**
-     * 
-     * @param pager
-     *     The pager
+     * @param pager The pager
      */
     public void setPager(Pager pager) {
         this.pager = pager;

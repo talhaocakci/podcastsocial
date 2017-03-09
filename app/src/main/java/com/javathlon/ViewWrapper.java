@@ -4,8 +4,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.javathlon.R;
-
 class ViewWrapper {
     View base;
     CheckBox checker = null;

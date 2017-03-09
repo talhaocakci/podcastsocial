@@ -24,7 +24,6 @@ import com.facebook.android.SessionEvents.LogoutListener;
 import com.facebook.android.SessionStore;
 import com.facebook.android.ShareOnFacebook;
 import com.facebook.android.Util;
-import com.javathlon.R;
 import com.podmark.twitter.OAuthAccessTokenActivity;
 import com.podmark.twitter.store.SharedPreferencesCredentialStore;
 

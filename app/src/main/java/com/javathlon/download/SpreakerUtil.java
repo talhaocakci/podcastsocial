@@ -19,52 +19,52 @@ import java.util.concurrent.ExecutionException;
  */
 public class SpreakerUtil {
 
-public static List<PodcastData> getEpisodesFromSpreakerUrl(String url, int catalogId) {
+    public static List<PodcastData> getEpisodesFromSpreakerUrl(String url, int catalogId) {
 
-    ResponseHolder s = null;
-    try {
-        s = new WebServiceAsyncTaskGet().execute(url + "/episodes?max_per_page=50").get();
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    } catch (ExecutionException e) {
-        e.printStackTrace();
-    }
-    Gson gson = new Gson();
-    EpisodeResult episodeResult = gson.fromJson(s.getResponseText(), EpisodeResult.class);
-    System.out.print(episodeResult);
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-    List<PodcastData> dataList = new ArrayList<PodcastData>();
-    for (Result r : episodeResult.getResponse().getPager().getResults()) {
-        PodcastData d = new PodcastData();
-        d.url = r.getDownloadUrl();
-        d.chapterTitle = r.getTitle();
-        d.editionTitle = r.getTitle();
-        d.description = r.getDescription();
-        d.duration = r.getLength() / 1000;
-
-        StringBuilder durationString = new StringBuilder();
-        if (d.duration > 3600) {
-            durationString.append(String.format("%02d", d.duration / 3600)).append(":");
-        }
-        durationString.append(String.format("%02d", (d.duration % 3600) / 60)).append(":");
-        durationString.append(String.format("%02d", d.duration % 60));
-        d.durationString = durationString.toString();
-
-
-        d.catalogId = catalogId;
-        String time = r.getPublishedAt();
+        ResponseHolder s = null;
         try {
-            Date timeD = sdf.parse(time);
-            if (timeD != null)
-                d.publishDateLong = timeD.getTime();
-        } catch (ParseException e) {
+            s = new WebServiceAsyncTaskGet().execute(url + "/episodes?max_per_page=50").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        Gson gson = new Gson();
+        EpisodeResult episodeResult = gson.fromJson(s.getResponseText(), EpisodeResult.class);
+        System.out.print(episodeResult);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        List<PodcastData> dataList = new ArrayList<PodcastData>();
+        for (Result r : episodeResult.getResponse().getPager().getResults()) {
+            PodcastData d = new PodcastData();
+            d.url = r.getDownloadUrl();
+            d.chapterTitle = r.getTitle();
+            d.editionTitle = r.getTitle();
+            d.description = r.getDescription();
+            d.duration = r.getLength() / 1000;
 
-        dataList.add(d);
+            StringBuilder durationString = new StringBuilder();
+            if (d.duration > 3600) {
+                durationString.append(String.format("%02d", d.duration / 3600)).append(":");
+            }
+            durationString.append(String.format("%02d", (d.duration % 3600) / 60)).append(":");
+            durationString.append(String.format("%02d", d.duration % 60));
+            d.durationString = durationString.toString();
 
+
+            d.catalogId = catalogId;
+            String time = r.getPublishedAt();
+            try {
+                Date timeD = sdf.parse(time);
+                if (timeD != null)
+                    d.publishDateLong = timeD.getTime();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            dataList.add(d);
+
+        }
+        return dataList;
     }
-    return dataList;
-}
 
 }

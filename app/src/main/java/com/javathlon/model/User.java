@@ -23,7 +23,7 @@ public class User {
     private String gcmToken;
     private String gooogleIdTokenForServer;
 
-    public enum SOCIAL_TYPES{
+    public enum SOCIAL_TYPES {
         FACEBOOK, GOOGLE;
     }
 

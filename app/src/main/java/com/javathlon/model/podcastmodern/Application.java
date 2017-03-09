@@ -1,11 +1,10 @@
-
 package com.javathlon.model.podcastmodern;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Application {
@@ -28,13 +27,11 @@ public class Application {
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public Application() {
     }
 
     /**
-     * 
      * @param podcasts
      * @param category
      * @param applicationUsers
@@ -50,95 +47,74 @@ public class Application {
     }
 
     /**
-     * 
-     * @return
-     *     The applicationId
+     * @return The applicationId
      */
     public Integer getApplicationId() {
         return applicationId;
     }
 
     /**
-     * 
-     * @param applicationId
-     *     The applicationId
+     * @param applicationId The applicationId
      */
     public void setApplicationId(Integer applicationId) {
         this.applicationId = applicationId;
     }
 
     /**
-     * 
-     * @return
-     *     The applicationName
+     * @return The applicationName
      */
     public String getApplicationName() {
         return applicationName;
     }
 
     /**
-     * 
-     * @param applicationName
-     *     The applicationName
+     * @param applicationName The applicationName
      */
     public void setApplicationName(String applicationName) {
         this.applicationName = applicationName;
     }
 
     /**
-     * 
-     * @return
-     *     The category
+     * @return The category
      */
     public Object getCategory() {
         return category;
     }
 
     /**
-     * 
-     * @param category
-     *     The category
+     * @param category The category
      */
     public void setCategory(Object category) {
         this.category = category;
     }
 
     /**
-     * 
-     * @return
-     *     The applicationUsers
+     * @return The applicationUsers
      */
     public List<Object> getApplicationUsers() {
         return applicationUsers;
     }
 
     /**
-     * 
-     * @param applicationUsers
-     *     The applicationUsers
+     * @param applicationUsers The applicationUsers
      */
     public void setApplicationUsers(List<Object> applicationUsers) {
         this.applicationUsers = applicationUsers;
     }
 
     /**
-     * 
-     * @return
-     *     The podcasts
+     * @return The podcasts
      */
     public List<Podcast> getPodcasts() {
         return podcasts;
     }
 
     /**
-     * 
-     * @param podcasts
-     *     The podcasts
+     * @param podcasts The podcasts
      */
     public void setPodcasts(List<Podcast> podcasts) {
         this.podcasts = podcasts;
     }
-
 
 
 }

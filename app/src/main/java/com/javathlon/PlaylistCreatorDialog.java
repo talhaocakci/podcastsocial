@@ -36,7 +36,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.javathlon.R;
 import com.javathlon.db.DBAccessor;
 
 import java.io.File;

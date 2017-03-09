@@ -13,16 +13,20 @@ public class MemsoftUtil {
 
     public static String getTimeAsString() {
         long now = System.currentTimeMillis();
+        return dateToString(longToDate(now));
+    }
+
+    public static String dateToString(Date date) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(now);
-        Date dd = null;
-        DateFormat parser = new SimpleDateFormat(
-                "dd/MM/yyyy hh:mm:ss");
+        calendar.setTimeInMillis(date.getTime());
+        DateFormat parser = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         String result = "";
-
         result = parser.format(calendar.getTime());
-
         return result;
+    }
+
+    public static Date longToDate(long time) {
+        return new Date(time);
     }
 
     public static Date getTimeFromString(String s) {

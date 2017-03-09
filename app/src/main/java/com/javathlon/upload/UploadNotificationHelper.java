@@ -50,7 +50,7 @@ public class UploadNotificationHelper {
 
         //add the additional content and intent to the notification
 //        mNotification.setLatestEventInfo(mContext, mContentTitle, contentText, mContentIntent);
-       // mNotification.setLatestEventInfo(mContext, mContentTitle, tickerText, mContentIntent);
+        // mNotification.setLatestEventInfo(mContext, mContentTitle, tickerText, mContentIntent);
         //make this notification appear in the 'Ongoing events' section
         mNotification.flags = Notification.FLAG_ONGOING_EVENT;
 
@@ -59,7 +59,7 @@ public class UploadNotificationHelper {
     }
 
 
-//    public void progressUpdate(String fileName,int percentageComplete) {
+    //    public void progressUpdate(String fileName,int percentageComplete) {
 //        //build up the new status message
 //        CharSequence contentText = percentageComplete + "% complete";
 //        //publish it to the status bar
@@ -71,7 +71,7 @@ public class UploadNotificationHelper {
         //build up the new status message
 //        CharSequence contentText = percentageComplete + "% complete";
         //publish it to the status bar
-     //   mNotification.setLatestEventInfo(mContext, mContentTitle, tickerText + " of " + fileName, mContentIntent);
+        //   mNotification.setLatestEventInfo(mContext, mContentTitle, tickerText + " of " + fileName, mContentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mNotification);
 //        checkActivityForeground(fileName,tickerText.toString(),percentageComplete);
     }
@@ -133,7 +133,7 @@ public class UploadNotificationHelper {
 
     public void onShareNotify(String shareNotify) {
         // TODO Auto-generated method stub
-      //  mNotification.setLatestEventInfo(mContext, mContentTitle, tickerText + " of " + shareNotify, mContentIntent);
+        //  mNotification.setLatestEventInfo(mContext, mContentTitle, tickerText + " of " + shareNotify, mContentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mNotification);
     }
 

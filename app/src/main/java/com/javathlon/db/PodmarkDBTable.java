@@ -7,19 +7,19 @@ public class PodmarkDBTable {
     // Database creation SQL statement
     private static final String CREATE_USER_TABLE = "create table if not exists user  "
             + "(_id INTEGER PRIMARY KEY autoincrement,"
-            +" display_name VARCHAR(60), "
-            +" email VARCHAR(60), "
-            +" gender VARCHAR(1), "
-            +" min_age NUMBER, "
-            +" fb_id VARCHAR(50), "
-            +" google_id VARCHAR(50), "
-            +"linked_in id VARCHAR(50), "
-            +"twitter id VARCHAR(50), "
-            +"swarm id VARCHAR(50), "
-            +"instagram id VARCHAR(50), "
-            +"register_date VARCHAR(20),"
-            +"location VARCHAR(50), "
-            +"locale VARCHAR(15))";
+            + " display_name VARCHAR(60), "
+            + " email VARCHAR(60), "
+            + " gender VARCHAR(1), "
+            + " min_age NUMBER, "
+            + " fb_id VARCHAR(50), "
+            + " google_id VARCHAR(50), "
+            + "linked_in id VARCHAR(50), "
+            + "twitter id VARCHAR(50), "
+            + "swarm id VARCHAR(50), "
+            + "instagram id VARCHAR(50), "
+            + "register_date VARCHAR(20),"
+            + "location VARCHAR(50), "
+            + "locale VARCHAR(15))";
 
 
     private static final String CREATE_NOTE_TABLE = "create table if not exists podcast_notes  "
@@ -33,7 +33,7 @@ public class PodmarkDBTable {
             + "note_text TEXT,"
             + "author VARCHAR(60),"
             + "create_date VARCHAR(30),"
-            +" upload_link VARCHAR(300) DEFAULT '',  "
+            + " upload_link VARCHAR(300) DEFAULT '',  "
             + "last_listen_date_mil NUMBER,"
             + " last_listen_date VARCHAR(30));";
 
@@ -46,7 +46,7 @@ public class PodmarkDBTable {
             + "create_date VARCHAR(20));";
 
     private static final String CREATE_PODCAST_CATALOG_TABLE = "create table if not exists podcast_catalog "
-            + "(_id INTEGER  PRIMARY KEY autoincrement,"
+            + "(_id INTEGER  PRIMARY KEY,"
             + "rss_url VARCHAR(300),"
             + "name VARCHAR(80),"
             + "image VARCHAR(400),"
@@ -60,13 +60,19 @@ public class PodmarkDBTable {
             + " is_subscribed VARCHAR(1), "
             + "last_rss_download_date VARCHAR(50),"
             + "last_downloaded_episode_date VARCHAR(50),"
-            + " item_count INTEGER);";
+            + " item_count INTEGER,"
+            + " bucket_name VARCHAR(100));";
 
 
     private static final String CREATE_UPLOAD_TRRACKER = "create table if not exists upload_tracker "
             + "(_id INTEGER  PRIMARY KEY autoincrement,"
             + "podcast_id VARCHAR(20),"
             + "uploaded VARCHAR(3));";
+
+    private static final String CREATE_PURCHASED_PODCASTS = "create table if not exists purchased_podcasts "
+            + "(_id INTEGER  PRIMARY KEY autoincrement,"
+            + "podcast_id INTEGER,"
+            + "valid_till VARCHAR(20));";
 
     private static final String CREATE_PODCAST_TABLE = "create table if not exists podcast "
             + "(_id INTEGER  PRIMARY KEY autoincrement,"
@@ -121,11 +127,11 @@ public class PodmarkDBTable {
         database.execSQL(CREATE_UPLOAD_TRRACKER);
         database.execSQL(CREATE_PODCAST_CATALOG_TABLE);
         database.execSQL(CREATE_USER_TABLE);
+        database.execSQL(CREATE_PURCHASED_PODCASTS);
         createInitialItems();
     }
 
-    public static void createInitialItems(){
-
+    public static void createInitialItems() {
 
 
     }

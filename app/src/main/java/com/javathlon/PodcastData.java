@@ -27,7 +27,7 @@ public class PodcastData {
 
     public void setIsDownloaded(String isDownloaded) {
         this.isDownloaded = isDownloaded;
-        if(isDownloaded != null && isDownloaded.equals("y"))
+        if (isDownloaded != null && isDownloaded.equals("y"))
             downloadPercentage = 100;
         else
             downloadPercentage = 0;

@@ -11,15 +11,15 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.nhaarman.listviewanimations.appearance.simple.SwingBottomInAnimationAdapter;
-import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
-import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 import com.javathlon.CatalogData;
 import com.javathlon.PodcastData;
 import com.javathlon.R;
 import com.javathlon.adapters.LibraryAdapter;
 import com.javathlon.db.DBAccessor;
 import com.javathlon.rss.RssListPlayerActivity;
+import com.nhaarman.listviewanimations.appearance.simple.SwingBottomInAnimationAdapter;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class LibraryFragment extends Fragment implements OnDismissCallback {
     private ListView libraryList;
     private List<CatalogData> catalogDataList = new ArrayList<CatalogData>();
     LibraryAdapter adapter;
-Button clearItemsButton;
+    Button clearItemsButton;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,13 +41,13 @@ Button clearItemsButton;
 
         View view = inflater.inflate(R.layout.library, container, false);
         libraryList = (ListView) view.findViewById(R.id.librarylist);
-        clearItemsButton = (Button)view.findViewById(R.id.clearItems);
+        clearItemsButton = (Button) view.findViewById(R.id.clearItems);
 
         clearItemsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                for(CatalogData podcast: catalogDataList){
+                for (CatalogData podcast : catalogDataList) {
                     System.out.println(podcast.name);
                 }
 

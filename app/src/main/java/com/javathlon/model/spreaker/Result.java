@@ -1,11 +1,10 @@
-
 package com.javathlon.model.spreaker;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Result {
@@ -86,540 +85,420 @@ public class Result {
     private Image__ image;
 
     /**
-     * 
-     * @return
-     *     The episodeId
+     * @return The episodeId
      */
     public Long getEpisodeId() {
         return episodeId;
     }
 
     /**
-     * 
-     * @param episodeId
-     *     The episode_id
+     * @param episodeId The episode_id
      */
     public void setEpisodeId(Long episodeId) {
         this.episodeId = episodeId;
     }
 
     /**
-     * 
-     * @return
-     *     The showId
+     * @return The showId
      */
     public Long getShowId() {
         return showId;
     }
 
     /**
-     * 
-     * @param showId
-     *     The show_id
+     * @param showId The show_id
      */
     public void setShowId(Long showId) {
         this.showId = showId;
     }
 
     /**
-     * 
-     * @return
-     *     The userId
+     * @return The userId
      */
     public Long getUserId() {
         return userId;
     }
 
     /**
-     * 
-     * @param userId
-     *     The user_id
+     * @param userId The user_id
      */
     public void setUserId(Long userId) {
         this.userId = userId;
     }
 
     /**
-     * 
-     * @return
-     *     The permalink
+     * @return The permalink
      */
     public String getPermalink() {
         return permalink;
     }
 
     /**
-     * 
-     * @param permalink
-     *     The permalink
+     * @param permalink The permalink
      */
     public void setPermalink(String permalink) {
         this.permalink = permalink;
     }
 
     /**
-     * 
-     * @return
-     *     The type
+     * @return The type
      */
     public String getType() {
         return type;
     }
 
     /**
-     * 
-     * @param type
-     *     The type
+     * @param type The type
      */
     public void setType(String type) {
         this.type = type;
     }
 
     /**
-     * 
-     * @return
-     *     The onAir
+     * @return The onAir
      */
     public Boolean getOnAir() {
         return onAir;
     }
 
     /**
-     * 
-     * @param onAir
-     *     The on_air
+     * @param onAir The on_air
      */
     public void setOnAir(Boolean onAir) {
         this.onAir = onAir;
     }
 
     /**
-     * 
-     * @return
-     *     The title
+     * @return The title
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * 
-     * @param title
-     *     The title
+     * @param title The title
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
     /**
-     * 
-     * @return
-     *     The length
+     * @return The length
      */
     public Long getLength() {
         return length;
     }
 
     /**
-     * 
-     * @param length
-     *     The length
+     * @param length The length
      */
     public void setLength(Long length) {
         this.length = length;
     }
 
     /**
-     * 
-     * @return
-     *     The publishedAt
+     * @return The publishedAt
      */
     public String getPublishedAt() {
         return publishedAt;
     }
 
     /**
-     * 
-     * @param publishedAt
-     *     The published_at
+     * @param publishedAt The published_at
      */
     public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
     }
 
     /**
-     * 
-     * @return
-     *     The autoPublishedAt
+     * @return The autoPublishedAt
      */
     public Object getAutoPublishedAt() {
         return autoPublishedAt;
     }
 
     /**
-     * 
-     * @param autoPublishedAt
-     *     The auto_published_at
+     * @param autoPublishedAt The auto_published_at
      */
     public void setAutoPublishedAt(Object autoPublishedAt) {
         this.autoPublishedAt = autoPublishedAt;
     }
 
     /**
-     * 
-     * @return
-     *     The nonStop
+     * @return The nonStop
      */
     public Boolean getNonStop() {
         return nonStop;
     }
 
     /**
-     * 
-     * @param nonStop
-     *     The non_stop
+     * @param nonStop The non_stop
      */
     public void setNonStop(Boolean nonStop) {
         this.nonStop = nonStop;
     }
 
     /**
-     * 
-     * @return
-     *     The explicit
+     * @return The explicit
      */
     public Boolean getExplicit() {
         return explicit;
     }
 
     /**
-     * 
-     * @param explicit
-     *     The explicit
+     * @param explicit The explicit
      */
     public void setExplicit(Boolean explicit) {
         this.explicit = explicit;
     }
 
     /**
-     * 
-     * @return
-     *     The downloadEnabled
+     * @return The downloadEnabled
      */
     public Boolean getDownloadEnabled() {
         return downloadEnabled;
     }
 
     /**
-     * 
-     * @param downloadEnabled
-     *     The download_enabled
+     * @param downloadEnabled The download_enabled
      */
     public void setDownloadEnabled(Boolean downloadEnabled) {
         this.downloadEnabled = downloadEnabled;
     }
 
     /**
-     * 
-     * @return
-     *     The hidden
+     * @return The hidden
      */
     public Boolean getHidden() {
         return hidden;
     }
 
     /**
-     * 
-     * @param hidden
-     *     The hidden
+     * @param hidden The hidden
      */
     public void setHidden(Boolean hidden) {
         this.hidden = hidden;
     }
 
     /**
-     * 
-     * @return
-     *     The ihrHidden
+     * @return The ihrHidden
      */
     public Boolean getIhrHidden() {
         return ihrHidden;
     }
 
     /**
-     * 
-     * @param ihrHidden
-     *     The ihr_hidden
+     * @param ihrHidden The ihr_hidden
      */
     public void setIhrHidden(Boolean ihrHidden) {
         this.ihrHidden = ihrHidden;
     }
 
     /**
-     * 
-     * @return
-     *     The streamId
+     * @return The streamId
      */
     public Object getStreamId() {
         return streamId;
     }
 
     /**
-     * 
-     * @param streamId
-     *     The stream_id
+     * @param streamId The stream_id
      */
     public void setStreamId(Object streamId) {
         this.streamId = streamId;
     }
 
     /**
-     * 
-     * @return
-     *     The siteUrl
+     * @return The siteUrl
      */
     public String getSiteUrl() {
         return siteUrl;
     }
 
     /**
-     * 
-     * @param siteUrl
-     *     The site_url
+     * @param siteUrl The site_url
      */
     public void setSiteUrl(String siteUrl) {
         this.siteUrl = siteUrl;
     }
 
     /**
-     * 
-     * @return
-     *     The apiUrl
+     * @return The apiUrl
      */
     public String getApiUrl() {
         return apiUrl;
     }
 
     /**
-     * 
-     * @param apiUrl
-     *     The api_url
+     * @param apiUrl The api_url
      */
     public void setApiUrl(String apiUrl) {
         this.apiUrl = apiUrl;
     }
 
     /**
-     * 
-     * @return
-     *     The downloadUrl
+     * @return The downloadUrl
      */
     public String getDownloadUrl() {
         return downloadUrl;
     }
 
     /**
-     * 
-     * @param downloadUrl
-     *     The download_url
+     * @param downloadUrl The download_url
      */
     public void setDownloadUrl(String downloadUrl) {
         this.downloadUrl = downloadUrl;
     }
 
     /**
-     * 
-     * @return
-     *     The description
+     * @return The description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * 
-     * @param description
-     *     The description
+     * @param description The description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * 
-     * @return
-     *     The publishedAtLocale
+     * @return The publishedAtLocale
      */
     public String getPublishedAtLocale() {
         return publishedAtLocale;
     }
 
     /**
-     * 
-     * @param publishedAtLocale
-     *     The published_at_locale
+     * @param publishedAtLocale The published_at_locale
      */
     public void setPublishedAtLocale(String publishedAtLocale) {
         this.publishedAtLocale = publishedAtLocale;
     }
 
     /**
-     * 
-     * @return
-     *     The show
+     * @return The show
      */
     public Show getShow() {
         return show;
     }
 
     /**
-     * 
-     * @param show
-     *     The show
+     * @param show The show
      */
     public void setShow(Show show) {
         this.show = show;
     }
 
     /**
-     * 
-     * @return
-     *     The status
+     * @return The status
      */
     public String getStatus() {
         return status;
     }
 
     /**
-     * 
-     * @param status
-     *     The status
+     * @param status The status
      */
     public void setStatus(String status) {
         this.status = status;
     }
 
     /**
-     * 
-     * @return
-     *     The styles
+     * @return The styles
      */
     public List<Object> getStyles() {
         return styles;
     }
 
     /**
-     * 
-     * @param styles
-     *     The styles
+     * @param styles The styles
      */
     public void setStyles(List<Object> styles) {
         this.styles = styles;
     }
 
     /**
-     * 
-     * @return
-     *     The tags
+     * @return The tags
      */
     public List<Tag> getTags() {
         return tags;
     }
 
     /**
-     * 
-     * @param tags
-     *     The tags
+     * @param tags The tags
      */
     public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
 
     /**
-     * 
-     * @return
-     *     The categories
+     * @return The categories
      */
     public List<Category> getCategories() {
         return categories;
     }
 
     /**
-     * 
-     * @param categories
-     *     The categories
+     * @param categories The categories
      */
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 
     /**
-     * 
-     * @return
-     *     The category
+     * @return The category
      */
     public Category_ getCategory() {
         return category;
     }
 
     /**
-     * 
-     * @param category
-     *     The category
+     * @param category The category
      */
     public void setCategory(Category_ category) {
         this.category = category;
     }
 
     /**
-     * 
-     * @return
-     *     The author
+     * @return The author
      */
     public Author getAuthor() {
         return author;
     }
 
     /**
-     * 
-     * @param author
-     *     The author
+     * @param author The author
      */
     public void setAuthor(Author author) {
         this.author = author;
     }
 
     /**
-     * 
-     * @return
-     *     The stats
+     * @return The stats
      */
     public Stats getStats() {
         return stats;
     }
 
     /**
-     * 
-     * @param stats
-     *     The stats
+     * @param stats The stats
      */
     public void setStats(Stats stats) {
         this.stats = stats;
     }
 
     /**
-     * 
-     * @return
-     *     The image
+     * @return The image
      */
     public Image__ getImage() {
         return image;
     }
 
     /**
-     * 
-     * @param image
-     *     The image
+     * @param image The image
      */
     public void setImage(Image__ image) {
         this.image = image;

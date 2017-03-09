@@ -3,30 +3,32 @@ package com.javathlon.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.facebook.CallbackManager;
 import com.google.gson.Gson;
-import com.javathlon.model.podcastmodern.Application;
-import com.nhaarman.listviewanimations.appearance.simple.SwingBottomInAnimationAdapter;
-import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
-import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
-import com.javathlon.ApplicationSettings;
 import com.javathlon.BaseActivity;
 import com.javathlon.CatalogData;
 import com.javathlon.R;
+import com.javathlon.apiclient.ApiClient;
+import com.javathlon.apiclient.api.AccountresourceApi;
+import com.javathlon.apiclient.api.PodcastresourceApi;
+import com.javathlon.apiclient.model.PodcastDTO;
 import com.javathlon.db.DBAccessor;
-import com.javathlon.download.PodcastModernClient;
 import com.javathlon.memsoft.GoogleCardAdapter;
 import com.javathlon.memsoft.MemsoftUtil;
 import com.javathlon.memsoft.ResponseHolder;
@@ -34,8 +36,11 @@ import com.javathlon.memsoft.WebServiceAsyncTaskGet;
 import com.javathlon.model.podcastmodern.Podcast;
 import com.javathlon.model.spreaker.Author;
 import com.javathlon.model.spreaker.ShowResult;
+import com.nhaarman.listviewanimations.appearance.simple.SwingBottomInAnimationAdapter;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -50,12 +55,14 @@ public class FragmentHome extends Fragment implements OnDismissCallback {
     GoogleCardAdapter adapterBackup;
     private CallbackManager callbackManager;
     Button openSocialConnectButton;
+    Context context;
 
     @SuppressLint("NewApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.context = getActivity().getApplicationContext();
         View view = inflater.inflate(R.layout.list_view, container, false);
         ListView listView = (ListView) view.findViewById(R.id.list_view);
         openSocialConnectButton = (Button) view.findViewById(R.id.openSocialConnect);
@@ -81,38 +88,13 @@ public class FragmentHome extends Fragment implements OnDismissCallback {
 
         final List<CatalogData> list = dbHelper.getMainCatalogList();
 
-        final GoogleCardAdapter mGoogleCardsAdapter = new GoogleCardAdapter(this.getActivity(), list, (BaseActivity) (this.getActivity()));
+        final GoogleCardAdapter mGoogleCardsAdapter = new GoogleCardAdapter(this.getActivity(), list, (AppCompatActivity) this.getActivity());
         adapterBackup = mGoogleCardsAdapter;
 
-        int i = 1;
-        if (list == null || list.size() <= 0) {
-            List<Podcast> podcastList = null;
-            try {
-                PodcastModernClient.getPodcastsByApplication(
-                        ApplicationSettings.appId.intValue(), new Callback<Application>() {
-                            @Override
-                            public void onResponse(Call<Application> call, Response<Application> response) {
-                                for (Podcast podcast : response.body().getPodcasts()) {
-                                    list.add(createCatalogDataItem(podcast));
-                                }
-                                mGoogleCardsAdapter.notifyDataSetChanged();
-                            }
-                            @Override
-                            public void onFailure(Call<Application> call, Throwable t) {
-                                Podcast podcast = new Podcast();
-                                podcast.setAuthor("Default");
-                                podcast.setName("Default");
-                                podcast.setOtherRssUrl("https://s3.ap-south-1.amazonaws.com/javacore-course/javacourse.xml");
-                                list.add(createCatalogDataItem(podcast));
-                            }
-                        });
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
+        final int i = 1;
+
+        if (BaseActivity.isNetworkAvailable(getActivity().getBaseContext())) {
+            getAllPodcasts(list, mGoogleCardsAdapter);
         }
 
         SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
@@ -140,7 +122,54 @@ public class FragmentHome extends Fragment implements OnDismissCallback {
         return view;
     }
 
-    private CatalogData createCatalogDataItem(Podcast podcast) {
+    private void getAllPodcasts(final List<CatalogData> list, final ArrayAdapter adapter) {
+
+        final List<Podcast> podcastList = null;
+
+        final List<com.javathlon.apiclient.model.Podcast> podcastApiList = new ArrayList<>();
+
+        ApiClient apiClient = ApiClient.getApiClient(FragmentHome.this.getActivity().getApplicationContext());
+
+        AccountresourceApi api = apiClient.createService(AccountresourceApi.class);
+
+        final PodcastresourceApi podcastresourceApi = apiClient.createService(PodcastresourceApi.class);
+
+        podcastresourceApi.getAllPodcastsUsingGET(0, 20, new ArrayList<String>()).enqueue(
+                new Callback<List<PodcastDTO>>() {
+                    @Override
+                    public void onResponse(Call<List<PodcastDTO>> call, Response<List<PodcastDTO>> response) {
+
+                        if (!response.isSuccessful()) {
+
+                            return;
+                        }
+
+                        boolean dataSetChanged = false;
+                        for (PodcastDTO podcast : response.body()) {
+                            CatalogData catalogData = FragmentHome.this.createCatalogDataItem(podcast);
+                            if (!list.contains(catalogData)) {
+                                dataSetChanged = true;
+                                list.add(FragmentHome.this.createCatalogDataItem(podcast));
+                            } else {
+                                int index = list.indexOf(catalogData);
+                                list.remove(catalogData);
+                                list.add(index, catalogData);
+                            }
+                        }
+                        if (dataSetChanged) {
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<PodcastDTO>> call, Throwable t) {
+                        Log.d("", t.toString());
+                    }
+                }
+        );
+    }
+
+    private CatalogData createCatalogDataItem(PodcastDTO podcast) {
         CatalogData data = new CatalogData();
         data.name = podcast.getName();
         data.author = podcast.getAuthor();
@@ -148,6 +177,7 @@ public class FragmentHome extends Fragment implements OnDismissCallback {
         data.rss = podcast.getItunesUrl() != null && !podcast.getItunesUrl().equals("") ? podcast.getItunesUrl() : podcast.getOtherRssUrl();
         data.isMainCatalog = "y";
         data.isSubscribed = "y";
+        data.id = podcast.getId();
 
         // get more possible details from spreaker
         CatalogData c = dbHelper.getPodcastCatalogByRss(data.rss);

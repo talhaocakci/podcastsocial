@@ -1,27 +1,36 @@
 package com.javathlon;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-import com.javathlon.R;
-import com.javathlon.components.LastPlayClass;
+import com.amazonaws.mobileconnectors.cognito.internal.util.StringUtils;
+import com.javathlon.apiclient.ApiClient;
+import com.javathlon.apiclient.api.AccountresourceApi;
+import com.javathlon.apiclient.model.UsernamePassword;
 import com.javathlon.db.DBAccessor;
 import com.javathlon.upload.UploadTask;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
-public class BaseActivity extends Activity {
+import retrofit2.Response;
+
+public class BaseActivity extends AppCompatActivity {
     public static final int UPLOAD_ID = Menu.FIRST + 1;
     public static final int ONLINE_ID = Menu.FIRST + 2;
     public static final int EXIT_ID = Menu.FIRST + 3;
@@ -33,7 +42,7 @@ public class BaseActivity extends Activity {
     public static HashMap<Integer, UploadTask> uploadmap = new HashMap<Integer, UploadTask>();
     public HashMap<String, String> noteSelect;
     int notifyUserForUpload = 0;
-    LastPlayClass lastPlayObj = null;
+
 
     public int uploadNotePos;
     protected boolean exited = false;
@@ -44,69 +53,103 @@ public class BaseActivity extends Activity {
     AlertDialog alert = null;
     ContextThemeWrapper themeWrapper;
 
-    protected void fillLastPlayedList() {
-        lastPlayObj = new LastPlayClass();
 
-        Cursor mCursor = null;
+    protected boolean login() {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String userName = preferences.getString("username", "");
+        String password = preferences.getString("password", "");
+
+        return login(userName, password);
+    }
+
+    protected boolean login(final String email, final String password) {
+
+
+        // Show a progress spinner, and kick off a background task to
+        // perform the user login attempt.
+        //showProgress(true);
+        final AccountresourceApi api = ApiClient.getApiClient(getApplicationContext()).createService(AccountresourceApi.class);
+
+        UsernamePassword usernamePassword = new UsernamePassword();
+        usernamePassword.setUsername(email);
+        usernamePassword.setPassword(password);
+        usernamePassword.setRememberMe(true);
+
+        boolean isSuccess = false;
         try {
-            mCursor = dbHelper.getLastPlayedNotesListResult();
-            if (mCursor.moveToFirst()) {
-                do {
+            isSuccess = new AsyncTask<String, Void, Boolean>() {
+                protected Boolean doInBackground(String... param) {
 
-                    String name = mCursor.getString(mCursor
-                            .getColumnIndex("name"));
+                    Response<Void> response = null;
+                    boolean result = false;
+                    try {
+                        response = api.authenticate(email, password).execute();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-                    String podcast_id = mCursor.getString(mCursor
-                            .getColumnIndex("podcast_id"));
-                    String song_sp_id = mCursor.getString(mCursor
-                            .getColumnIndex("song_sp_id"));
-                    String begin_sec = mCursor.getString(mCursor
-                            .getColumnIndex("begin_sec"));
-                    String end_sec = mCursor.getString(mCursor
-                            .getColumnIndex("end_sec"));
-                    String beginend = mCursor.getString(mCursor
-                            .getColumnIndex("beginend"));
-                    String songpath = mCursor.getString(mCursor
-                            .getColumnIndex("songpath"));
-                    String note_text = mCursor.getString(mCursor
-                            .getColumnIndex("note_text"));
-                    String author = mCursor.getString(mCursor
-                            .getColumnIndex("author"));
-                    String create_date = mCursor.getString(mCursor
-                            .getColumnIndex("create_date"));
-                    String last_listen_date_mil = mCursor.getString(mCursor
-                            .getColumnIndex("last_listen_date_mil"));
-                    String last_listen_date = mCursor.getString(mCursor
-                            .getColumnIndex("last_listen_date"));
-                    lastPlayObj.setPodcast_id(podcast_id);
-                    lastPlayObj.setSong_sp_id(song_sp_id);
-                    lastPlayObj.setBegin_sec(begin_sec);
-                    lastPlayObj.setEnd_sec(end_sec);
-                    lastPlayObj.setBeginend(beginend);
-                    lastPlayObj.setSongpath(songpath);
-                    lastPlayObj.setNote_text(note_text);
-                    lastPlayObj.setAuthor(author);
-                    lastPlayObj.setCreate_date(create_date);
-                    lastPlayObj.setLast_listen_date_mil(last_listen_date_mil);
-                    lastPlayObj.setLast_listen_date(last_listen_date);
+                    if (response.isSuccessful()) {
 
-                } while (mCursor.moveToNext());
-            }
-        } catch (Exception e) {
-            // TODO: handle exception
-        } finally {
-            if (mCursor != null && !mCursor.isClosed()) {
-                mCursor.close();
-            }
+                        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(BaseActivity.this).edit();
+                        editor.putString("username", email);
+                        editor.putString("password", password);
+                        editor.apply();
+                        result = true;
+
+                    }
+                    // Toast.makeText(getApplicationContext(), "Username or password is wrong"
+                    //       , Toast.LENGTH_SHORT).show();
+
+
+                    return result;
+
+
+                }
+
+            }.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
 
+        return isSuccess;
     }
+
+    protected boolean anyFailedRequest(Response response) {
+
+        if (response.code() == 500) {
+            Toast.makeText(getApplicationContext(), "We have some server issues, sorry for this", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+
+        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+        editor.putString("jsessionid", null);
+        editor.apply();
+
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        if (StringUtils.isEmpty(prefs.getString("username", "")) || StringUtils.isEmpty(prefs.getString("password", ""))) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            return false;
+        }
+        return login(prefs.getString("username", ""), prefs.getString("password", ""));
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         con = this;
 
+    }
+
+    public void goToLoginActivity() {
+        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(i);
     }
 
     /**
@@ -132,83 +175,17 @@ public class BaseActivity extends Activity {
                 onDestroy();
                 System.exit(0);
                 return true;
-        /*case R.id.UploadMenuItem:
-			Intent i = new Intent(BaseActivity.this, NoteListScreen.class);
-			startActivity(i);
-			return true;*/
+
             case R.id.loginMenuItem:
                 Intent intnt = new Intent(BaseActivity.this, LoginPref.class);
                 startActivity(intnt);
                 return true;
-		/*case R.id.OnlineMenuItem:
-			String onlineUrl = "http://www.paperify.net/";
-			Intent onlineIntent = new Intent(Intent.ACTION_VIEW);
-			onlineIntent.setData(Uri.parse(onlineUrl));
-			startActivity(onlineIntent);
-			return true;  */
-			/*
-			 * case R.id.SettingsMenuItem: Intent i = new Intent(RadioApp.this,
-			 * Preferences.class); startActivity(i); return true;
-			 */
+
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-
-    public HashMap<String, String> audioFilePathFromNote(int pos) {
-        Cursor audioCursor = null;
-        int i = 0;
-        HashMap<String, String> note = new HashMap<String, String>();
-        try {
-            String[] projection = {DBAccessor.KEY_BEGINSEC,
-                    DBAccessor.KEY_ENDSEC, DBAccessor.KEY_NOTETEXT,
-                    DBAccessor.KEY_SONGPATH};
-            if (path == null) {
-                Log.e("", "it is null");
-                if (lastPlayObj == null) {
-                    fillLastPlayedList();
-                    audioCursor = dbHelper.fetchNote(pos, lastPlayObj
-                            .getSongpath().get(pos));
-                } else {
-                    audioCursor = dbHelper.fetchNote(pos, lastPlayObj
-                            .getSongpath().get(pos));
-                }
-
-            } else {
-                Log.e("pos", "" + pos);
-                audioCursor = dbHelper.fetchNote(pos, path);
-            }
-
-            if (audioCursor.moveToFirst()) {
-                do {
-                    int rowID = audioCursor.getInt(audioCursor
-                            .getColumnIndex(DBAccessor.KEY_ID));
-                    note.put("rowID", rowID + "");
-                    String beginPos = audioCursor.getString(audioCursor
-                            .getColumnIndex(DBAccessor.KEY_BEGINSEC));
-                    note.put("beginPos", beginPos);
-                    String endPos = audioCursor.getString(audioCursor
-                            .getColumnIndex(DBAccessor.KEY_ENDSEC));
-                    note.put("endPos", endPos);
-                    String noteText = audioCursor.getString(audioCursor
-                            .getColumnIndex(DBAccessor.KEY_NOTETEXT));
-                    note.put("noteText", noteText);
-                    String audioFilePath = audioCursor.getString(audioCursor
-                            .getColumnIndex(DBAccessor.KEY_SONGPATH));
-                    note.put("audioFilePath", audioFilePath);
-
-                    return note;
-                } while (audioCursor.moveToNext());
-            }
-        } finally {
-            if (null != audioCursor) {
-                audioCursor.close();
-            }
-        }
-
-        return null;
-    }
 
     @Override
     protected void onDestroy() {
@@ -216,8 +193,8 @@ public class BaseActivity extends Activity {
     }
 
     public void showMyDialog(String msg) {
-if(builder == null)
-    builder = new AlertDialog.Builder(this);
+        if (builder == null)
+            builder = new AlertDialog.Builder(this);
         builder.setMessage(msg)
                 .setCancelable(false)
                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
@@ -229,23 +206,28 @@ if(builder == null)
         alert.show();
     }
 
-    public void hideDialog(){
-        if(alert != null)
+    public void hideDialog() {
+        if (alert != null)
             alert.hide();
     }
-    
-    public void showConfirmDialog(String message, String positiveText, String negativeText, DialogInterface.OnClickListener positiveListener, DialogInterface.OnClickListener negativeListener){
 
-         // if(themeWrapper == null)
-           //   themeWrapper = new ContextThemeWrapper(this, R.style.THE);
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(message)
-			.setPositiveButton(positiveText, positiveListener) ;
-			builder.setNegativeButton(negativeText, negativeListener);
-			AlertDialog alert = builder.create();
-			alert.show();
+    public void showConfirmDialog(String message, String positiveText, String negativeText, DialogInterface.OnClickListener positiveListener, DialogInterface.OnClickListener negativeListener) {
+
+        // if(themeWrapper == null)
+        //   themeWrapper = new ContextThemeWrapper(this, R.style.THE);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setPositiveButton(positiveText, positiveListener);
+        builder.setNegativeButton(negativeText, negativeListener);
+        AlertDialog alert = builder.create();
+        alert.show();
 
     }
 
+
+    public static boolean isNetworkAvailable(final Context context) {
+        final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
 
 }

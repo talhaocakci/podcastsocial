@@ -44,10 +44,9 @@ public class RssRefreshAndDownloadItemsAsyncTask extends AsyncTask<CatalogData, 
         this.data = dataArray[0];
         List<PodcastData> dataList = new ArrayList<PodcastData>();
         RSSDownloaderParser parser = new RSSDownloaderParser(context, false, null, new MyXMLHandlerItems(), dataList);
-        if(data.rss.startsWith("http://api.spreaker.com/show/")){
+        if (data.rss.startsWith("http://api.spreaker.com/show/")) {
             dataList = SpreakerUtil.getEpisodesFromSpreakerUrl(data.rss, data.id.intValue());
-        }
-        else {
+        } else {
             dataList = parser.getRSSListFromUrl(data.rss, context);
         }
         return dataList;
@@ -113,8 +112,8 @@ public class RssRefreshAndDownloadItemsAsyncTask extends AsyncTask<CatalogData, 
                     return;
 
 
-                   Uri Download_Uri = Uri.parse(data.url);
-               // Uri Download_Uri = Uri.parse("http://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt");
+                Uri Download_Uri = Uri.parse(data.url);
+                // Uri Download_Uri = Uri.parse("http://data.giss.nasa.gov/gistemp/tabledata_v3/GLB.Ts+dSST.txt");
                 DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
 
                 //Restrict the types of networks over which this download may proceed.

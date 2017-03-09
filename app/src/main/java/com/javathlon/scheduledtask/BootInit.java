@@ -48,7 +48,7 @@ public class BootInit extends BroadcastReceiver {
             /*****************************************************************/
         }
 
-        }
+    }
 
 
 }

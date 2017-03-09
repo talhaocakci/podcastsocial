@@ -31,7 +31,7 @@ public class ListenStatisticHolder {
         }
         dbHelper.bulkInsertListenStatisctics(list);
         // şimdiye kadarki progress geçmişse %sini hesapla
-        if(CommonStaticClass.getCurrentPodcast().progressSecond == null)
+        if (CommonStaticClass.getCurrentPodcast().progressSecond == null)
             CommonStaticClass.getCurrentPodcast().progressSecond = "0";
         if (list.get(list.size() - 1).getEndPos() > Long.parseLong(CommonStaticClass.getCurrentPodcast().progressSecond)) {
             dbHelper.updatePodcastProgressSecond(CommonStaticClass.getCurrentPodcast(), list.get(list.size() - 1).getEndPos());

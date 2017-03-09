@@ -12,7 +12,7 @@ import com.javathlon.CheckInternet;
  * Created by talha on 20.07.2015.
  */
 public class CustomEventHandler extends Handler {
-    public static final int UPLOADFILE = 90, UPLOADSEQ = 99, UPLOAD_COMPLETED = 199, CROPCOMPLETED = 299 ;
+    public static final int UPLOADFILE = 90, UPLOADSEQ = 99, UPLOAD_COMPLETED = 199, CROPCOMPLETED = 299;
 
     Context context;
 
@@ -21,33 +21,33 @@ public class CustomEventHandler extends Handler {
     }
 
     @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case UPLOADFILE:
+    public void handleMessage(Message msg) {
+        super.handleMessage(msg);
+        switch (msg.what) {
+            case UPLOADFILE:
 
-                    if (CheckInternet.checkAnyConnectionExists(context)) {
-                        Bundle bundle = msg.getData();
-                        String filePath = bundle.getString("filepath");
-                        int sec = bundle.getInt("beginsec");
-                        long noteId = bundle.getLong("noteid");
-                        long podcastId = bundle.getLong("podcastid");
-
-
-                        //  new Cropm
-                        // handleUpload(uploadNotePos);
-                    } else {
-                        String dialogmsg = "Internet connection is not available";
-                        //    BaseActivity.showMyDialog(dialogmsg);
-                    }
-                    break;
-
-                case CROPCOMPLETED:
-
-                case UPLOAD_COMPLETED:
+                if (CheckInternet.checkAnyConnectionExists(context)) {
                     Bundle bundle = msg.getData();
-                    final String url = bundle.getString("url");
-                    final String devicePath = bundle.getString("devicepath");
+                    String filePath = bundle.getString("filepath");
+                    int sec = bundle.getInt("beginsec");
+                    long noteId = bundle.getLong("noteid");
+                    long podcastId = bundle.getLong("podcastid");
+
+
+                    //  new Cropm
+                    // handleUpload(uploadNotePos);
+                } else {
+                    String dialogmsg = "Internet connection is not available";
+                    //    BaseActivity.showMyDialog(dialogmsg);
+                }
+                break;
+
+            case CROPCOMPLETED:
+
+            case UPLOAD_COMPLETED:
+                Bundle bundle = msg.getData();
+                final String url = bundle.getString("url");
+                final String devicePath = bundle.getString("devicepath");
                    /* if (context instanceof Activity) {
                         Activity a = (Activity) context;
                         AlertDialog.Builder builder = new AlertDialog.Builder(a);
@@ -69,17 +69,15 @@ public class CustomEventHandler extends Handler {
 
                     }*/
 
-                    Intent i = new Intent(Intent.ACTION_SEND);
-                    i.setType("plain/text");
-                    i.putExtra(Intent.EXTRA_TEXT, url);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.getApplicationContext().startActivity(i);
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("plain/text");
+                i.putExtra(Intent.EXTRA_TEXT, url);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.getApplicationContext().startActivity(i);
 
 
-
-            }
         }
-
+    }
 
 
 }

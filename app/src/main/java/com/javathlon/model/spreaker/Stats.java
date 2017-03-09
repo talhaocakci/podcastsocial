@@ -1,4 +1,3 @@
-
 package com.javathlon.model.spreaker;
 
 
@@ -22,90 +21,70 @@ public class Stats {
     private Long editableEpisodes;
 
     /**
-     * 
-     * @return
-     *     The plays
+     * @return The plays
      */
     public Long getPlays() {
         return plays;
     }
 
     /**
-     * 
-     * @param plays
-     *     The plays
+     * @param plays The plays
      */
     public void setPlays(Long plays) {
         this.plays = plays;
     }
 
     /**
-     * 
-     * @return
-     *     The downloads
+     * @return The downloads
      */
     public Long getDownloads() {
         return downloads;
     }
 
     /**
-     * 
-     * @param downloads
-     *     The downloads
+     * @param downloads The downloads
      */
     public void setDownloads(Long downloads) {
         this.downloads = downloads;
     }
 
     /**
-     * 
-     * @return
-     *     The fans
+     * @return The fans
      */
     public Long getFans() {
         return fans;
     }
 
     /**
-     * 
-     * @param fans
-     *     The fans
+     * @param fans The fans
      */
     public void setFans(Long fans) {
         this.fans = fans;
     }
 
     /**
-     * 
-     * @return
-     *     The listenableEpisodes
+     * @return The listenableEpisodes
      */
     public Long getListenableEpisodes() {
         return listenableEpisodes;
     }
 
     /**
-     * 
-     * @param listenableEpisodes
-     *     The listenable_episodes
+     * @param listenableEpisodes The listenable_episodes
      */
     public void setListenableEpisodes(Long listenableEpisodes) {
         this.listenableEpisodes = listenableEpisodes;
     }
 
     /**
-     * 
-     * @return
-     *     The editableEpisodes
+     * @return The editableEpisodes
      */
     public Long getEditableEpisodes() {
         return editableEpisodes;
     }
 
     /**
-     * 
-     * @param editableEpisodes
-     *     The editable_episodes
+     * @param editableEpisodes The editable_episodes
      */
     public void setEditableEpisodes(Long editableEpisodes) {
         this.editableEpisodes = editableEpisodes;

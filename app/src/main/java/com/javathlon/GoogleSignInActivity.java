@@ -23,12 +23,7 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.plus.model.people.Person;
 import com.google.gson.Gson;
 import com.javathlon.db.DBAccessor;
-import com.javathlon.download.PodcastModernClient;
 import com.javathlon.model.User;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Activity to demonstrate basic retrieval of the Google user's ID, email address, and basic
@@ -121,7 +116,6 @@ public class GoogleSignInActivity extends AppCompatActivity implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -145,20 +139,20 @@ public class GoogleSignInActivity extends AppCompatActivity implements
             Person.Image image = null;
             String currentLocation = "";
             String id = "";
-            String lang ="";
+            String lang = "";
             int relationShip = 0;
-            String email="";
-            String photoURL="";
-            String givenName="";
-            String surname="";
+            String email = "";
+            String photoURL = "";
+            String givenName = "";
+            String surname = "";
 
-            if(person != null) {
+            if (person != null) {
                 name = person.getDisplayName();
 
                 id = person.getId();
                 email = person.getEmail();
-                if(person.getPhotoUrl() != null)
-                photoURL = person.getPhotoUrl().getPath();
+                if (person.getPhotoUrl() != null)
+                    photoURL = person.getPhotoUrl().getPath();
                 givenName = person.getGivenName();
                 surname = person.getFamilyName();
             }
@@ -173,29 +167,30 @@ public class GoogleSignInActivity extends AppCompatActivity implements
 
 
             final User user = new User();
-          //  if(checkId <= 0) {
+            //  if(checkId <= 0) {
 
-                String userJson = "";
+            String userJson = "";
 
-                user.setName(givenName);
-                user.setSurname(surname);
-                user.setDisplayName(name);
-                user.setLanguage(lang);
-                user.setLocation(currentLocation);
-                user.setEmail(email);
-                user.setGooogleIdTokenForServer(idTokenForServer);
+            user.setName(givenName);
+            user.setSurname(surname);
+            user.setDisplayName(name);
+            user.setLanguage(lang);
+            user.setLocation(currentLocation);
+            user.setEmail(email);
+            user.setGooogleIdTokenForServer(idTokenForServer);
 
-               //this should not be sent to the server. server will get this value  by invoking
-               // https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=XYZ123 idToken will be idTokenForServer
-               // user.setGoogleToken(id);
+            //this should not be sent to the server. server will get this value  by invoking
+            // https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=XYZ123 idToken will be idTokenForServer
+            // user.setGoogleToken(id);
 
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-                String gcmToken = sharedPreferences.getString(QuickstartPreferences.GCM_TOKEN, "");
-                user.setGcmToken(gcmToken);
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String gcmToken = sharedPreferences.getString(QuickstartPreferences.GCM_TOKEN, "");
+            user.setGcmToken(gcmToken);
 
-                Gson gson = new Gson();
-                userJson = gson.toJson(user, User.class);
+            Gson gson = new Gson();
+            userJson = gson.toJson(user, User.class);
 
+            /*TODO
                 PodcastModernClient.saveUser(user, ApplicationSettings.appId, new Callback<Long>() {
 
                     @Override
@@ -206,25 +201,34 @@ public class GoogleSignInActivity extends AppCompatActivity implements
                         }
                         newId = checkId;
 
+                        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(GoogleSignInActivity.this);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putLong("userid", response.body());
+                        editor.apply();
+
                         dbAccessor.updateUserSocialId(newId, User.SOCIAL_TYPES.GOOGLE, googleToken);
                     }
 
                     @Override
                     public void onFailure(Call<Long> call, Throwable t) {
-                        Log.d("app", t.getLocalizedMessage());
+                        Toast.makeText(getApplicationContext(), "User save service failed ", Toast.LENGTH_SHORT).show();
                     }
                 });
-    //        }
 
-
+*/
 
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(GoogleSignInActivity.this);
             SharedPreferences.Editor editor = pref.edit();
             editor.putString("googletoken", id);
+            editor.putString("usermail", email);
+            editor.putString("username", givenName + " " + surname);
             editor.apply();
 
             mStatusTextView.setText(getString(R.string.signed_in_fmt, person.getDisplayName()));
             updateUI(true);
+
+            Intent i = new Intent(this.getApplicationContext(), BuySubscriptionActivity.class);
+            startActivity(i);
         } else {
             // Signed out, show unauthenticated UI.
             updateUI(false);

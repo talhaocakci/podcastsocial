@@ -38,8 +38,7 @@ public class Mp3Cropper extends AsyncTask<Number, Void, Void> {
 
         long podcastId = (Long) values[0];
         int beginSecond = (Integer) values[1];
-        long noteId =  (Long) values[2];
-
+        long noteId = (Long) values[2];
 
 
         if (dbAccessor == null) {
@@ -73,7 +72,7 @@ public class Mp3Cropper extends AsyncTask<Number, Void, Void> {
 
             UploadNotificationHelper mNotificationHelper;
 
-            mNotificationHelper = new UploadNotificationHelper(context, (int)System.currentTimeMillis()%999999);
+            mNotificationHelper = new UploadNotificationHelper(context, (int) System.currentTimeMillis() % 999999);
             mNotificationHelper.createNotification(context.getResources().getString(R.string.croppingsnippet));
 
             cheap.ReadFile(a);
@@ -95,7 +94,7 @@ public class Mp3Cropper extends AsyncTask<Number, Void, Void> {
         }
 
 
-        if(type == CropResultType.MP3){
+        if (type == CropResultType.MP3) {
 
             PackageManager manager = context.getPackageManager();
             try {
@@ -117,7 +116,7 @@ public class Mp3Cropper extends AsyncTask<Number, Void, Void> {
 
         if (newFileName.length() > 0) {
             // to make the notification unique
-            UploadTask ut = new UploadTask(context, 10000+ (int)noteId);
+            UploadTask ut = new UploadTask(context, 10000 + (int) noteId);
             ut.noteStart = (int) beginSecond;
             ut.noteEnd = (int) endSecond;
             ut.noteId = noteId;

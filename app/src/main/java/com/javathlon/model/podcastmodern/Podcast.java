@@ -1,9 +1,7 @@
-
 package com.javathlon.model.podcastmodern;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 
 
 public class Podcast {
@@ -45,13 +43,11 @@ public class Podcast {
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public Podcast() {
     }
 
     /**
-     * 
      * @param author
      * @param podcastId
      * @param imageUrl
@@ -79,203 +75,158 @@ public class Podcast {
     }
 
     /**
-     * 
-     * @return
-     *     The podcastId
+     * @return The podcastId
      */
     public Integer getPodcastId() {
         return podcastId;
     }
 
     /**
-     * 
-     * @param podcastId
-     *     The podcastId
+     * @param podcastId The podcastId
      */
     public void setPodcastId(Integer podcastId) {
         this.podcastId = podcastId;
     }
 
     /**
-     * 
-     * @return
-     *     The name
+     * @return The name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 
-     * @param name
-     *     The name
+     * @param name The name
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * 
-     * @return
-     *     The itunesUrl
+     * @return The itunesUrl
      */
     public String getItunesUrl() {
         return itunesUrl;
     }
 
     /**
-     * 
-     * @param itunesUrl
-     *     The itunesUrl
+     * @param itunesUrl The itunesUrl
      */
     public void setItunesUrl(String itunesUrl) {
         this.itunesUrl = itunesUrl;
     }
 
     /**
-     * 
-     * @return
-     *     The otherRssUrl
+     * @return The otherRssUrl
      */
     public String getOtherRssUrl() {
         return otherRssUrl;
     }
 
     /**
-     * 
-     * @param otherRssUrl
-     *     The otherRssUrl
+     * @param otherRssUrl The otherRssUrl
      */
     public void setOtherRssUrl(String otherRssUrl) {
         this.otherRssUrl = otherRssUrl;
     }
 
     /**
-     * 
-     * @return
-     *     The description
+     * @return The description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * 
-     * @param description
-     *     The description
+     * @param description The description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * 
-     * @return
-     *     The currentItemCount
+     * @return The currentItemCount
      */
     public String getCurrentItemCount() {
         return currentItemCount;
     }
 
     /**
-     * 
-     * @param currentItemCount
-     *     The currentItemCount
+     * @param currentItemCount The currentItemCount
      */
     public void setCurrentItemCount(String currentItemCount) {
         this.currentItemCount = currentItemCount;
     }
 
     /**
-     * 
-     * @return
-     *     The publisher
+     * @return The publisher
      */
     public String getPublisher() {
         return publisher;
     }
 
     /**
-     * 
-     * @param publisher
-     *     The publisher
+     * @param publisher The publisher
      */
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
 
     /**
-     * 
-     * @return
-     *     The isPublic
+     * @return The isPublic
      */
     public String getIsPublic() {
         return isPublic;
     }
 
     /**
-     * 
-     * @param isPublic
-     *     The isPublic
+     * @param isPublic The isPublic
      */
     public void setIsPublic(String isPublic) {
         this.isPublic = isPublic;
     }
 
     /**
-     * 
-     * @return
-     *     The lastItemDate
+     * @return The lastItemDate
      */
     public String getLastItemDate() {
         return lastItemDate;
     }
 
     /**
-     * 
-     * @param lastItemDate
-     *     The lastItemDate
+     * @param lastItemDate The lastItemDate
      */
     public void setLastItemDate(String lastItemDate) {
         this.lastItemDate = lastItemDate;
     }
 
     /**
-     * 
-     * @return
-     *     The imageUrl
+     * @return The imageUrl
      */
     public String getImageUrl() {
         return imageUrl;
     }
 
     /**
-     * 
-     * @param imageUrl
-     *     The imageUrl
+     * @param imageUrl The imageUrl
      */
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 
     /**
-     * 
-     * @return
-     *     The author
+     * @return The author
      */
     public String getAuthor() {
         return author;
     }
 
     /**
-     * 
-     * @param author
-     *     The author
+     * @param author The author
      */
     public void setAuthor(String author) {
         this.author = author;
     }
-
 
 
 }

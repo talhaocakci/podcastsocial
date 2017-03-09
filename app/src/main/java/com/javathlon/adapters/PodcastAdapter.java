@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.javathlon.PodcastData;
 import com.javathlon.R;
-import com.javathlon.download.PodcastModernClient;
 import com.javathlon.rss.RssListPlayerActivity;
 
 import java.text.DateFormat;
@@ -34,6 +33,8 @@ public class PodcastAdapter extends BaseAdapter {
     DownloadManager downloadManager;
     private LayoutInflater mInflater;
     private long downloadReference;
+
+    boolean purchased;
 
     public PodcastAdapter(Activity context, List<PodcastData> dataList) {
         this.context = context;
@@ -68,13 +69,13 @@ public class PodcastAdapter extends BaseAdapter {
 
                 downloadManager = (DownloadManager) view.getContext().getSystemService(Context.DOWNLOAD_SERVICE);
 
-                if(!dataList.get(position).url.contains("http")) {
+                if (!dataList.get(position).url.contains("http")) {
                     String signedUrl = null;
 
-                    signedUrl = PodcastModernClient.getSignedUrl("javacore-course", dataList.get(position).url, false);
+                    signedUrl = "";
+                            /*TODO PodcastModernClient.getSignedUrl("javacore-course", dataList.get(position).url, false); */
 
-                    if(signedUrl == null)
-                    {
+                    if (signedUrl == null && purchased == false) {
                         Toast.makeText(view.getContext(), "Can not open, upgrade your account", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -82,7 +83,7 @@ public class PodcastAdapter extends BaseAdapter {
                 }
                 Uri Download_Uri = Uri.parse(dataList.get(position).url);
 
-               // Uri Download_Uri = Uri.parse("http://www.google.com");
+                // Uri Download_Uri = Uri.parse("http://www.google.com");
                 DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
 
                 //Restrict the types of networks over which this download may proceed.
@@ -97,7 +98,7 @@ public class PodcastAdapter extends BaseAdapter {
 
                 String extension = ".mp3";
 
-                if(!dataList.get(position).url.isEmpty() && dataList.get(position).url.contains(".mp4"))
+                if (!dataList.get(position).url.isEmpty() && dataList.get(position).url.contains(".mp4"))
                     extension = ".mp4";
 
                 String fileName = dataList.get(position).editionTitle.replaceAll("[^\\x30-\\x5A\\x61-\\x7A\\x30-\\x39]", "") + extension;
@@ -135,16 +136,16 @@ public class PodcastAdapter extends BaseAdapter {
         holder.duration.setText(dataList.get(position).durationString);
 
         holder.positionTxt.setText(title);
-        if(dataList.get(position).downloadPercentage == 100)
+        if (dataList.get(position).downloadPercentage == 100)
             holder.downloadStatus.setText(R.string.material_ok);
-        else if(dataList.get(position).downloadPercentage == 0)
+        else if (dataList.get(position).downloadPercentage == 0)
             holder.downloadStatus.setText(R.string.material_downloadindicator);
         else
-            holder.downloadStatus.setText(dataList.get(position).downloadPercentage+ "%");
+            holder.downloadStatus.setText(dataList.get(position).downloadPercentage + "%");
 
         holder.progress.setText("%" + dataList.get(position).progressPercentage);
 
-        if(dataList.get(position).url.contains("http")) {
+        if (dataList.get(position).url.contains("http") || purchased) {
             linearLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.material_light_green_100));
         } else {
             linearLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.material_red_100));
@@ -179,5 +180,13 @@ public class PodcastAdapter extends BaseAdapter {
         TextView pubDate;
         TextView size;
         TextView progress;
+    }
+
+    public boolean isPurchased() {
+        return purchased;
+    }
+
+    public void setPurchased(boolean purchased) {
+        this.purchased = purchased;
     }
 }

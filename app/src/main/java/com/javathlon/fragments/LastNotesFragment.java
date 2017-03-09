@@ -140,9 +140,9 @@ public class LastNotesFragment extends Fragment {
             Log.e("mediapath", lastPlayObj.getSongpath().get(pos) + "");
             Log.e("sppos", lastPlayObj.getBegin_sec().get(pos) + "");
 
-            String filePath =  lastPlayObj.getSongpath().get(pos);
+            String filePath = lastPlayObj.getSongpath().get(pos);
 
-            if(filePath.endsWith(".mp4")) {
+            if (filePath.endsWith(".mp4")) {
                 Intent i = new Intent(getActivity(), VideoScreen.class);
                 PodcastData podcastData = dbHelper.getPodcastByUrl(filePath);
                 CommonStaticClass.setCurrentPodcast(podcastData);
